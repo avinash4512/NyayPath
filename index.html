@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NyayPath — Chief Justices' Conference 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-org">City Montessori School</div>
+      <div class="brand-name">Nyay<span>Path</span></div>
+      <div style="font-size:11px;color:var(--text-muted);margin-top:3px">न्यायपथ · Conference Manager</div>
+      <div class="brand-tag">Nov 12–15, 2025 · 4 Days</div>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-section">Overview</div>
+
+      <button class="nav-item active" data-panel="dashboard" onclick="showPanel('dashboard',this)">
+        <div class="nav-icon">📊</div>
+        Dashboard
+      </button>
+
+      <button class="nav-item" data-panel="arrivals" onclick="showPanel('arrivals',this)">
+        <div class="nav-icon">✈️</div>
+        Arrivals
+        <span class="nav-badge">3</span>
+      </button>
+
+      <div class="nav-section">Delegates</div>
+
+      <button class="nav-item" data-panel="delegates" onclick="showPanel('delegates',this)">
+        <div class="nav-icon">👥</div>
+        All Delegates
+      </button>
+
+      <button class="nav-item" data-panel="schedule" onclick="showPanel('schedule',this)">
+        <div class="nav-icon">📅</div>
+        Programme
+      </button>
+
+      <div class="nav-section">Logistics</div>
+
+      <button class="nav-item" data-panel="hotels" onclick="showPanel('hotels',this)">
+        <div class="nav-icon">🏨</div>
+        Hotels
+      </button>
+
+      <button class="nav-item" data-panel="transport" onclick="showPanel('transport',this)">
+        <div class="nav-icon">🚗</div>
+        Transport
+      </button>
+
+      <div class="nav-section">Communications</div>
+
+      <button class="nav-item" data-panel="notifications" onclick="showPanel('notifications',this)">
+        <div class="nav-icon">🔔</div>
+        Notifications
+        <span class="nav-badge" id="sidebar-notif-badge">5</span>
+      </button>
+
+    </nav>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <div class="main">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="topbar-title" id="topbar-title">Dashboard</div>
+      <div class="live-pill"><div class="live-dot"></div> Live</div>
+      <div class="topbar-date">Day 1 of 4 &nbsp;·&nbsp; November 12, 2025</div>
+      <button class="btn btn-primary" onclick="openModal()">+ Add Delegate</button>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="content">
+
+      <!-- ══════════════════ DASHBOARD ══════════════════ -->
+      <section class="panel active" id="panel-dashboard">
+
+        <!-- Journey bar -->
+        <div class="journey-bar">
+          <div class="j-city active">
+            <div class="j-city-name">Delhi</div>
+            <div class="j-city-date">Nov 12–13</div>
+          </div>
+          <div class="j-arrow done">
+            <div class="j-arrow-label">Nov 13 AM</div>
+          </div>
+          <div class="j-city">
+            <div class="j-city-name">Agra</div>
+            <div class="j-city-date">Nov 13 night</div>
+          </div>
+          <div class="j-arrow">
+            <div class="j-arrow-label">Nov 14 AM</div>
+          </div>
+          <div class="j-city">
+            <div class="j-city-name">Lucknow</div>
+            <div class="j-city-date">Nov 14–15</div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-label">Total Delegates</div>
+            <div class="stat-value" id="stat-total">—</div>
+            <div class="stat-sub">from 31 countries</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Arriving / In Transit</div>
+            <div class="stat-value blue" id="stat-arriving">—</div>
+            <div class="stat-sub">need coordination</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Hotel Check-ins</div>
+            <div class="stat-value green" id="stat-checkedin">—</div>
+            <div class="stat-sub">confirmed today</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Unread Alerts</div>
+            <div class="stat-value gold" id="stat-alerts">—</div>
+            <div class="stat-sub">require attention</div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <!-- Recent arrivals -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Live Arrival Feed</span>
+              <span class="pill pill-green">Live</span>
+            </div>
+            <div class="card-body" id="recent-arrivals"></div>
+          </div>
+
+          <!-- Today's programme -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Today's Programme</span>
+              <span style="font-size:12px;color:var(--text-muted);font-weight:600">Day 1</span>
+            </div>
+            <div class="timeline">
+              <div class="tl-item">
+                <div class="tl-time">14:00</div>
+                <div class="tl-dot" style="background:var(--text-muted)"></div>
+                <div class="tl-info"><div class="tl-title">Delegate Arrivals</div><div class="tl-sub">IGI Airport · All terminals</div></div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-time">16:30</div>
+                <div class="tl-dot" style="background:var(--primary-mid)"></div>
+                <div class="tl-info"><div class="tl-title">Welcome Tea & Registration</div><div class="tl-sub">Taj Diplomats — Lobby Lounge</div></div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-time">18:00</div>
+                <div class="tl-dot" style="background:var(--teal-mid)"></div>
+                <div class="tl-info"><div class="tl-title">Inaugural Ceremony</div><div class="tl-sub">Auditorium A · Keynote</div><div class="tl-tag">All delegates</div></div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-time">20:00</div>
+                <div class="tl-dot" style="background:var(--gold)"></div>
+                <div class="tl-info"><div class="tl-title">Welcome Dinner</div><div class="tl-sub">Grand Ballroom — Taj Diplomats</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pending actions -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Pending Actions</span>
+            <span class="pill pill-amber">Requires Attention</span>
+          </div>
+          <div class="card-body table-wrap">
+            <table>
+              <thead>
+                <tr><th>Delegate</th><th>Status</th><th>Required Action</th><th>Assigned To</th></tr>
+              </thead>
+              <tbody id="pending-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════ ARRIVALS ══════════════════ -->
+      <section class="panel" id="panel-arrivals">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Arrival Tracking — November 12</span>
+            <input class="search-input" id="arrivals-search" placeholder="Search name, flight, country…" />
+          </div>
+          <div class="card-body table-wrap">
+            <table>
+              <thead>
+                <tr><th>Delegate</th><th>Flight</th><th>Terminal</th><th>ETA</th><th>Status</th><th>Receiver</th><th>Hotel Delhi</th><th>Action</th></tr>
+              </thead>
+              <tbody id="arrivals-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════ DELEGATES ══════════════════ -->
+      <section class="panel" id="panel-delegates">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">All Delegates</span>
+            <input class="search-input" id="delegates-search" placeholder="Search name or country…" />
+          </div>
+          <div class="card-body table-wrap">
+            <table>
+              <thead>
+                <tr><th>Name</th><th>Country</th><th>Delhi Hotel / Room</th><th>Lucknow Hotel / Room</th><th>Diet</th><th>Status</th><th>Details</th></tr>
+              </thead>
+              <tbody id="delegates-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════ PROGRAMME ══════════════════ -->
+      <section class="panel" id="panel-schedule">
+        <div class="day-tabs">
+          <button class="day-btn active" onclick="renderDay(0)">Day 1 — Nov 12 · Delhi</button>
+          <button class="day-btn"        onclick="renderDay(1)">Day 2 — Nov 13 · Delhi → Agra</button>
+          <button class="day-btn"        onclick="renderDay(2)">Day 3 — Nov 14 · Agra → Lucknow</button>
+          <button class="day-btn"        onclick="renderDay(3)">Day 4 — Nov 15 · Lucknow</button>
+        </div>
+        <div id="day-content"></div>
+      </section>
+
+      <!-- ══════════════════ HOTELS ══════════════════ -->
+      <section class="panel" id="panel-hotels">
+        <div class="two-col">
+          <div>
+            <div class="section-label">Delhi Hotels</div>
+            <div id="hotels-delhi"></div>
+          </div>
+          <div>
+            <div class="section-label">Lucknow Hotels</div>
+            <div id="hotels-lucknow"></div>
+            <div class="section-label">Agra — Transit Night</div>
+            <div id="hotels-agra"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════ TRANSPORT ══════════════════ -->
+      <section class="panel" id="panel-transport">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Vehicle & Driver Assignments</span>
+            <span class="pill pill-blue">All Legs</span>
+          </div>
+          <div class="card-body table-wrap">
+            <table>
+              <thead>
+                <tr><th>Delegate</th><th>Leg</th><th>Driver & Phone</th><th>Vehicle</th><th>Pickup Time</th><th>Status</th></tr>
+              </thead>
+              <tbody id="transport-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════ NOTIFICATIONS ══════════════════ -->
+      <section class="panel" id="panel-notifications">
+        <div class="two-col">
+
+          <!-- Send broadcast -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Send Broadcast</span>
+            </div>
+            <div class="card-pad">
+              <div class="form-group" style="margin-bottom:12px">
+                <label>Target Group</label>
+                <select id="broadcast-group">
+                  <option>All Delegates</option>
+                  <option>Delhi Coordinators</option>
+                  <option>Airport Team</option>
+                  <option>Hotel Teams</option>
+                  <option>Transport Team</option>
+                  <option>All Staff</option>
+                  <option>Lucknow Team</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom:16px">
+                <label>Message</label>
+                <textarea id="broadcast-msg" rows="4" placeholder="Type your broadcast message here…" style="resize:vertical"></textarea>
+              </div>
+              <button class="btn btn-primary" style="width:100%" onclick="sendBroadcast()">Send Broadcast Now</button>
+            </div>
+          </div>
+
+          <!-- Notification feed -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Notification Feed</span>
+              <span class="pill pill-red" id="notif-count">5 unread</span>
+            </div>
+            <div class="card-body" id="notif-list"></div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ══ MODAL: ADD DELEGATE ══ -->
+<div class="modal-overlay" id="modal-add">
+  <div class="modal-box">
+    <div class="modal-title">Add New Delegate</div>
+    <div class="form-grid-2">
+      <div class="form-group"><label>Full Name *</label><input id="new-name" placeholder="Justice / Chief Justice…" /></div>
+      <div class="form-group"><label>Country *</label><input id="new-country" placeholder="Country" /></div>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-group"><label>Role / Designation</label><input id="new-role" placeholder="Chief Justice / Assoc. Justice" /></div>
+      <div class="form-group"><label>Flight Number</label><input id="new-flight" placeholder="e.g. AI 202" /></div>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-group"><label>Arrival Terminal</label>
+        <select id="new-terminal"><option>T1</option><option>T2</option><option selected>T3</option></select>
+      </div>
+      <div class="form-group"><label>Arrival Time</label><input id="new-eta" type="time" value="14:00" /></div>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-group"><label>Delhi Hotel</label>
+        <select id="new-hotel-delhi">
+          <option>Taj Diplomats</option><option>The Leela Palace</option><option>ITC Maurya</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Room No. (Delhi)</label><input id="new-room-delhi" placeholder="e.g. 410" /></div>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-group"><label>Lucknow Hotel</label>
+        <select id="new-hotel-lko">
+          <option>Taj Hotel Lucknow</option><option>Vivanta Lucknow</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Dietary Requirement</label>
+        <select id="new-diet">
+          <option>None</option><option>Vegetarian</option><option>Halal</option><option>Vegan</option><option>Kosher</option><option>Gluten-free</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-group"><label>Receiver / Escort</label><input id="new-receiver" placeholder="Staff name assigned" /></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveDelegate()">Add Delegate</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL: VIEW DELEGATE ══ -->
+<div class="modal-overlay" id="modal-view">
+  <div class="modal-box">
+    <div id="view-content"></div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeViewModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
