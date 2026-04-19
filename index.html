@@ -14,7 +14,6 @@
   --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#1D9E75;
   --red:#A32D2D;--red-light:#FCEBEB;
   --amber-light:#FAEEDA;--purple-light:#EEEDFE;--purple-mid:#7F77DD;
-  --coral-light:#FAECE7;
   --bg:#F8F7F5;--surface:#FFFFFF;
   --border:rgba(0,0,0,0.10);--border-s:rgba(0,0,0,0.18);
   --text:#1A1A18;--text-s:#5F5E5A;--text-m:#888780;
@@ -24,28 +23,88 @@ body{font-family:'DM Sans','Segoe UI',system-ui,sans-serif;background:var(--bg);
 button{cursor:pointer;font-family:inherit}
 input,select,textarea{font-family:inherit}
 
-/* Layout */
+/* ── LOGIN SCREEN ── */
+.login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);padding:20px}
+.login-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px;width:100%;max-width:420px;box-shadow:0 8px 40px rgba(0,0,0,0.08)}
+.login-logo{text-align:center;margin-bottom:32px}
+.login-logo-name{font-size:32px;font-weight:700;color:var(--primary);letter-spacing:-0.02em}
+.login-logo-name span{color:var(--gold)}
+.login-logo-sub{font-size:12px;color:var(--text-m);margin-top:4px}
+.login-logo-conf{font-size:13px;font-weight:600;color:var(--text-s);margin-top:8px;padding:6px 14px;background:var(--primary-light);color:var(--primary);border-radius:20px;display:inline-block}
+.login-title{font-size:18px;font-weight:700;margin-bottom:6px;color:var(--text)}
+.login-sub{font-size:13px;color:var(--text-m);margin-bottom:24px}
+.login-field{margin-bottom:16px}
+.login-field label{display:block;font-size:12px;font-weight:700;color:var(--text-s);margin-bottom:6px}
+.login-field input{width:100%;padding:11px 14px;border:1px solid var(--border-s);border-radius:var(--r-md);background:var(--bg);font-size:14px;color:var(--text);outline:none;transition:border-color 0.15s}
+.login-field input:focus{border-color:var(--primary-mid);background:var(--surface)}
+.login-btn{width:100%;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:var(--r-md);font-size:14px;font-weight:700;cursor:pointer;transition:opacity 0.15s;margin-top:8px}
+.login-btn:hover{opacity:0.88}
+.login-btn:disabled{opacity:0.5;cursor:not-allowed}
+.login-error{background:var(--red-light);color:var(--red);padding:10px 14px;border-radius:var(--r-md);font-size:13px;font-weight:600;margin-bottom:16px;display:none}
+.login-error.show{display:block}
+.login-loading{text-align:center;padding:20px;color:var(--text-m);font-size:13px}
+.role-badges{display:flex;gap:8px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+.role-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px}
+.rb-admin{background:var(--primary-light);color:var(--primary)}
+.rb-coord{background:var(--teal-light);color:var(--teal)}
+.rb-delegate{background:var(--gold-light);color:var(--gold)}
+
+/* ── DELEGATE PERSONAL VIEW ── */
+.delegate-view{min-height:100vh;background:var(--bg);padding:20px}
+.dv-header{background:var(--primary);color:#fff;border-radius:var(--r-lg);padding:24px;margin-bottom:20px;display:flex;align-items:center;gap:16px}
+.dv-avatar{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0}
+.dv-name{font-size:20px;font-weight:700}
+.dv-role{font-size:13px;opacity:0.8;margin-top:2px}
+.dv-logout{margin-left:auto;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:7px 14px;border-radius:var(--r-md);font-size:12px;font-weight:700;cursor:pointer}
+.dv-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.dv-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px}
+.dv-card-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-m);margin-bottom:12px}
+.dv-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.dv-row:last-child{border-bottom:none}
+.dv-row-label{color:var(--text-m)}
+.dv-row-val{font-weight:700;color:var(--text);text-align:right}
+.dv-full{grid-column:span 2}
+.dv-session{border-left:4px solid var(--primary-mid);padding:10px 14px;margin-bottom:8px;background:var(--surface);border-radius:0 var(--r-md) var(--r-md) 0;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.dv-session.keynote{border-left-color:var(--teal-mid)}
+.dv-session.social{border-left-color:var(--gold)}
+.dv-session.student{border-left-color:var(--purple-mid)}
+.dv-session.transit{border-left-color:var(--text-m)}
+.dv-session-time{font-size:11px;color:var(--text-m);font-weight:700;margin-bottom:3px}
+.dv-session-title{font-size:13px;font-weight:700}
+.dv-session-venue{font-size:12px;color:var(--text-s);margin-top:2px}
+.dv-day-tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.dv-day-btn{padding:6px 14px;border-radius:var(--r-md);font-size:12px;font-weight:600;border:1px solid var(--border-s);background:var(--surface);color:var(--text-s);cursor:pointer}
+.dv-day-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.emergency-card{background:var(--red-light);border:1px solid rgba(163,45,45,0.2);border-radius:var(--r-lg);padding:16px 18px;margin-top:14px}
+.emergency-title{font-size:12px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px}
+.emergency-row{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid rgba(163,45,45,0.15)}
+.emergency-row:last-child{border-bottom:none}
+
+/* ── MAIN APP (admin/coordinator) ── */
 .app{display:flex;height:100vh;overflow:hidden}
 .sidebar{width:var(--sw);min-width:var(--sw);background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-
-/* Sidebar */
 .sb-brand{padding:18px 16px 14px;border-bottom:1px solid var(--border)}
 .sb-org{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-m);margin-bottom:3px}
 .sb-name{font-size:22px;font-weight:700;color:var(--primary);letter-spacing:-0.02em}
 .sb-name span{color:var(--gold)}
 .sb-sub{font-size:11px;color:var(--text-m);margin-top:2px}
 .sb-tag{display:inline-block;margin-top:8px;font-size:10px;background:var(--primary-light);color:var(--primary);padding:3px 9px;border-radius:20px;font-weight:700}
+.sb-user{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.sb-user-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.sb-user-name{font-size:12px;font-weight:700;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb-user-role{font-size:10px;color:var(--text-m)}
+.sb-logout{background:none;border:none;font-size:11px;color:var(--text-m);cursor:pointer;padding:2px 6px;border-radius:4px}
+.sb-logout:hover{background:var(--bg);color:var(--red)}
 .nav{padding:10px 8px;flex:1}
 .nav-sec{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-m);padding:10px 8px 4px}
 .nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--r-md);border:none;background:none;width:100%;text-align:left;font-size:13px;color:var(--text-s);transition:all 0.12s;margin-bottom:1px}
 .nav-item:hover{background:var(--bg);color:var(--text)}
 .nav-item.active{background:var(--primary-light);color:var(--primary);font-weight:700}
+.nav-item:disabled{opacity:0.4;cursor:not-allowed}
 .nav-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;background:var(--bg);flex-shrink:0}
 .nav-item.active .nav-icon{background:var(--primary)}
 .nav-badge{margin-left:auto;background:var(--red-light);color:var(--red);font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px}
-
-/* Topbar */
 .topbar{height:var(--th);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:14px;flex-shrink:0}
 .topbar-title{font-size:16px;font-weight:700;flex:1}
 .live-pill{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--teal);background:var(--teal-light);padding:4px 10px;border-radius:20px;font-weight:700}
@@ -57,33 +116,24 @@ input,select,textarea{font-family:inherit}
 .btn-primary{background:var(--primary);color:#fff;border-color:var(--primary)}
 .btn-primary:hover{opacity:0.88}
 .btn-sm{padding:4px 10px;font-size:11px}
-
-/* Content */
 .content{flex:1;overflow-y:auto;padding:24px}
 .panel{display:none}
 .panel.active{display:block}
-
-/* Loading state */
 .loading{text-align:center;padding:60px 20px;color:var(--text-m)}
 .loading-spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--primary-mid);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.error-box{background:var(--red-light);color:var(--red);padding:16px 20px;border-radius:var(--r-lg);margin-bottom:16px;font-size:13px;font-weight:600}
 .db-status{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px}
 .db-status.connected{background:var(--teal-light);color:var(--teal)}
 .db-status.disconnected{background:var(--red-light);color:var(--red)}
-
-/* Journey bar */
 .journey-bar{display:flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px 24px;margin-bottom:20px}
 .j-city{text-align:center;min-width:80px}
-.j-city-name{font-size:13px;font-weight:700;color:var(--text)}
+.j-city-name{font-size:13px;font-weight:700}
 .j-city-date{font-size:11px;color:var(--text-m);margin-top:2px}
 .j-city.done .j-city-name{color:var(--teal-mid)}
 .j-city.active .j-city-name{color:var(--primary)}
 .j-arrow{flex:1;height:2px;background:var(--border);position:relative;margin:0 6px}
 .j-arrow.done{background:var(--teal-mid)}
 .j-arrow-lbl{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;color:var(--text-m);white-space:nowrap}
-
-/* Stats */
 .stat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
 .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 16px}
 .stat-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-m);margin-bottom:6px}
@@ -93,23 +143,17 @@ input,select,textarea{font-family:inherit}
 .stat-val.gold{color:var(--gold)}
 .stat-val.red{color:var(--red)}
 .stat-sub{font-size:11px;color:var(--text-m);margin-top:4px}
-
-/* Cards */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:18px}
 .card-hdr{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .card-title{font-size:14px;font-weight:700}
 .card-pad{padding:16px 18px}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-
-/* Tables */
 .tbl-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th{padding:9px 14px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);background:var(--bg);border-bottom:1px solid var(--border);white-space:nowrap}
 td{padding:11px 14px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
 tr:last-child td{border-bottom:none}
 tbody tr:hover td{background:#FAFAF8}
-
-/* Pills */
 .pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
 .pill-green{background:var(--teal-light);color:var(--teal)}
 .pill-blue{background:var(--primary-light);color:var(--primary)}
@@ -117,30 +161,19 @@ tbody tr:hover td{background:#FAFAF8}
 .pill-red{background:var(--red-light);color:var(--red)}
 .pill-gray{background:var(--bg);color:var(--text-m);border:1px solid var(--border)}
 .pill-purple{background:var(--purple-light);color:var(--purple-mid)}
-
-/* Avatars */
 .avatar{width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
-.av-0{background:#B5D4F4;color:#0C447C}
-.av-1{background:#9FE1CB;color:#085041}
-.av-2{background:#FAC775;color:#633806}
-.av-3{background:#CECBF6;color:#3C3489}
-.av-4{background:#F5C4B3;color:#712B13}
-.av-5{background:#F4C0D1;color:#72243E}
-.av-6{background:#C0DD97;color:#27500A}
-.av-7{background:#B5D4F4;color:#0C447C}
+.av-0{background:#B5D4F4;color:#0C447C}.av-1{background:#9FE1CB;color:#085041}
+.av-2{background:#FAC775;color:#633806}.av-3{background:#CECBF6;color:#3C3489}
+.av-4{background:#F5C4B3;color:#712B13}.av-5{background:#F4C0D1;color:#72243E}
+.av-6{background:#C0DD97;color:#27500A}.av-7{background:#B5D4F4;color:#0C447C}
 .name-cell{display:flex;align-items:center;gap:10px}
-
-/* Timeline */
 .timeline{padding:4px 18px}
 .tl-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
 .tl-item:last-child{border-bottom:none}
 .tl-time{font-size:12px;color:var(--text-m);min-width:46px;padding-top:3px;font-weight:700}
 .tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px}
-.tl-info{flex:1}
 .tl-title{font-size:13px;font-weight:700}
 .tl-sub{font-size:12px;color:var(--text-s);margin-top:2px}
-
-/* Programme */
 .day-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
 .day-btn{padding:7px 16px;border-radius:var(--r-md);font-size:13px;font-weight:600;border:1px solid var(--border-s);background:var(--surface);color:var(--text-s);cursor:pointer;transition:all 0.12s}
 .day-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
@@ -152,8 +185,6 @@ tbody tr:hover td{background:#FAFAF8}
 .session-time{font-size:11px;color:var(--text-m);font-weight:700;margin-bottom:4px}
 .session-title{font-size:14px;font-weight:700}
 .session-meta{font-size:12px;color:var(--text-s);margin-top:4px}
-
-/* Hotels */
 .hotel-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:15px 17px;margin-bottom:12px}
 .hotel-name{font-size:14px;font-weight:700;margin-bottom:2px}
 .hotel-city{font-size:12px;color:var(--primary-mid);margin-bottom:10px;font-weight:600}
@@ -164,11 +195,7 @@ tbody tr:hover td{background:#FAFAF8}
 .hstat strong{color:var(--text);font-weight:700}
 .sec-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-m);margin:16px 0 10px}
 .sec-lbl:first-child{margin-top:0}
-
-/* Departure summary */
 .dep-summary{background:var(--bg);border-radius:var(--r-md);padding:10px 14px;margin-bottom:12px;font-size:13px;border-left:4px solid var(--gold)}
-
-/* Notifications */
 .notif-item{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.1s}
 .notif-item:last-child{border-bottom:none}
 .notif-item:hover{background:var(--bg)}
@@ -176,8 +203,6 @@ tbody tr:hover td{background:#FAFAF8}
 .notif-dot.read{background:var(--border-s)}
 .notif-msg{font-size:13px;line-height:1.5}
 .notif-meta{font-size:11px;color:var(--text-m);margin-top:3px}
-
-/* Forms */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:13px}
 .fg{display:flex;flex-direction:column;gap:5px}
 .fg label{font-size:12px;font-weight:700;color:var(--text-s)}
@@ -185,206 +210,316 @@ tbody tr:hover td{background:#FAFAF8}
 .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--primary-mid);background:var(--surface)}
 .search-inp{padding:7px 12px;border-radius:var(--r-md);border:1px solid var(--border-s);background:var(--bg);font-size:13px;color:var(--text);outline:none;width:200px;transition:all 0.12s}
 .search-inp:focus{border-color:var(--primary-mid);background:var(--surface);width:240px}
-
-/* Modal */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;align-items:center;justify-content:center}
 .modal-overlay.open{display:flex}
 .modal-box{background:var(--surface);border-radius:var(--r-lg);padding:28px;width:540px;max-height:88vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
 .modal-title{font-size:18px;font-weight:700;margin-bottom:20px}
 .modal-footer{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:18px;border-top:1px solid var(--border)}
-
-/* Toast */
 .toast{position:fixed;bottom:24px;right:24px;background:var(--text);color:#fff;padding:12px 20px;border-radius:var(--r-md);font-size:13px;font-weight:600;z-index:999;opacity:0;transform:translateY(8px);transition:all 0.25s;pointer-events:none;max-width:340px}
 .toast.show{opacity:1;transform:translateY(0)}
-
-@media(max-width:900px){.stat-grid{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}.sidebar{width:200px;min-width:200px}}
+/* Admin-only elements */
+.admin-only{display:none}
+.role-admin .admin-only{display:flex}
+.role-admin .admin-only-block{display:block}
+@media(max-width:900px){.stat-grid{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}.sidebar{width:200px;min-width:200px}.dv-grid{grid-template-columns:1fr}.dv-full{grid-column:span 1}}
 @media(max-width:680px){.sidebar{display:none}.stat-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
-<div class="app">
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="sb-brand">
-    <div class="sb-org">City Montessori School</div>
-    <div class="sb-name">Nyay<span>Path</span></div>
-    <div class="sb-sub">न्यायपथ · Conference Manager</div>
-    <div class="sb-tag">Nov 12–15, 2025 · Lucknow</div>
+<!-- ══ LOGIN SCREEN ══ -->
+<div id="login-screen" class="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-name">Nyay<span>Path</span></div>
+      <div class="login-logo-sub">न्यायपथ · City Montessori School, Lucknow</div>
+      <div class="login-logo-conf">Chief Justices' Conference 2025</div>
+    </div>
+    <div class="login-title">Welcome — Please sign in</div>
+    <div class="login-sub">Use your assigned NyayPath credentials</div>
+    <div class="login-error" id="login-error">Invalid email or password. Please try again.</div>
+    <div class="login-field">
+      <label>Email Address</label>
+      <input type="email" id="login-email" placeholder="you@cms.ac.in" autocomplete="email"/>
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="login-password" placeholder="Your password" autocomplete="current-password"/>
+    </div>
+    <button class="login-btn" id="login-btn" onclick="doLogin()">Sign In to NyayPath</button>
+    <div class="role-badges">
+      <span class="role-badge rb-admin">👑 Admin</span>
+      <span class="role-badge rb-coord">🗂️ Coordinator</span>
+      <span class="role-badge rb-delegate">⚖️ Delegate</span>
+    </div>
   </div>
-  <nav class="nav">
-    <div class="nav-sec">Overview</div>
-    <button class="nav-item active" onclick="showPanel('dashboard',this)"><div class="nav-icon">📊</div>Dashboard</button>
-    <button class="nav-item" onclick="showPanel('arrivals',this)"><div class="nav-icon">✈️</div>Arrivals<span class="nav-badge" id="badge-arrivals">—</span></button>
-    <button class="nav-item" onclick="showPanel('departures',this)"><div class="nav-icon">🛫</div>Departures<span class="nav-badge" id="badge-departures">—</span></button>
-    <div class="nav-sec">Delegates</div>
-    <button class="nav-item" onclick="showPanel('delegates',this)"><div class="nav-icon">👥</div>All Delegates</button>
-    <button class="nav-item" onclick="showPanel('schedule',this)"><div class="nav-icon">📅</div>Programme</button>
-    <div class="nav-sec">Logistics</div>
-    <button class="nav-item" onclick="showPanel('hotels',this)"><div class="nav-icon">🏨</div>Hotels</button>
-    <button class="nav-item" onclick="showPanel('transport',this)"><div class="nav-icon">🚗</div>Transport</button>
-    <div class="nav-sec">Communications</div>
-    <button class="nav-item" onclick="showPanel('notifications',this)"><div class="nav-icon">🔔</div>Notifications<span class="nav-badge" id="badge-notif">—</span></button>
-  </nav>
-</aside>
+</div>
 
-<!-- MAIN -->
-<div class="main">
-  <header class="topbar">
-    <div class="topbar-title" id="topbar-title">Dashboard</div>
-    <div class="live-pill"><div class="live-dot"></div>Live</div>
-    <div id="db-status" class="db-status disconnected">⚪ Connecting…</div>
-    <div class="topbar-date">Day 1 of 4 · November 12, 2025</div>
-    <button class="btn btn-primary" onclick="openModal()">+ Add Delegate</button>
-  </header>
-
-  <main class="content">
-
-    <!-- DASHBOARD -->
-    <section class="panel active" id="panel-dashboard">
-      <div class="journey-bar">
-        <div class="j-city active"><div class="j-city-name">🏠 Home Country</div><div class="j-city-date">Departure</div></div>
-        <div class="j-arrow done"><div class="j-arrow-lbl">Arrival flight</div></div>
-        <div class="j-city done"><div class="j-city-name">Delhi</div><div class="j-city-date">Nov 12–13</div></div>
-        <div class="j-arrow"><div class="j-arrow-lbl">Nov 13 AM</div></div>
-        <div class="j-city"><div class="j-city-name">Agra</div><div class="j-city-date">Nov 13 night</div></div>
-        <div class="j-arrow"><div class="j-arrow-lbl">Nov 14 AM</div></div>
-        <div class="j-city"><div class="j-city-name">Lucknow</div><div class="j-city-date">Nov 14–15</div></div>
-        <div class="j-arrow"><div class="j-arrow-lbl">Return flight</div></div>
-        <div class="j-city"><div class="j-city-name">🏠 Home Country</div><div class="j-city-date">Safe return</div></div>
+<!-- ══ DELEGATE PERSONAL VIEW ══ -->
+<div id="delegate-screen" style="display:none">
+  <div class="delegate-view">
+    <div class="dv-header">
+      <div class="dv-avatar" id="dv-initials">??</div>
+      <div>
+        <div class="dv-name" id="dv-name">Loading…</div>
+        <div class="dv-role" id="dv-role">Chief Justice</div>
       </div>
-      <div class="stat-grid">
-        <div class="stat-card"><div class="stat-lbl">Total Delegates</div><div class="stat-val" id="stat-total">—</div><div class="stat-sub">from multiple countries</div></div>
-        <div class="stat-card"><div class="stat-lbl">Arriving / In Transit</div><div class="stat-val blue" id="stat-arriving">—</div><div class="stat-sub">need coordination</div></div>
-        <div class="stat-card"><div class="stat-lbl">Checked In</div><div class="stat-val green" id="stat-checkedin">—</div><div class="stat-sub">confirmed today</div></div>
-        <div class="stat-card"><div class="stat-lbl">Departing Nov 15</div><div class="stat-val red" id="stat-departing">—</div><div class="stat-sub">need drop arrangements</div></div>
-        <div class="stat-card"><div class="stat-lbl">Unread Alerts</div><div class="stat-val gold" id="stat-alerts">—</div><div class="stat-sub">require attention</div></div>
+      <button class="dv-logout" onclick="doLogout()">Sign Out</button>
+    </div>
+
+    <div class="dv-grid">
+      <div class="dv-card">
+        <div class="dv-card-title">✈️ Arrival Details</div>
+        <div class="dv-row"><span class="dv-row-label">Flight</span><span class="dv-row-val" id="dv-arr-flight">—</span></div>
+        <div class="dv-row"><span class="dv-row-label">Terminal</span><span class="dv-row-val" id="dv-arr-terminal">—</span></div>
+        <div class="dv-row"><span class="dv-row-label">Arrival Time</span><span class="dv-row-val" id="dv-arr-time">—</span></div>
+        <div class="dv-row"><span class="dv-row-label">Received by</span><span class="dv-row-val" id="dv-receiver">—</span></div>
       </div>
-      <div class="two-col">
-        <div class="card">
-          <div class="card-hdr"><span class="card-title">Live Arrival Feed</span><span class="pill pill-green">Live</span></div>
-          <div id="recent-arrivals"><div class="loading"><div class="loading-spinner"></div>Loading…</div></div>
-        </div>
-        <div class="card">
-          <div class="card-hdr"><span class="card-title">Today's Programme</span><span style="font-size:12px;color:var(--text-m);font-weight:600">Day 1</span></div>
-          <div class="timeline" id="today-programme"><div class="loading"><div class="loading-spinner"></div>Loading…</div></div>
+      <div class="dv-card">
+        <div class="dv-card-title">🛫 Departure Details</div>
+        <div class="dv-row"><span class="dv-row-label">Return Flight</span><span class="dv-row-val" id="dv-dep-flight">—</span></div>
+        <div class="dv-row"><span class="dv-row-label">Airport</span><span class="dv-row-val" id="dv-dep-airport">—</span></div>
+        <div class="dv-row"><span class="dv-row-label">Departure Time</span><span class="dv-row-val" id="dv-dep-time">—</span></div>
+        <div class="dv-row"><span class="dv-row-label">Checkout Time</span><span class="dv-row-val" id="dv-checkout">—</span></div>
+      </div>
+      <div class="dv-card">
+        <div class="dv-card-title">🏨 Delhi Accommodation</div>
+        <div class="dv-row"><span class="dv-row-label">Hotel</span><span class="dv-row-val" id="dv-hotel-delhi">—</span></div>
+        <div class="dv-row"><span class="dv-row-label">Room</span><span class="dv-row-val" id="dv-room-delhi">—</span></div>
+        <div class="dv-row"><span class="dv-row-label">Check-in</span><span class="dv-row-val">Nov 12, 2025</span></div>
+        <div class="dv-row"><span class="dv-row-label">Check-out</span><span class="dv-row-val">Nov 13, 2025</span></div>
+      </div>
+      <div class="dv-card">
+        <div class="dv-card-title">🏨 Lucknow Accommodation</div>
+        <div class="dv-row"><span class="dv-row-label">Hotel</span><span class="dv-row-val" id="dv-hotel-lko">—</span></div>
+        <div class="dv-row"><span class="dv-row-label">Room</span><span class="dv-row-val" id="dv-room-lko">—</span></div>
+        <div class="dv-row"><span class="dv-row-label">Check-in</span><span class="dv-row-val">Nov 14, 2025</span></div>
+        <div class="dv-row"><span class="dv-row-label">Check-out</span><span class="dv-row-val">Nov 15, 2025</span></div>
+      </div>
+      <div class="dv-card">
+        <div class="dv-card-title">🍽️ My Requirements</div>
+        <div class="dv-row"><span class="dv-row-label">Dietary</span><span class="dv-row-val" id="dv-diet">—</span></div>
+        <div class="dv-row"><span class="dv-row-label">Special Needs</span><span class="dv-row-val" id="dv-special">—</span></div>
+        <div class="dv-row"><span class="dv-row-label">Escort (Dep.)</span><span class="dv-row-val" id="dv-escort">—</span></div>
+      </div>
+      <div class="dv-card">
+        <div class="dv-card-title">📍 Current Status</div>
+        <div style="padding:16px 0;text-align:center">
+          <div id="dv-status-pill" style="display:inline-block;font-size:14px;font-weight:700;padding:8px 20px;border-radius:20px;background:var(--teal-light);color:var(--teal)">—</div>
+          <div style="font-size:12px;color:var(--text-m);margin-top:8px">Your current conference status</div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-hdr"><span class="card-title">Pending Actions</span><span class="pill pill-amber">Requires Attention</span></div>
-        <div class="tbl-wrap"><table>
-          <thead><tr><th>Delegate</th><th>Status</th><th>Action Required</th><th>Assigned To</th></tr></thead>
-          <tbody id="pending-tbody"><tr><td colspan="4" class="loading">Loading…</td></tr></tbody>
-        </table></div>
-      </div>
-    </section>
+    </div>
 
-    <!-- ARRIVALS -->
-    <section class="panel" id="panel-arrivals">
-      <div class="card">
-        <div class="card-hdr"><span class="card-title">Arrival Tracking — November 12</span><input class="search-inp" id="arrivals-search" placeholder="Search name, flight…"/></div>
-        <div class="tbl-wrap"><table>
-          <thead><tr><th>Delegate</th><th>Country</th><th>Flight</th><th>Terminal</th><th>ETA</th><th>Status</th><th>Receiver</th><th>Hotel Delhi</th><th>Action</th></tr></thead>
-          <tbody id="arrivals-tbody"><tr><td colspan="9" class="loading">Loading…</td></tr></tbody>
-        </table></div>
+    <!-- Programme for delegates -->
+    <div class="dv-card dv-full" style="margin-bottom:14px">
+      <div class="dv-card-title">📅 Conference Programme</div>
+      <div class="dv-day-tabs" style="margin-top:10px">
+        <button class="dv-day-btn active" onclick="dvShowDay(1,this)">Day 1 · Nov 12</button>
+        <button class="dv-day-btn" onclick="dvShowDay(2,this)">Day 2 · Nov 13</button>
+        <button class="dv-day-btn" onclick="dvShowDay(3,this)">Day 3 · Nov 14</button>
+        <button class="dv-day-btn" onclick="dvShowDay(4,this)">Day 4 · Nov 15</button>
       </div>
-    </section>
+      <div id="dv-sessions"></div>
+    </div>
 
-    <!-- DEPARTURES -->
-    <section class="panel" id="panel-departures">
-      <div class="dep-summary"><strong>Departure Overview:</strong> All delegates depart Nov 15 after Farewell Lunch. Some fly from Lucknow (LKO), others return to Delhi (DEL) first. Each needs confirmed drop vehicle, checkout time, and airport escort.</div>
-      <div class="card">
-        <div class="card-hdr">
-          <span class="card-title">Departure Schedule — November 15</span>
-          <div style="display:flex;gap:8px">
-            <input class="search-inp" id="dep-search" placeholder="Search delegate…"/>
-            <select id="dep-filter" onchange="filterDepartures()" style="padding:7px 10px;border-radius:var(--r-md);border:1px solid var(--border-s);background:var(--bg);font-size:13px;outline:none">
-              <option value="">All Airports</option><option value="LKO">Lucknow (LKO)</option><option value="DEL">Delhi (DEL)</option>
-            </select>
+    <!-- Emergency contacts -->
+    <div class="emergency-card">
+      <div class="emergency-title">🆘 Emergency Contacts — NyayPath Team</div>
+      <div class="emergency-row"><span>Conference Helpdesk (24/7)</span><span style="font-weight:700">+91 98765 00001</span></div>
+      <div class="emergency-row"><span>Airport Coordinator</span><span style="font-weight:700">+91 98765 00002</span></div>
+      <div class="emergency-row"><span>Hotel Coordinator Delhi</span><span style="font-weight:700">+91 98765 00003</span></div>
+      <div class="emergency-row"><span>Hotel Coordinator Lucknow</span><span style="font-weight:700">+91 98765 00004</span></div>
+      <div class="emergency-row" style="border:none"><span>CMS Main Office</span><span style="font-weight:700">+91 522 239 5881</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MAIN ADMIN / COORDINATOR APP ══ -->
+<div id="main-app" style="display:none" class="app">
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <div class="sb-org">City Montessori School</div>
+      <div class="sb-name">Nyay<span>Path</span></div>
+      <div class="sb-sub">न्यायपथ · Conference Manager</div>
+      <div class="sb-tag">Nov 12–15, 2025 · Lucknow</div>
+    </div>
+    <!-- Logged-in user info -->
+    <div class="sb-user">
+      <div class="sb-user-av av-0" id="sb-user-av">?</div>
+      <div>
+        <div class="sb-user-name" id="sb-user-name">Loading…</div>
+        <div class="sb-user-role" id="sb-user-role">—</div>
+      </div>
+      <button class="sb-logout" onclick="doLogout()" title="Sign out">↩</button>
+    </div>
+    <nav class="nav">
+      <div class="nav-sec">Overview</div>
+      <button class="nav-item active" onclick="showPanel('dashboard',this)"><div class="nav-icon">📊</div>Dashboard</button>
+      <button class="nav-item" onclick="showPanel('arrivals',this)"><div class="nav-icon">✈️</div>Arrivals<span class="nav-badge" id="badge-arrivals">—</span></button>
+      <button class="nav-item" onclick="showPanel('departures',this)"><div class="nav-icon">🛫</div>Departures<span class="nav-badge" id="badge-departures">—</span></button>
+      <div class="nav-sec">Delegates</div>
+      <button class="nav-item" onclick="showPanel('delegates',this)"><div class="nav-icon">👥</div>All Delegates</button>
+      <button class="nav-item" onclick="showPanel('schedule',this)"><div class="nav-icon">📅</div>Programme</button>
+      <div class="nav-sec">Logistics</div>
+      <button class="nav-item" onclick="showPanel('hotels',this)"><div class="nav-icon">🏨</div>Hotels</button>
+      <button class="nav-item" onclick="showPanel('transport',this)"><div class="nav-icon">🚗</div>Transport</button>
+      <div class="nav-sec">Communications</div>
+      <button class="nav-item" onclick="showPanel('notifications',this)"><div class="nav-icon">🔔</div>Notifications<span class="nav-badge" id="badge-notif">—</span></button>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-title" id="topbar-title">Dashboard</div>
+      <div class="live-pill"><div class="live-dot"></div>Live</div>
+      <div id="db-status" class="db-status disconnected">⚪ Connecting…</div>
+      <div class="topbar-date">Day 1 of 4 · November 12, 2025</div>
+      <button class="btn btn-primary admin-only" id="add-delegate-btn" onclick="openModal()">+ Add Delegate</button>
+    </header>
+
+    <main class="content">
+
+      <!-- DASHBOARD -->
+      <section class="panel active" id="panel-dashboard">
+        <div class="journey-bar">
+          <div class="j-city active"><div class="j-city-name">🏠 Home</div><div class="j-city-date">Departure</div></div>
+          <div class="j-arrow done"><div class="j-arrow-lbl">Arrival flight</div></div>
+          <div class="j-city done"><div class="j-city-name">Delhi</div><div class="j-city-date">Nov 12–13</div></div>
+          <div class="j-arrow"><div class="j-arrow-lbl">Nov 13 AM</div></div>
+          <div class="j-city"><div class="j-city-name">Agra</div><div class="j-city-date">Nov 13 night</div></div>
+          <div class="j-arrow"><div class="j-arrow-lbl">Nov 14 AM</div></div>
+          <div class="j-city"><div class="j-city-name">Lucknow</div><div class="j-city-date">Nov 14–15</div></div>
+          <div class="j-arrow"><div class="j-arrow-lbl">Return flight</div></div>
+          <div class="j-city"><div class="j-city-name">🏠 Home</div><div class="j-city-date">Safe return</div></div>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-lbl">Total Delegates</div><div class="stat-val" id="stat-total">—</div><div class="stat-sub">from multiple countries</div></div>
+          <div class="stat-card"><div class="stat-lbl">In Transit</div><div class="stat-val blue" id="stat-arriving">—</div><div class="stat-sub">need coordination</div></div>
+          <div class="stat-card"><div class="stat-lbl">Checked In</div><div class="stat-val green" id="stat-checkedin">—</div><div class="stat-sub">confirmed today</div></div>
+          <div class="stat-card"><div class="stat-lbl">Departing Nov 15</div><div class="stat-val red" id="stat-departing">—</div><div class="stat-sub">need drop arrangements</div></div>
+          <div class="stat-card"><div class="stat-lbl">Unread Alerts</div><div class="stat-val gold" id="stat-alerts">—</div><div class="stat-sub">require attention</div></div>
+        </div>
+        <div class="two-col">
+          <div class="card">
+            <div class="card-hdr"><span class="card-title">Live Feed</span><span class="pill pill-green">Live</span></div>
+            <div id="recent-arrivals"><div class="loading"><div class="loading-spinner"></div>Loading…</div></div>
+          </div>
+          <div class="card">
+            <div class="card-hdr"><span class="card-title">Today's Programme</span><span style="font-size:12px;color:var(--text-m);font-weight:600">Day 1</span></div>
+            <div class="timeline" id="today-programme"><div class="loading"><div class="loading-spinner"></div>Loading…</div></div>
           </div>
         </div>
-        <div class="tbl-wrap"><table>
-          <thead><tr><th>Delegate</th><th>Country</th><th>Dep. Airport</th><th>Return Flight</th><th>Dep. Time</th><th>Checkout</th><th>Escort</th><th>Special Need</th></tr></thead>
-          <tbody id="dep-tbody"><tr><td colspan="8" class="loading">Loading…</td></tr></tbody>
-        </table></div>
-      </div>
-    </section>
-
-    <!-- DELEGATES -->
-    <section class="panel" id="panel-delegates">
-      <div class="card">
-        <div class="card-hdr"><span class="card-title">All Delegates — Full Registry</span><input class="search-inp" id="delegates-search" placeholder="Search name or country…"/></div>
-        <div class="tbl-wrap"><table>
-          <thead><tr><th>Name</th><th>Country</th><th>Delhi Hotel / Room</th><th>Lucknow Hotel / Room</th><th>Arrival Flight</th><th>Return Flight</th><th>Dep. Airport</th><th>Diet</th><th>Status</th><th>Action</th></tr></thead>
-          <tbody id="delegates-tbody"><tr><td colspan="10" class="loading">Loading…</td></tr></tbody>
-        </table></div>
-      </div>
-    </section>
-
-    <!-- PROGRAMME -->
-    <section class="panel" id="panel-schedule">
-      <div class="day-tabs">
-        <button class="day-btn active" onclick="showDay(1,this)">Day 1 — Nov 12 · Delhi</button>
-        <button class="day-btn" onclick="showDay(2,this)">Day 2 — Nov 13 · Delhi→Agra</button>
-        <button class="day-btn" onclick="showDay(3,this)">Day 3 — Nov 14 · Agra→Lucknow</button>
-        <button class="day-btn" onclick="showDay(4,this)">Day 4 — Nov 15 · Departures</button>
-      </div>
-      <div id="day-content"><div class="loading"><div class="loading-spinner"></div>Loading…</div></div>
-    </section>
-
-    <!-- HOTELS -->
-    <section class="panel" id="panel-hotels">
-      <div class="two-col">
-        <div><div class="sec-lbl">Delhi Hotels</div><div id="hotels-delhi"><div class="loading"><div class="loading-spinner"></div>Loading…</div></div></div>
-        <div>
-          <div class="sec-lbl">Lucknow Hotels</div><div id="hotels-lucknow"></div>
-          <div class="sec-lbl">Agra — Transit Night</div><div id="hotels-agra"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TRANSPORT -->
-    <section class="panel" id="panel-transport">
-      <div class="card">
-        <div class="card-hdr"><span class="card-title">All Vehicle & Driver Assignments</span><span class="pill pill-blue">Arrivals + Departures</span></div>
-        <div class="tbl-wrap"><table>
-          <thead><tr><th>Delegate</th><th>Leg</th><th>Driver & Phone</th><th>Vehicle</th><th>Pickup Time</th><th>Date</th><th>Status</th></tr></thead>
-          <tbody id="transport-tbody"><tr><td colspan="7" class="loading">Loading…</td></tr></tbody>
-        </table></div>
-      </div>
-    </section>
-
-    <!-- NOTIFICATIONS -->
-    <section class="panel" id="panel-notifications">
-      <div class="two-col">
         <div class="card">
-          <div class="card-hdr"><span class="card-title">Send Broadcast</span></div>
-          <div class="card-pad">
-            <div class="fg" style="margin-bottom:12px"><label>Target Group</label>
-              <select id="broadcast-group">
-                <option>All Delegates</option><option>Delhi Coordinators</option><option>Airport Team</option>
-                <option>Hotel Teams</option><option>Transport Team</option><option>All Staff</option>
-                <option>Lucknow Team</option><option>Departure Escorts</option>
+          <div class="card-hdr"><span class="card-title">Pending Actions</span><span class="pill pill-amber">Requires Attention</span></div>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Delegate</th><th>Status</th><th>Action Required</th><th>Assigned To</th></tr></thead>
+            <tbody id="pending-tbody"><tr><td colspan="4" style="text-align:center;padding:20px;color:var(--text-m)">Loading…</td></tr></tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- ARRIVALS -->
+      <section class="panel" id="panel-arrivals">
+        <div class="card">
+          <div class="card-hdr"><span class="card-title">Arrival Tracking</span><input class="search-inp" id="arrivals-search" placeholder="Search name, flight…"/></div>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Delegate</th><th>Country</th><th>Flight</th><th>Terminal</th><th>ETA</th><th>Status</th><th>Receiver</th><th>Hotel</th><th>Action</th></tr></thead>
+            <tbody id="arrivals-tbody"><tr><td colspan="9" style="text-align:center;padding:20px;color:var(--text-m)">Loading…</td></tr></tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- DEPARTURES -->
+      <section class="panel" id="panel-departures">
+        <div class="dep-summary"><strong>Departure Overview:</strong> All delegates depart Nov 15. Some from Lucknow (LKO), others return to Delhi (DEL) first.</div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-title">Departure Schedule — November 15</span>
+            <div style="display:flex;gap:8px">
+              <input class="search-inp" id="dep-search" placeholder="Search delegate…"/>
+              <select id="dep-filter" onchange="filterDepartures()" style="padding:7px 10px;border-radius:var(--r-md);border:1px solid var(--border-s);background:var(--bg);font-size:13px;outline:none">
+                <option value="">All Airports</option><option value="LKO">Lucknow (LKO)</option><option value="DEL">Delhi (DEL)</option>
               </select>
             </div>
-            <div class="fg" style="margin-bottom:16px"><label>Message</label>
-              <textarea id="broadcast-msg" rows="4" placeholder="Type your message here…" style="resize:vertical"></textarea>
-            </div>
-            <button class="btn btn-primary" style="width:100%" onclick="sendBroadcast()">Send Broadcast Now</button>
+          </div>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Delegate</th><th>Country</th><th>Airport</th><th>Return Flight</th><th>Dep. Time</th><th>Checkout</th><th>Escort</th><th>Special Need</th></tr></thead>
+            <tbody id="dep-tbody"><tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-m)">Loading…</td></tr></tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- DELEGATES -->
+      <section class="panel" id="panel-delegates">
+        <div class="card">
+          <div class="card-hdr"><span class="card-title">All Delegates</span><input class="search-inp" id="delegates-search" placeholder="Search name or country…"/></div>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Name</th><th>Country</th><th>Delhi Hotel/Rm</th><th>Lucknow Hotel/Rm</th><th>Arrival</th><th>Return</th><th>Diet</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="delegates-tbody"><tr><td colspan="9" style="text-align:center;padding:20px;color:var(--text-m)">Loading…</td></tr></tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- PROGRAMME -->
+      <section class="panel" id="panel-schedule">
+        <div class="day-tabs">
+          <button class="day-btn active" onclick="showDay(1,this)">Day 1 — Nov 12 · Delhi</button>
+          <button class="day-btn" onclick="showDay(2,this)">Day 2 — Nov 13 · Delhi→Agra</button>
+          <button class="day-btn" onclick="showDay(3,this)">Day 3 — Nov 14 · Agra→Lucknow</button>
+          <button class="day-btn" onclick="showDay(4,this)">Day 4 — Nov 15 · Departures</button>
+        </div>
+        <div id="day-content"><div class="loading"><div class="loading-spinner"></div>Loading…</div></div>
+      </section>
+
+      <!-- HOTELS -->
+      <section class="panel" id="panel-hotels">
+        <div class="two-col">
+          <div><div class="sec-lbl">Delhi Hotels</div><div id="hotels-delhi"></div></div>
+          <div>
+            <div class="sec-lbl">Lucknow Hotels</div><div id="hotels-lucknow"></div>
+            <div class="sec-lbl">Agra — Transit Night</div><div id="hotels-agra"></div>
           </div>
         </div>
+      </section>
+
+      <!-- TRANSPORT -->
+      <section class="panel" id="panel-transport">
         <div class="card">
-          <div class="card-hdr"><span class="card-title">Notification Feed</span><span class="pill pill-red" id="notif-count">—</span></div>
-          <div id="notif-list"><div class="loading"><div class="loading-spinner"></div>Loading…</div></div>
+          <div class="card-hdr"><span class="card-title">All Vehicle & Driver Assignments</span></div>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Delegate</th><th>Leg</th><th>Driver & Phone</th><th>Vehicle</th><th>Time</th><th>Date</th><th>Status</th></tr></thead>
+            <tbody id="transport-tbody"><tr><td colspan="7" style="text-align:center;padding:20px;color:var(--text-m)">Loading…</td></tr></tbody>
+          </table></div>
         </div>
-      </div>
-    </section>
+      </section>
 
-  </main>
-</div>
+      <!-- NOTIFICATIONS -->
+      <section class="panel" id="panel-notifications">
+        <div class="two-col">
+          <div class="card admin-only-block" id="broadcast-card">
+            <div class="card-hdr"><span class="card-title">Send Broadcast</span></div>
+            <div class="card-pad">
+              <div class="fg" style="margin-bottom:12px"><label>Target Group</label>
+                <select id="broadcast-group"><option>All Delegates</option><option>Delhi Coordinators</option><option>Airport Team</option><option>Hotel Teams</option><option>Transport Team</option><option>All Staff</option><option>Lucknow Team</option></select>
+              </div>
+              <div class="fg" style="margin-bottom:16px"><label>Message</label>
+                <textarea id="broadcast-msg" rows="4" placeholder="Type your message here…" style="resize:vertical"></textarea>
+              </div>
+              <button class="btn btn-primary" style="width:100%" onclick="sendBroadcast()">Send Broadcast Now</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-hdr"><span class="card-title">Notification Feed</span><span class="pill pill-red" id="notif-count">—</span></div>
+            <div id="notif-list"><div class="loading"><div class="loading-spinner"></div>Loading…</div></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
 </div>
 
-<!-- MODAL: ADD DELEGATE -->
+<!-- MODAL: ADD DELEGATE (admin only) -->
 <div class="modal-overlay" id="modal-add">
   <div class="modal-box">
     <div class="modal-title">Add New Delegate</div>
@@ -397,27 +532,27 @@ tbody tr:hover td{background:#FAFAF8}
       <div class="fg"><label>Arrival Flight</label><input id="new-flight" placeholder="e.g. AI 202"/></div>
     </div>
     <div class="form-grid">
-      <div class="fg"><label>Arrival Terminal</label><select id="new-terminal"><option>T1</option><option>T2</option><option selected>T3</option></select></div>
+      <div class="fg"><label>Terminal</label><select id="new-terminal"><option>T1</option><option>T2</option><option selected>T3</option></select></div>
       <div class="fg"><label>Arrival Time</label><input id="new-eta" type="time" value="14:00"/></div>
     </div>
     <div class="form-grid">
       <div class="fg"><label>Delhi Hotel</label><select id="new-hotel-delhi"><option>Taj Diplomats</option><option>The Leela Palace</option><option>ITC Maurya</option></select></div>
       <div class="fg"><label>Lucknow Hotel</label><select id="new-hotel-lko"><option>Taj Hotel Lucknow</option><option>Vivanta Lucknow</option></select></div>
     </div>
-    <div style="border-top:1px solid var(--border);padding-top:14px;margin:4px 0 14px;font-size:11px;font-weight:700;color:var(--text-m);text-transform:uppercase;letter-spacing:0.06em">Return / Departure Details</div>
+    <div style="border-top:1px solid var(--border);padding-top:14px;margin:4px 0 14px;font-size:11px;font-weight:700;color:var(--text-m);text-transform:uppercase;letter-spacing:0.06em">Return / Departure</div>
     <div class="form-grid">
       <div class="fg"><label>Return Flight</label><input id="new-ret-flight" placeholder="e.g. AI 203"/></div>
       <div class="fg"><label>Departure Airport</label><select id="new-dep-airport"><option value="LKO">Lucknow (LKO)</option><option value="DEL">Delhi (DEL)</option></select></div>
     </div>
     <div class="form-grid">
       <div class="fg"><label>Departure Time</label><input id="new-dep-time" type="time" value="17:00"/></div>
-      <div class="fg"><label>Hotel Checkout Time</label><input id="new-checkout" type="time" value="14:00"/></div>
+      <div class="fg"><label>Checkout Time</label><input id="new-checkout" type="time" value="14:00"/></div>
     </div>
     <div class="form-grid">
-      <div class="fg"><label>Dietary Requirement</label><select id="new-diet"><option>None</option><option>Vegetarian</option><option>Halal</option><option>Vegan</option><option>Kosher</option><option>Gluten-free</option></select></div>
-      <div class="fg"><label>Receiver / Arrival Escort</label><input id="new-receiver" placeholder="Staff name"/></div>
+      <div class="fg"><label>Dietary</label><select id="new-diet"><option>None</option><option>Vegetarian</option><option>Halal</option><option>Vegan</option><option>Kosher</option><option>Gluten-free</option></select></div>
+      <div class="fg"><label>Receiver / Escort</label><input id="new-receiver" placeholder="Staff name"/></div>
     </div>
-    <div class="fg"><label>Special Requirements</label><input id="new-special" placeholder="e.g. Wheelchair, VIP lounge, extra baggage…"/></div>
+    <div class="fg"><label>Special Requirements</label><input id="new-special" placeholder="e.g. Wheelchair, VIP lounge…"/></div>
     <div class="modal-footer">
       <button class="btn" onclick="closeModal()">Cancel</button>
       <button class="btn btn-primary" onclick="saveDelegate()">Add Delegate</button>
@@ -435,86 +570,210 @@ tbody tr:hover td{background:#FAFAF8}
 <div class="toast" id="toast"></div>
 
 <script>
-// ── SUPABASE CONFIG ───────────────────────────────────────────────────────────
-const SUPABASE_URL = 'https://hsvhlhoflxngzkdwehoz.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhzdmhsaG9mbHhuZ3prZHdlaG96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1ODg1MTYsImV4cCI6MjA5MjE2NDUxNn0.Azg34yYTdXxadfCOQ2ZNQgQhx8WzchlGCT3Evc7Um4U';
+// ── CONFIG ────────────────────────────────────────────────────────────────────
+const SUPA_URL = 'https://hsvhlhoflxngzkdwehoz.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhzdmhsaG9mbHhuZ3prZHdlaG96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1ODg1MTYsImV4cCI6MjA5MjE2NDUxNn0.Azg34yYTdXxadfCOQ2ZNQgQhx8WzchlGCT3Evc7Um4U';
 
-// ── DATABASE HELPER ───────────────────────────────────────────────────────────
-async function db(table, options = {}) {
-  let url = `${SUPABASE_URL}/rest/v1/${table}?`;
-  if (options.select)  url += `select=${options.select}&`;
-  if (options.filter)  url += `${options.filter}&`;
-  if (options.order)   url += `order=${options.order}&`;
-  if (options.limit)   url += `limit=${options.limit}&`;
+let SESSION = null;
+let USER_PROFILE = null;
+let CACHE = {delegates:[],hotels:[],transport:[],programme:[],notifications:[]};
 
-  const headers = {
-    'apikey': SUPABASE_KEY,
-    'Authorization': `Bearer ${SUPABASE_KEY}`,
-    'Content-Type': 'application/json',
-    'Prefer': 'return=representation'
-  };
+// ── API HELPERS ───────────────────────────────────────────────────────────────
+const authHeaders = () => ({
+  'apikey': SUPA_KEY,
+  'Authorization': `Bearer ${SESSION?.access_token || SUPA_KEY}`,
+  'Content-Type': 'application/json',
+  'Prefer': 'return=representation'
+});
 
-  const res = await fetch(url, {
-    method: options.method || 'GET',
-    headers,
-    body: options.body ? JSON.stringify(options.body) : undefined
-  });
-
-  if (!res.ok) throw new Error(`DB error: ${res.status}`);
-  return options.method && options.method !== 'GET' ? res.json() : res.json();
+async function apiGet(table, params='') {
+  const r = await fetch(`${SUPA_URL}/rest/v1/${table}?${params}`, {headers: authHeaders()});
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
 }
 
-async function dbInsert(table, data) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
-    method: 'POST',
-    headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
-      'Content-Type': 'application/json',
-      'Prefer': 'return=representation'
-    },
-    body: JSON.stringify(data)
-  });
-  if (!res.ok) throw new Error(`Insert error: ${res.status}`);
-  return res.json();
+async function apiPost(table, data) {
+  const r = await fetch(`${SUPA_URL}/rest/v1/${table}`, {method:'POST', headers: authHeaders(), body: JSON.stringify(data)});
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
 }
 
-async function dbUpdate(table, id, data) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`, {
-    method: 'PATCH',
-    headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
-      'Content-Type': 'application/json',
-      'Prefer': 'return=representation'
-    },
-    body: JSON.stringify(data)
-  });
-  if (!res.ok) throw new Error(`Update error: ${res.status}`);
-  return res.json();
+async function apiPatch(table, id, data) {
+  const r = await fetch(`${SUPA_URL}/rest/v1/${table}?id=eq.${id}`, {method:'PATCH', headers: authHeaders(), body: JSON.stringify(data)});
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
 }
 
-// ── IN-MEMORY CACHE ───────────────────────────────────────────────────────────
-let CACHE = { delegates:[], hotels:[], transport:[], programme:[], notifications:[] };
+// ── AUTH ──────────────────────────────────────────────────────────────────────
+async function doLogin() {
+  const email    = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const errEl    = document.getElementById('login-error');
+  const btn      = document.getElementById('login-btn');
 
-// ── STATUS HELPERS ────────────────────────────────────────────────────────────
-const SC = {
-  'scheduled':  {label:'Scheduled',  cls:'pill-gray'},
-  'awaiting':   {label:'Awaiting',   cls:'pill-amber'},
-  'landed':     {label:'Landed',     cls:'pill-blue'},
-  'en-route':   {label:'En Route',   cls:'pill-blue'},
-  'in-transit': {label:'In Transit', cls:'pill-amber'},
-  'checked-in': {label:'Checked In', cls:'pill-green'},
-  'departed':   {label:'Departed',   cls:'pill-purple'},
-  'done':       {label:'Done',       cls:'pill-green'},
-  'dispatched': {label:'Dispatched', cls:'pill-blue'},
-  'standby':    {label:'Standby',    cls:'pill-amber'},
-  'confirmed':  {label:'Confirmed',  cls:'pill-green'},
-};
-const pill = s => { const c=SC[s]||{label:s,cls:'pill-gray'}; return `<span class="pill ${c.cls}">${c.label}</span>`; };
+  if(!email || !password){ errEl.textContent='Please enter email and password.'; errEl.classList.add('show'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Signing in…';
+  errEl.classList.remove('show');
+
+  try {
+    const r = await fetch(`${SUPA_URL}/auth/v1/token?grant_type=password`, {
+      method: 'POST',
+      headers: {'apikey': SUPA_KEY, 'Content-Type': 'application/json'},
+      body: JSON.stringify({email, password})
+    });
+    const data = await r.json();
+    if(!r.ok || data.error){ throw new Error(data.error_description || data.msg || 'Login failed'); }
+
+    SESSION = data;
+    // Get user profile (role)
+    const profiles = await apiGet('user_profiles', `id=eq.${data.user.id}&select=*`);
+    USER_PROFILE = profiles[0];
+
+    if(!USER_PROFILE){ throw new Error('Profile not found. Contact admin.'); }
+
+    // Route to correct view based on role
+    if(USER_PROFILE.role === 'delegate') {
+      await loadDelegateView();
+    } else {
+      await loadAdminApp();
+    }
+  } catch(e) {
+    errEl.textContent = e.message || 'Login failed. Please check your credentials.';
+    errEl.classList.add('show');
+    btn.disabled = false;
+    btn.textContent = 'Sign In to NyayPath';
+  }
+}
+
+function doLogout() {
+  SESSION = null;
+  USER_PROFILE = null;
+  CACHE = {delegates:[],hotels:[],transport:[],programme:[],notifications:[]};
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('delegate-screen').style.display = 'none';
+  document.getElementById('main-app').style.display = 'none';
+  document.getElementById('login-email').value = '';
+  document.getElementById('login-password').value = '';
+  showToast('Signed out successfully');
+}
+
+// Allow Enter key on login
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('login-password').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+  document.getElementById('login-email').addEventListener('keydown',    e => { if(e.key==='Enter') doLogin(); });
+});
+
+// ── DELEGATE PERSONAL VIEW ────────────────────────────────────────────────────
+async function loadDelegateView() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('delegate-screen').style.display = 'block';
+
+  try {
+    // Load delegate record
+    const delegates = await apiGet('delegates', `id=eq.${USER_PROFILE.delegate_id}&select=*`);
+    const d = delegates[0];
+    if(!d){ showToast('Delegate record not found — contact admin'); return; }
+
+    // Load programme
+    const programme = await apiGet('programme', 'select=*&order=day_number,session_time');
+
+    const initials = d.full_name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    document.getElementById('dv-initials').textContent = initials;
+    document.getElementById('dv-name').textContent     = d.full_name;
+    document.getElementById('dv-role').textContent     = `${d.role} · ${d.country}`;
+
+    document.getElementById('dv-arr-flight').textContent    = d.arrival_flight||'—';
+    document.getElementById('dv-arr-terminal').textContent  = d.arrival_terminal||'—';
+    document.getElementById('dv-arr-time').textContent      = d.arrival_time||'—';
+    document.getElementById('dv-receiver').textContent      = d.receiver||'—';
+    document.getElementById('dv-dep-flight').textContent    = d.departure_flight||'—';
+    document.getElementById('dv-dep-airport').textContent   = d.departure_airport||'—';
+    document.getElementById('dv-dep-time').textContent      = d.departure_time||'—';
+    document.getElementById('dv-checkout').textContent      = d.checkout_time||'14:00';
+    document.getElementById('dv-hotel-delhi').textContent   = d.hotel_delhi||'—';
+    document.getElementById('dv-room-delhi').textContent    = d.room_delhi||'TBC';
+    document.getElementById('dv-hotel-lko').textContent     = d.hotel_lucknow||'—';
+    document.getElementById('dv-room-lko').textContent      = d.room_lucknow||'TBC';
+    document.getElementById('dv-diet').textContent          = d.diet||'None';
+    document.getElementById('dv-special').textContent       = d.special_needs||'None';
+    document.getElementById('dv-escort').textContent        = d.dep_escort||d.receiver||'—';
+
+    const SC = {'checked-in':'Checked In ✓','en-route':'En Route','landed':'Landed','awaiting':'Awaiting Pickup','scheduled':'Scheduled','departed':'Departed'};
+    document.getElementById('dv-status-pill').textContent = SC[d.status]||d.status;
+
+    // Store programme for day switching
+    window._dvProgramme = programme;
+    dvShowDay(1);
+
+  } catch(e) { showToast('Error loading your details: '+e.message); }
+}
+
+function dvShowDay(day, btn) {
+  document.querySelectorAll('.dv-day-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  else document.querySelectorAll('.dv-day-btn')[day-1]?.classList.add('active');
+  const sessions = (window._dvProgramme||[]).filter(p=>p.day_number===day);
+  document.getElementById('dv-sessions').innerHTML = sessions.map(s=>`
+    <div class="dv-session ${s.session_type||''}">
+      <div class="dv-session-time">${s.session_time} · ${s.tag||''}</div>
+      <div class="dv-session-title">${s.session_title}</div>
+      <div class="dv-session-venue">${s.venue||''}</div>
+    </div>`).join('') || '<div style="padding:16px;text-align:center;color:var(--text-m)">No sessions</div>';
+}
+
+// ── ADMIN / COORDINATOR APP ───────────────────────────────────────────────────
+async function loadAdminApp() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('main-app').style.display    = 'flex';
+
+  // Apply role class for showing/hiding admin-only elements
+  const app = document.getElementById('main-app');
+  if(USER_PROFILE.role === 'admin') app.classList.add('role-admin');
+
+  // Show user in sidebar
+  const initials = USER_PROFILE.full_name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  document.getElementById('sb-user-av').textContent   = initials;
+  document.getElementById('sb-user-name').textContent = USER_PROFILE.full_name;
+  document.getElementById('sb-user-role').textContent = USER_PROFILE.role === 'admin' ? '👑 Admin' : '🗂️ Coordinator' + (USER_PROFILE.team ? ' · '+USER_PROFILE.team : '');
+
+  await loadAll();
+  setInterval(loadAll, 30000);
+}
+
+// ── LOAD DATA ─────────────────────────────────────────────────────────────────
+async function loadAll() {
+  try {
+    const [delegates, hotels, transport, programme, notifications] = await Promise.all([
+      apiGet('delegates',     'select=*&order=id'),
+      apiGet('hotels',        'select=*&order=id'),
+      apiGet('transport',     'select=*&order=pickup_date,pickup_time'),
+      apiGet('programme',     'select=*&order=day_number,session_time'),
+      apiGet('notifications', 'select=*&order=created_at.desc&limit=20'),
+    ]);
+    CACHE = {delegates, hotels, transport, programme, notifications};
+    const dbEl = document.getElementById('db-status');
+    dbEl.className = 'db-status connected';
+    dbEl.textContent = '🟢 Supabase Live';
+    renderAll();
+  } catch(e) {
+    const dbEl = document.getElementById('db-status');
+    if(dbEl){ dbEl.className='db-status disconnected'; dbEl.textContent='🔴 DB Error'; }
+  }
+}
+
+function renderAll() {
+  renderDashboard(); renderArrivals(); renderDepartures();
+  renderDelegates(); showDay(1); renderHotels();
+  renderTransport(); renderNotifications(); updateBadges();
+}
+
+// ── STATUS / HELPERS ──────────────────────────────────────────────────────────
+const SC = {'scheduled':{l:'Scheduled',c:'pill-gray'},'awaiting':{l:'Awaiting',c:'pill-amber'},'landed':{l:'Landed',c:'pill-blue'},'en-route':{l:'En Route',c:'pill-blue'},'in-transit':{l:'In Transit',c:'pill-amber'},'checked-in':{l:'Checked In',c:'pill-green'},'departed':{l:'Departed',c:'pill-purple'},'done':{l:'Done',c:'pill-green'},'dispatched':{l:'Dispatched',c:'pill-blue'},'standby':{l:'Standby',c:'pill-amber'}};
+const pill = s => { const c=SC[s]||{l:s,c:'pill-gray'}; return `<span class="pill ${c.c}">${c.l}</span>`; };
 const av   = (d,i) => `<div class="avatar av-${(i||0)%8}">${d.initials||d.full_name?.split(' ').map(w=>w[0]).join('').slice(0,2)||'??'}</div>`;
 
-// ── NAVIGATION ────────────────────────────────────────────────────────────────
 const TITLES = {dashboard:'Dashboard',arrivals:'Arrivals — Today',departures:'Departures — Nov 15',delegates:'All Delegates',schedule:'Conference Programme',hotels:'Hotel Management',transport:'Transport & Logistics',notifications:'Notifications & Broadcast'};
 function showPanel(id, btn) {
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
@@ -524,58 +783,16 @@ function showPanel(id, btn) {
   document.getElementById('topbar-title').textContent = TITLES[id]||id;
 }
 
-// ── LOAD ALL DATA ─────────────────────────────────────────────────────────────
-async function loadAll() {
-  try {
-    const [delegates, hotels, transport, programme, notifications] = await Promise.all([
-      db('delegates', {select:'*', order:'id'}),
-      db('hotels',    {select:'*', order:'id'}),
-      db('transport', {select:'*', order:'pickup_date,pickup_time'}),
-      db('programme', {select:'*', order:'day_number,session_time'}),
-      db('notifications', {select:'*', order:'created_at.desc', limit:'20'}),
-    ]);
-
-    CACHE = { delegates, hotels, transport, programme, notifications };
-
-    // Mark DB as connected
-    const dbEl = document.getElementById('db-status');
-    dbEl.className = 'db-status connected';
-    dbEl.textContent = '🟢 Supabase Live';
-
-    renderAll();
-    showToast('Connected to live database ✓');
-  } catch(e) {
-    const dbEl = document.getElementById('db-status');
-    dbEl.className = 'db-status disconnected';
-    dbEl.textContent = '🔴 DB Error';
-    console.error(e);
-    showToast('Database connection error — check console');
-  }
-}
-
-function renderAll() {
-  renderDashboard();
-  renderArrivals();
-  renderDepartures();
-  renderDelegates();
-  showDay(1);
-  renderHotels();
-  renderTransport();
-  renderNotifications();
-  updateBadges();
-}
-
-// ── BADGES ────────────────────────────────────────────────────────────────────
 function updateBadges() {
-  const arriving = CACHE.delegates.filter(d=>['awaiting','landed','en-route','in-transit'].includes(d.status)).length;
-  const unread   = CACHE.notifications.filter(n=>!n.is_read).length;
-  document.getElementById('badge-arrivals').textContent    = arriving||'0';
-  document.getElementById('badge-departures').textContent  = CACHE.delegates.length;
-  document.getElementById('badge-notif').textContent       = unread||'0';
-  document.getElementById('notif-count').textContent       = unread+' unread';
+  const arr = CACHE.delegates.filter(d=>['awaiting','landed','en-route','in-transit'].includes(d.status)).length;
+  const unr = CACHE.notifications.filter(n=>!n.is_read).length;
+  document.getElementById('badge-arrivals').textContent   = arr||'0';
+  document.getElementById('badge-departures').textContent = CACHE.delegates.length;
+  document.getElementById('badge-notif').textContent      = unr||'0';
+  document.getElementById('notif-count').textContent      = unr+' unread';
 }
 
-// ── DASHBOARD ─────────────────────────────────────────────────────────────────
+// ── RENDER FUNCTIONS ──────────────────────────────────────────────────────────
 function renderDashboard() {
   const d = CACHE.delegates;
   document.getElementById('stat-total').textContent     = d.length;
@@ -584,7 +801,6 @@ function renderDashboard() {
   document.getElementById('stat-departing').textContent = d.length;
   document.getElementById('stat-alerts').textContent    = CACHE.notifications.filter(n=>!n.is_read).length;
 
-  // Recent arrivals from notifications
   document.getElementById('recent-arrivals').innerHTML = CACHE.notifications.slice(0,5).map(n=>`
     <div class="notif-item" onclick="markRead(${n.id})">
       <div class="notif-dot ${n.is_read?'read':''}"></div>
@@ -592,101 +808,80 @@ function renderDashboard() {
       <div class="notif-meta">${new Date(n.created_at).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})} · ${n.sent_by}</div></div>
     </div>`).join('') || '<div style="padding:20px;text-align:center;color:var(--text-m)">No notifications yet</div>';
 
-  // Today's programme (Day 1)
-  const day1 = CACHE.programme.filter(p=>p.day_number===1);
-  const dotColors = {keynote:' style="background:var(--teal-mid)"',social:' style="background:var(--gold)"',student:' style="background:var(--purple-mid)"',transit:' style="background:var(--text-m)"','':" style=\"background:var(--primary-mid)\""};
-  document.getElementById('today-programme').innerHTML = day1.map(s=>`
+  const dotC = {keynote:'var(--teal-mid)',social:'var(--gold)',student:'var(--purple-mid)',transit:'var(--text-m)','':"var(--primary-mid)"};
+  document.getElementById('today-programme').innerHTML = CACHE.programme.filter(p=>p.day_number===1).map(s=>`
     <div class="tl-item">
       <div class="tl-time">${s.session_time}</div>
-      <div class="tl-dot"${dotColors[s.session_type]||dotColors['']}></div>
-      <div class="tl-info"><div class="tl-title">${s.session_title}</div><div class="tl-sub">${s.venue}</div></div>
-    </div>`).join('') || '<div style="padding:20px;text-align:center;color:var(--text-m)">No sessions found</div>';
+      <div class="tl-dot" style="background:${dotC[s.session_type]||dotC['']}"></div>
+      <div><div class="tl-title">${s.session_title}</div><div class="tl-sub">${s.venue}</div></div>
+    </div>`).join('');
 
-  // Pending actions
   const pending = d.filter(x=>['awaiting','in-transit','landed'].includes(x.status));
   document.getElementById('pending-tbody').innerHTML = pending.length ? pending.map((x,i)=>`
-    <tr>
-      <td><div class="name-cell">${av(x,i)}<span style="font-weight:700">${x.full_name}</span></div></td>
-      <td>${pill(x.status)}</td>
-      <td>${x.status==='awaiting'?'Airport pickup needed':x.status==='landed'?'Car dispatched, waiting':'Room confirmation needed'}</td>
-      <td>${x.receiver||'—'}</td>
-    </tr>`).join('') : '<tr><td colspan="4" style="text-align:center;padding:20px;color:var(--text-m)">No pending actions 🎉</td></tr>';
+    <tr><td><div class="name-cell">${av(x,i)}<span style="font-weight:700">${x.full_name}</span></div></td>
+    <td>${pill(x.status)}</td>
+    <td>${x.status==='awaiting'?'Airport pickup needed':x.status==='landed'?'Car dispatched, waiting':'Room confirmation needed'}</td>
+    <td>${x.receiver||'—'}</td></tr>`).join('')
+    : '<tr><td colspan="4" style="text-align:center;padding:20px;color:var(--text-m)">No pending actions 🎉</td></tr>';
 }
 
-// ── ARRIVALS ─────────────────────────────────────────────────────────────────
-let allDelegates = [];
 function renderArrivals(filter='') {
-  allDelegates = CACHE.delegates;
-  const list = filter ? allDelegates.filter(d=>d.full_name.toLowerCase().includes(filter.toLowerCase())||d.arrival_flight?.toLowerCase().includes(filter.toLowerCase())||d.country.toLowerCase().includes(filter.toLowerCase())) : allDelegates;
+  const list = filter ? CACHE.delegates.filter(d=>d.full_name.toLowerCase().includes(filter.toLowerCase())||d.arrival_flight?.toLowerCase().includes(filter.toLowerCase())||d.country.toLowerCase().includes(filter.toLowerCase())) : CACHE.delegates;
   document.getElementById('arrivals-tbody').innerHTML = list.map((d,i)=>`
-    <tr>
-      <td><div class="name-cell">${av(d,i)}<div><div style="font-weight:700">${d.full_name}</div></div></div></td>
-      <td>${d.country}</td><td>${d.arrival_flight||'—'}</td><td>${d.arrival_terminal||'—'}</td>
-      <td style="font-weight:700">${d.arrival_time||'—'}</td>
-      <td>${pill(d.status)}</td><td>${d.receiver||'—'}</td><td>${d.hotel_delhi||'—'}</td>
-      <td><button class="btn btn-sm" onclick="advanceStatus(${d.id},'${d.status}')">Update ↑</button></td>
-    </tr>`).join('') || '<tr><td colspan="9" style="text-align:center;padding:20px;color:var(--text-m)">No delegates found</td></tr>';
+    <tr><td><div class="name-cell">${av(d,i)}<div><div style="font-weight:700">${d.full_name}</div></div></div></td>
+    <td>${d.country}</td><td>${d.arrival_flight||'—'}</td><td>${d.arrival_terminal||'—'}</td>
+    <td style="font-weight:700">${d.arrival_time||'—'}</td><td>${pill(d.status)}</td>
+    <td>${d.receiver||'—'}</td><td>${d.hotel_delhi||'—'}</td>
+    <td><button class="btn btn-sm" onclick="advanceStatus(${d.id},'${d.status}')">Update ↑</button></td></tr>`).join('')
+    || '<tr><td colspan="9" style="text-align:center;padding:20px;color:var(--text-m)">No delegates found</td></tr>';
 }
 
-// ── DEPARTURES ────────────────────────────────────────────────────────────────
 function renderDepartures(filter='', airport='') {
   let list = CACHE.delegates;
   if(filter)  list = list.filter(d=>d.full_name.toLowerCase().includes(filter.toLowerCase()));
   if(airport) list = list.filter(d=>d.departure_airport===airport);
   document.getElementById('dep-tbody').innerHTML = list.map((d,i)=>`
-    <tr>
-      <td><div class="name-cell">${av(d,i)}<div><div style="font-weight:700">${d.full_name}</div><div style="font-size:11px;color:var(--text-m)">${d.country}</div></div></div></td>
-      <td>${d.country}</td>
-      <td><span class="pill ${d.departure_airport==='LKO'?'pill-blue':'pill-amber'}">${d.departure_airport||'—'}</span></td>
-      <td style="font-weight:700">${d.departure_flight||'—'}</td>
-      <td style="font-weight:700">${d.departure_time||'—'}</td>
-      <td>${d.checkout_time||'14:00'}</td>
-      <td>${d.dep_escort||d.receiver||'—'}</td>
-      <td style="font-size:12px;color:var(--text-s)">${d.special_needs||'—'}</td>
-    </tr>`).join('') || '<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-m)">No delegates found</td></tr>';
+    <tr><td><div class="name-cell">${av(d,i)}<div><div style="font-weight:700">${d.full_name}</div><div style="font-size:11px;color:var(--text-m)">${d.country}</div></div></div></td>
+    <td>${d.country}</td>
+    <td><span class="pill ${d.departure_airport==='LKO'?'pill-blue':'pill-amber'}">${d.departure_airport||'—'}</span></td>
+    <td style="font-weight:700">${d.departure_flight||'—'}</td>
+    <td style="font-weight:700">${d.departure_time||'—'}</td>
+    <td>${d.checkout_time||'14:00'}</td><td>${d.dep_escort||d.receiver||'—'}</td>
+    <td style="font-size:12px;color:var(--text-s)">${d.special_needs||'—'}</td></tr>`).join('')
+    || '<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-m)">No delegates found</td></tr>';
 }
-function filterDepartures() {
-  renderDepartures(document.getElementById('dep-search').value, document.getElementById('dep-filter').value);
-}
+function filterDepartures(){ renderDepartures(document.getElementById('dep-search').value, document.getElementById('dep-filter').value); }
 
-// ── DELEGATES ─────────────────────────────────────────────────────────────────
 function renderDelegates(filter='') {
   const list = filter ? CACHE.delegates.filter(d=>d.full_name.toLowerCase().includes(filter.toLowerCase())||d.country.toLowerCase().includes(filter.toLowerCase())) : CACHE.delegates;
   document.getElementById('delegates-tbody').innerHTML = list.map((d,i)=>`
-    <tr>
-      <td><div class="name-cell">${av(d,i)}<div><div style="font-weight:700">${d.full_name}</div><div style="font-size:11px;color:var(--text-m)">${d.role}</div></div></div></td>
-      <td>${d.country}</td>
-      <td>${d.hotel_delhi||'—'} <span style="color:var(--text-m)">Rm ${d.room_delhi||'TBC'}</span></td>
-      <td>${d.hotel_lucknow||'—'} <span style="color:var(--text-m)">Rm ${d.room_lucknow||'TBC'}</span></td>
-      <td>${d.arrival_flight||'—'}</td>
-      <td>${d.departure_flight||'—'} <span class="pill ${d.departure_airport==='LKO'?'pill-blue':'pill-amber'}" style="margin-left:4px">${d.departure_airport||''}</span></td>
-      <td>${d.departure_airport||'—'}</td>
-      <td>${d.diet||'None'}</td>
-      <td>${pill(d.status)}</td>
-      <td><button class="btn btn-sm" onclick="viewDelegate(${d.id})">View</button></td>
-    </tr>`).join('') || '<tr><td colspan="10" style="text-align:center;padding:20px;color:var(--text-m)">No delegates found</td></tr>';
+    <tr><td><div class="name-cell">${av(d,i)}<div><div style="font-weight:700">${d.full_name}</div><div style="font-size:11px;color:var(--text-m)">${d.role}</div></div></div></td>
+    <td>${d.country}</td>
+    <td>${d.hotel_delhi||'—'} <span style="color:var(--text-m)">Rm ${d.room_delhi||'TBC'}</span></td>
+    <td>${d.hotel_lucknow||'—'} <span style="color:var(--text-m)">Rm ${d.room_lucknow||'TBC'}</span></td>
+    <td>${d.arrival_flight||'—'}</td>
+    <td>${d.departure_flight||'—'} <span class="pill ${d.departure_airport==='LKO'?'pill-blue':'pill-amber'}" style="margin-left:4px">${d.departure_airport||''}</span></td>
+    <td>${d.diet||'None'}</td><td>${pill(d.status)}</td>
+    <td><button class="btn btn-sm" onclick="viewDelegate(${d.id})">View</button></td></tr>`).join('')
+    || '<tr><td colspan="9" style="text-align:center;padding:20px;color:var(--text-m)">No delegates found</td></tr>';
 }
 
-// ── PROGRAMME ─────────────────────────────────────────────────────────────────
 function showDay(day, btn) {
   document.querySelectorAll('.day-btn').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
   else document.querySelectorAll('.day-btn')[day-1]?.classList.add('active');
-  const sessions = CACHE.programme.filter(p=>p.day_number===day);
-  document.getElementById('day-content').innerHTML = sessions.map(s=>`
+  document.getElementById('day-content').innerHTML = CACHE.programme.filter(p=>p.day_number===day).map(s=>`
     <div class="session-card ${s.session_type||''}">
       <div class="session-time">${s.session_time} · ${s.tag||''}</div>
       <div class="session-title">${s.session_title}</div>
       <div class="session-meta">${s.venue||''} ${s.speakers?'· '+s.speakers:''}</div>
-    </div>`).join('') || '<div style="padding:20px;text-align:center;color:var(--text-m)">No sessions for this day</div>';
+    </div>`).join('') || '<div style="padding:20px;text-align:center;color:var(--text-m)">No sessions</div>';
 }
 
-// ── HOTELS ────────────────────────────────────────────────────────────────────
 function renderHotels() {
   const hCard = h => {
     const pct = h.total_rooms ? Math.round((h.occupied_rooms/h.total_rooms)*100) : 0;
-    return `<div class="hotel-block">
-      <div class="hotel-name">${h.name}</div>
+    return `<div class="hotel-block"><div class="hotel-name">${h.name}</div>
       <div class="hotel-city">${h.address||h.city}</div>
       <div class="hotel-bar"><div class="hotel-bar-fill" style="width:${pct||2}%"></div></div>
       <div class="hotel-stats">
@@ -696,62 +891,54 @@ function renderHotels() {
         <div class="hstat">📞 <strong>${h.phone||'—'}</strong></div>
       </div></div>`;
   };
-  document.getElementById('hotels-delhi').innerHTML   = CACHE.hotels.filter(h=>h.city==='Delhi').map(hCard).join('')   || '<div style="padding:20px;color:var(--text-m)">No hotels found</div>';
+  document.getElementById('hotels-delhi').innerHTML   = CACHE.hotels.filter(h=>h.city==='Delhi').map(hCard).join('')   || '<div style="padding:20px;color:var(--text-m)">No hotels</div>';
   document.getElementById('hotels-agra').innerHTML    = CACHE.hotels.filter(h=>h.city==='Agra').map(hCard).join('')    || '';
   document.getElementById('hotels-lucknow').innerHTML = CACHE.hotels.filter(h=>h.city==='Lucknow').map(hCard).join('') || '';
 }
 
-// ── TRANSPORT ─────────────────────────────────────────────────────────────────
 function renderTransport() {
   document.getElementById('transport-tbody').innerHTML = CACHE.transport.map(t=>`
-    <tr>
-      <td style="font-weight:700">${t.delegate_name}</td>
-      <td>${t.leg}</td>
-      <td>${t.driver_name||'—'}<br><span style="font-size:11px;color:var(--text-m)">${t.driver_phone||''}</span></td>
-      <td style="font-size:12px">${t.vehicle||'—'}</td>
-      <td style="font-weight:700">${t.pickup_time||'—'}</td>
-      <td style="font-size:12px;color:var(--text-m)">${t.pickup_date||'—'}</td>
-      <td>${pill(t.status)}</td>
-    </tr>`).join('') || '<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--text-m)">No transport data</td></tr>';
+    <tr><td style="font-weight:700">${t.delegate_name}</td><td>${t.leg}</td>
+    <td>${t.driver_name||'—'}<br><span style="font-size:11px;color:var(--text-m)">${t.driver_phone||''}</span></td>
+    <td style="font-size:12px">${t.vehicle||'—'}</td>
+    <td style="font-weight:700">${t.pickup_time||'—'}</td>
+    <td style="font-size:12px;color:var(--text-m)">${t.pickup_date||'—'}</td>
+    <td>${pill(t.status)}</td></tr>`).join('')
+    || '<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--text-m)">No transport data</td></tr>';
 }
 
-// ── NOTIFICATIONS ─────────────────────────────────────────────────────────────
 function renderNotifications() {
   const unread = CACHE.notifications.filter(n=>!n.is_read).length;
   document.getElementById('notif-count').textContent = unread+' unread';
-  document.getElementById('badge-notif').textContent = unread||'0';
   document.getElementById('notif-list').innerHTML = CACHE.notifications.map(n=>`
     <div class="notif-item" onclick="markRead(${n.id})">
       <div class="notif-dot ${n.is_read?'read':''}"></div>
       <div><div class="notif-msg">${n.message}</div>
       <div class="notif-meta">${new Date(n.created_at).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})} · ${n.sent_by} → ${n.target_group}</div></div>
-    </div>`).join('') || '<div style="padding:20px;text-align:center;color:var(--text-m)">No notifications yet</div>';
+    </div>`).join('') || '<div style="padding:20px;text-align:center;color:var(--text-m)">No notifications</div>';
 }
 
 async function markRead(id) {
   try {
-    await dbUpdate('notifications', id, {is_read: true});
+    await apiPatch('notifications', id, {is_read:true});
     const n = CACHE.notifications.find(x=>x.id===id);
     if(n) n.is_read = true;
-    renderNotifications();
-    renderDashboard();
-    updateBadges();
-  } catch(e) { showToast('Could not update notification'); }
+    renderNotifications(); renderDashboard(); updateBadges();
+  } catch(e) {}
 }
 
 async function sendBroadcast() {
-  const msg  = document.getElementById('broadcast-msg').value.trim();
-  const grp  = document.getElementById('broadcast-group').value;
+  if(USER_PROFILE?.role !== 'admin'){ showToast('Only admins can send broadcasts'); return; }
+  const msg = document.getElementById('broadcast-msg').value.trim();
+  const grp = document.getElementById('broadcast-group').value;
   if(!msg){ showToast('Please type a message first.'); return; }
   try {
-    const result = await dbInsert('notifications', {message:msg, sent_by:'Admin', target_group:grp, is_read:false, category:'info'});
+    const result = await apiPost('notifications', {message:msg, sent_by:USER_PROFILE.full_name, target_group:grp, is_read:false, category:'info'});
     CACHE.notifications.unshift(result[0]);
     document.getElementById('broadcast-msg').value = '';
-    renderNotifications();
-    renderDashboard();
-    updateBadges();
+    renderNotifications(); renderDashboard(); updateBadges();
     showToast(`Broadcast sent to: ${grp} ✓`);
-  } catch(e) { showToast('Failed to send broadcast'); }
+  } catch(e) { showToast('Failed to send: '+e.message); }
 }
 
 // ── STATUS UPDATE ─────────────────────────────────────────────────────────────
@@ -760,18 +947,14 @@ async function advanceStatus(id, current) {
   const idx = STATUS_FLOW.indexOf(current);
   if(idx >= STATUS_FLOW.length-1){ showToast('Already at final status.'); return; }
   const next = STATUS_FLOW[idx+1];
+  const d    = CACHE.delegates.find(x=>x.id===id);
   try {
-    await dbUpdate('delegates', id, {status: next});
-    const d = CACHE.delegates.find(x=>x.id===id);
-    if(d){ d.status = next; }
-    // Add auto-notification
-    await dbInsert('notifications', {
-      message: `${d?.full_name} status updated → ${SC[next]?.label||next}`,
-      sent_by: 'Coordinator', target_group: 'All Staff', is_read: false, category: 'info'
-    });
+    await apiPatch('delegates', id, {status:next});
+    if(d) d.status = next;
+    await apiPost('notifications', {message:`${d?.full_name} status updated → ${SC[next]?.l||next}`, sent_by:'Coordinator', target_group:'All Staff', is_read:false, category:'info'});
     await loadAll();
-    showToast(`${d?.full_name} → ${SC[next]?.label} ✓`);
-  } catch(e) { showToast('Update failed — check connection'); }
+    showToast(`${d?.full_name} → ${SC[next]?.l} ✓`);
+  } catch(e) { showToast('Update failed: '+e.message); }
 }
 
 // ── VIEW DELEGATE ─────────────────────────────────────────────────────────────
@@ -781,7 +964,7 @@ function viewDelegate(id) {
   const i = CACHE.delegates.indexOf(d);
   document.getElementById('view-content').innerHTML = `
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
-      ${av(d,i).replace('34px','52px').replace('34px','52px').replace('12px','16px')}
+      <div class="avatar av-${i%8}" style="width:52px;height:52px;font-size:16px">${d.initials||'??'}</div>
       <div><div style="font-size:18px;font-weight:700">${d.full_name}</div>
       <div style="font-size:13px;color:var(--text-m)">${d.role} · ${d.country}</div></div>
       <div style="margin-left:auto">${pill(d.status)}</div>
@@ -797,85 +980,76 @@ function viewDelegate(id) {
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:8px">🛫 Departure</div>
         <div style="font-size:13px;margin-bottom:4px"><span style="color:var(--text-m)">Flight:</span> <strong>${d.departure_flight||'—'}</strong></div>
         <div style="font-size:13px;margin-bottom:4px"><span style="color:var(--text-m)">Airport:</span> <strong>${d.departure_airport||'—'}</strong></div>
-        <div style="font-size:13px;margin-bottom:4px"><span style="color:var(--text-m)">Time:</span> <strong>${d.departure_time||'—'}</strong></div>
-        <div style="font-size:13px"><span style="color:var(--text-m)">Checkout:</span> <strong>${d.checkout_time||'14:00'}</strong></div>
+        <div style="font-size:13px"><span style="color:var(--text-m)">Time:</span> <strong>${d.departure_time||'—'}</strong></div>
       </div>
       <div style="background:var(--bg);border-radius:var(--r-md);padding:12px">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:8px">🏨 Delhi</div>
-        <div style="font-size:13px;margin-bottom:4px"><strong>${d.hotel_delhi||'—'}</strong></div>
+        <div style="font-size:13px;font-weight:700">${d.hotel_delhi||'—'}</div>
         <div style="font-size:13px;color:var(--text-m)">Room ${d.room_delhi||'TBC'}</div>
       </div>
       <div style="background:var(--bg);border-radius:var(--r-md);padding:12px">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:8px">🏨 Lucknow</div>
-        <div style="font-size:13px;margin-bottom:4px"><strong>${d.hotel_lucknow||'—'}</strong></div>
+        <div style="font-size:13px;font-weight:700">${d.hotel_lucknow||'—'}</div>
         <div style="font-size:13px;color:var(--text-m)">Room ${d.room_lucknow||'TBC'}</div>
       </div>
       <div style="background:var(--bg);border-radius:var(--r-md);padding:12px;grid-column:span 2">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:8px">📋 Additional Info</div>
-        <div style="font-size:13px;margin-bottom:4px"><span style="color:var(--text-m)">Receiver:</span> <strong>${d.receiver||'—'}</strong> &nbsp;|&nbsp; <span style="color:var(--text-m)">Dep. Escort:</span> <strong>${d.dep_escort||d.receiver||'—'}</strong></div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:8px">📋 Additional</div>
+        <div style="font-size:13px;margin-bottom:4px"><span style="color:var(--text-m)">Receiver:</span> <strong>${d.receiver||'—'}</strong> &nbsp;|&nbsp; <span style="color:var(--text-m)">Escort:</span> <strong>${d.dep_escort||'—'}</strong></div>
         <div style="font-size:13px;margin-bottom:4px"><span style="color:var(--text-m)">Dietary:</span> <strong>${d.diet||'None'}</strong></div>
-        <div style="font-size:13px"><span style="color:var(--text-m)">Special Requirements:</span> <strong>${d.special_needs||'None'}</strong></div>
+        <div style="font-size:13px"><span style="color:var(--text-m)">Special:</span> <strong>${d.special_needs||'None'}</strong></div>
       </div>
     </div>`;
   document.getElementById('modal-view').classList.add('open');
 }
 
 // ── ADD DELEGATE ──────────────────────────────────────────────────────────────
-function openModal()  { document.getElementById('modal-add').classList.add('open'); }
+function openModal()  { if(USER_PROFILE?.role==='admin') document.getElementById('modal-add').classList.add('open'); }
 function closeModal() { document.getElementById('modal-add').classList.remove('open'); }
 
 async function saveDelegate() {
   const name = document.getElementById('new-name').value.trim();
   if(!name){ showToast('Please enter delegate name.'); return; }
-  const initials = name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
   const data = {
-    full_name:          name,
-    country:            document.getElementById('new-country').value.trim()||'—',
-    role:               document.getElementById('new-role').value.trim()||'Delegate',
-    initials,
-    arrival_flight:     document.getElementById('new-flight').value.trim()||null,
-    arrival_terminal:   document.getElementById('new-terminal').value,
-    arrival_time:       document.getElementById('new-eta').value||null,
-    arrival_date:       '2025-11-12',
-    hotel_delhi:        document.getElementById('new-hotel-delhi').value,
-    hotel_lucknow:      document.getElementById('new-hotel-lko').value,
-    departure_flight:   document.getElementById('new-ret-flight').value.trim()||null,
-    departure_airport:  document.getElementById('new-dep-airport').value,
-    departure_time:     document.getElementById('new-dep-time').value||null,
-    departure_date:     '2025-11-15',
-    checkout_time:      document.getElementById('new-checkout').value||'14:00',
-    diet:               document.getElementById('new-diet').value,
-    receiver:           document.getElementById('new-receiver').value.trim()||null,
-    special_needs:      document.getElementById('new-special').value.trim()||null,
-    status:             'scheduled',
-    current_city:       'Arriving',
+    full_name:name, country:document.getElementById('new-country').value.trim()||'—',
+    role:document.getElementById('new-role').value.trim()||'Delegate',
+    initials:name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase(),
+    arrival_flight:document.getElementById('new-flight').value.trim()||null,
+    arrival_terminal:document.getElementById('new-terminal').value,
+    arrival_time:document.getElementById('new-eta').value||null,
+    arrival_date:'2025-11-12',
+    hotel_delhi:document.getElementById('new-hotel-delhi').value,
+    hotel_lucknow:document.getElementById('new-hotel-lko').value,
+    departure_flight:document.getElementById('new-ret-flight').value.trim()||null,
+    departure_airport:document.getElementById('new-dep-airport').value,
+    departure_time:document.getElementById('new-dep-time').value||null,
+    departure_date:'2025-11-15',
+    checkout_time:document.getElementById('new-checkout').value||'14:00',
+    diet:document.getElementById('new-diet').value,
+    receiver:document.getElementById('new-receiver').value.trim()||null,
+    special_needs:document.getElementById('new-special').value.trim()||null,
+    status:'scheduled', current_city:'Arriving',
   };
   try {
-    const result = await dbInsert('delegates', data);
+    const result = await apiPost('delegates', data);
     CACHE.delegates.push(result[0]);
-    closeModal();
-    renderAll();
+    closeModal(); renderAll();
     showToast(`${name} added to database ✓`);
     document.getElementById('new-name').value='';
-  } catch(e) { showToast('Failed to save delegate — check connection'); }
+  } catch(e) { showToast('Failed to save: '+e.message); }
 }
 
 // ── TOAST ─────────────────────────────────────────────────────────────────────
 function showToast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
+  t.textContent = msg; t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'), 3000);
 }
 
 // ── SEARCH WIRING ─────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  loadAll();
   document.getElementById('arrivals-search').addEventListener('input',  e=>renderArrivals(e.target.value));
-  document.getElementById('dep-search').addEventListener('input',       e=>filterDepartures());
+  document.getElementById('dep-search').addEventListener('input',       ()=>filterDepartures());
   document.getElementById('delegates-search').addEventListener('input', e=>renderDelegates(e.target.value));
-  // Auto-refresh every 30 seconds
-  setInterval(loadAll, 30000);
 });
 </script>
 </body>
