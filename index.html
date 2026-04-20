@@ -23,135 +23,123 @@ body{font-family:'DM Sans','Segoe UI',system-ui,sans-serif;background:var(--bg);
 button{cursor:pointer;font-family:inherit}
 input,select,textarea{font-family:inherit}
 
-/* ── LOGIN SCREEN ── */
+/* LOGIN */
 .login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);padding:20px}
-.login-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px;width:100%;max-width:420px;box-shadow:0 8px 40px rgba(0,0,0,0.08)}
-.login-logo{text-align:center;margin-bottom:32px}
+.login-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px;width:100%;max-width:420px}
+.login-logo{text-align:center;margin-bottom:28px}
 .login-logo-name{font-size:32px;font-weight:700;color:var(--primary);letter-spacing:-0.02em}
 .login-logo-name span{color:var(--gold)}
-.login-logo-sub{font-size:12px;color:var(--text-m);margin-top:4px}
-.login-logo-conf{font-size:13px;font-weight:600;color:var(--text-s);margin-top:8px;padding:6px 14px;background:var(--primary-light);color:var(--primary);border-radius:20px;display:inline-block}
-.login-title{font-size:18px;font-weight:700;margin-bottom:6px;color:var(--text)}
-.login-sub{font-size:13px;color:var(--text-m);margin-bottom:24px}
-.login-field{margin-bottom:16px}
-.login-field label{display:block;font-size:12px;font-weight:700;color:var(--text-s);margin-bottom:6px}
-.login-field input{width:100%;padding:11px 14px;border:1px solid var(--border-s);border-radius:var(--r-md);background:var(--bg);font-size:14px;color:var(--text);outline:none;transition:border-color 0.15s}
-.login-field input:focus{border-color:var(--primary-mid);background:var(--surface)}
-.login-btn{width:100%;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:var(--r-md);font-size:14px;font-weight:700;cursor:pointer;transition:opacity 0.15s;margin-top:8px}
+.login-logo-sub{font-size:11px;color:var(--text-m);margin-top:4px}
+.login-logo-conf{font-size:12px;font-weight:700;color:var(--primary);margin-top:8px;padding:5px 14px;background:var(--primary-light);border-radius:20px;display:inline-block}
+.login-title{font-size:17px;font-weight:700;margin-bottom:4px}
+.login-sub{font-size:12px;color:var(--text-m);margin-bottom:20px}
+.login-error{background:var(--red-light);color:var(--red);padding:10px 14px;border-radius:var(--r-md);font-size:13px;font-weight:600;margin-bottom:14px;display:none}
+.login-error.show{display:block}
+.lf{margin-bottom:14px}
+.lf label{display:block;font-size:11px;font-weight:700;color:var(--text-s);margin-bottom:5px}
+.lf input{width:100%;padding:11px 14px;border:1px solid var(--border-s);border-radius:var(--r-md);background:var(--bg);font-size:14px;color:var(--text);outline:none;transition:border-color 0.15s}
+.lf input:focus{border-color:var(--primary-mid);background:var(--surface)}
+.login-btn{width:100%;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:var(--r-md);font-size:14px;font-weight:700;cursor:pointer;transition:opacity 0.15s;margin-top:6px}
 .login-btn:hover{opacity:0.88}
 .login-btn:disabled{opacity:0.5;cursor:not-allowed}
-.login-error{background:var(--red-light);color:var(--red);padding:10px 14px;border-radius:var(--r-md);font-size:13px;font-weight:600;margin-bottom:16px;display:none}
-.login-error.show{display:block}
-.login-loading{text-align:center;padding:20px;color:var(--text-m);font-size:13px}
-.role-badges{display:flex;gap:8px;justify-content:center;margin-top:24px;flex-wrap:wrap}
-.role-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px}
-.rb-admin{background:var(--primary-light);color:var(--primary)}
-.rb-coord{background:var(--teal-light);color:var(--teal)}
-.rb-delegate{background:var(--gold-light);color:var(--gold)}
+.login-roles{border-top:1px solid var(--border);padding-top:16px;margin-top:20px;text-align:center}
+.login-roles-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:10px}
+.login-role-badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.lrb{font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px}
+.lrb-admin{background:var(--primary-light);color:var(--primary)}
+.lrb-coord{background:var(--teal-light);color:var(--teal)}
+.lrb-delegate{background:var(--gold-light);color:var(--gold)}
+.login-auto-note{font-size:11px;color:var(--text-m)}
 
-/* ── DELEGATE PERSONAL VIEW ── */
+/* DELEGATE VIEW */
 .delegate-view{min-height:100vh;background:var(--bg);padding:20px}
-.dv-header{background:var(--primary);color:#fff;border-radius:var(--r-lg);padding:24px;margin-bottom:20px;display:flex;align-items:center;gap:16px}
-.dv-avatar{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0}
-.dv-name{font-size:20px;font-weight:700}
-.dv-role{font-size:13px;opacity:0.8;margin-top:2px}
+.dv-header{background:var(--primary);color:#fff;border-radius:var(--r-lg);padding:22px;margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.dv-avatar{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;flex-shrink:0}
+.dv-name{font-size:19px;font-weight:700}
+.dv-role{font-size:12px;opacity:0.8;margin-top:2px}
 .dv-logout{margin-left:auto;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:7px 14px;border-radius:var(--r-md);font-size:12px;font-weight:700;cursor:pointer}
-.dv-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-.dv-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px}
-.dv-card-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-m);margin-bottom:12px}
-.dv-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.dv-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.dv-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px}
+.dv-card-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-m);margin-bottom:10px}
+.dv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px}
 .dv-row:last-child{border-bottom:none}
 .dv-row-label{color:var(--text-m)}
-.dv-row-val{font-weight:700;color:var(--text);text-align:right}
+.dv-row-val{font-weight:700;text-align:right}
 .dv-full{grid-column:span 2}
 .dv-session{border-left:4px solid var(--primary-mid);padding:10px 14px;margin-bottom:8px;background:var(--surface);border-radius:0 var(--r-md) var(--r-md) 0;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
 .dv-session.keynote{border-left-color:var(--teal-mid)}
 .dv-session.social{border-left-color:var(--gold)}
 .dv-session.student{border-left-color:var(--purple-mid)}
 .dv-session.transit{border-left-color:var(--text-m)}
-.dv-session-time{font-size:11px;color:var(--text-m);font-weight:700;margin-bottom:3px}
-.dv-session-title{font-size:13px;font-weight:700}
-.dv-session-venue{font-size:12px;color:var(--text-s);margin-top:2px}
-.dv-day-tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-.dv-day-btn{padding:6px 14px;border-radius:var(--r-md);font-size:12px;font-weight:600;border:1px solid var(--border-s);background:var(--surface);color:var(--text-s);cursor:pointer}
-.dv-day-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-.emergency-card{background:var(--red-light);border:1px solid rgba(163,45,45,0.2);border-radius:var(--r-lg);padding:16px 18px;margin-top:14px}
-.emergency-title{font-size:12px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px}
+.emergency-card{background:var(--red-light);border:1px solid rgba(163,45,45,0.2);border-radius:var(--r-lg);padding:16px;margin-top:12px}
+.emergency-title{font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px}
 .emergency-row{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid rgba(163,45,45,0.15)}
 .emergency-row:last-child{border-bottom:none}
 
-/* ── MAIN APP (admin/coordinator) ── */
+/* MAIN APP */
 .app{display:flex;height:100vh;overflow:hidden}
 .sidebar{width:var(--sw);min-width:var(--sw);background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.sb-brand{padding:18px 16px 14px;border-bottom:1px solid var(--border)}
-.sb-org{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-m);margin-bottom:3px}
-.sb-name{font-size:22px;font-weight:700;color:var(--primary);letter-spacing:-0.02em}
+.sb-brand{padding:16px 14px 12px;border-bottom:1px solid var(--border)}
+.sb-org{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-m);margin-bottom:2px}
+.sb-name{font-size:20px;font-weight:700;color:var(--primary);letter-spacing:-0.02em}
 .sb-name span{color:var(--gold)}
-.sb-sub{font-size:11px;color:var(--text-m);margin-top:2px}
-.sb-tag{display:inline-block;margin-top:8px;font-size:10px;background:var(--primary-light);color:var(--primary);padding:3px 9px;border-radius:20px;font-weight:700}
-.sb-user{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.sb-sub{font-size:10px;color:var(--text-m);margin-top:2px}
+.sb-tag{display:inline-block;margin-top:6px;font-size:10px;background:var(--primary-light);color:var(--primary);padding:2px 8px;border-radius:20px;font-weight:700}
+.sb-user{padding:10px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
 .sb-user-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
-.sb-user-name{font-size:12px;font-weight:700;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb-user-info{flex:1;min-width:0}
+.sb-user-name{font-size:12px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sb-user-role{font-size:10px;color:var(--text-m)}
-.sb-logout{background:none;border:none;font-size:11px;color:var(--text-m);cursor:pointer;padding:2px 6px;border-radius:4px}
-.sb-logout:hover{background:var(--bg);color:var(--red)}
-.nav{padding:10px 8px;flex:1}
-.nav-sec{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-m);padding:10px 8px 4px}
-.nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--r-md);border:none;background:none;width:100%;text-align:left;font-size:13px;color:var(--text-s);transition:all 0.12s;margin-bottom:1px}
+.sb-logout{background:none;border:none;font-size:18px;color:var(--text-m);cursor:pointer;padding:2px;border-radius:4px;line-height:1}
+.sb-logout:hover{color:var(--red)}
+.nav{padding:8px 6px;flex:1}
+.nav-sec{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-m);padding:8px 8px 3px}
+.nav-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--r-md);border:none;background:none;width:100%;text-align:left;font-size:13px;color:var(--text-s);transition:all 0.12s;margin-bottom:1px}
 .nav-item:hover{background:var(--bg);color:var(--text)}
 .nav-item.active{background:var(--primary-light);color:var(--primary);font-weight:700}
-.nav-item:disabled{opacity:0.4;cursor:not-allowed}
-.nav-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;background:var(--bg);flex-shrink:0}
+.nav-icon{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:14px;background:var(--bg);flex-shrink:0}
 .nav-item.active .nav-icon{background:var(--primary)}
-.nav-badge{margin-left:auto;background:var(--red-light);color:var(--red);font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px}
-.topbar{height:var(--th);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:14px;flex-shrink:0}
-.topbar-title{font-size:16px;font-weight:700;flex:1}
-.live-pill{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--teal);background:var(--teal-light);padding:4px 10px;border-radius:20px;font-weight:700}
-.live-dot{width:7px;height:7px;border-radius:50%;background:var(--teal-mid);animation:pulse 1.8s infinite}
+.nav-badge{margin-left:auto;background:var(--red-light);color:var(--red);font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px}
+.topbar{height:var(--th);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:12px;flex-shrink:0}
+.topbar-title{font-size:15px;font-weight:700;flex:1}
+.live-pill{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--teal);background:var(--teal-light);padding:4px 10px;border-radius:20px;font-weight:700}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--teal-mid);animation:pulse 1.8s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.25}}
-.topbar-date{font-size:12px;color:var(--text-m)}
-.btn{padding:8px 16px;border-radius:var(--r-md);font-size:13px;font-weight:600;border:1px solid var(--border-s);background:var(--surface);color:var(--text);transition:all 0.12s;cursor:pointer}
+.topbar-date{font-size:11px;color:var(--text-m)}
+.db-status{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px}
+.db-status.connected{background:var(--teal-light);color:var(--teal)}
+.db-status.disconnected{background:var(--red-light);color:var(--red)}
+.btn{padding:7px 14px;border-radius:var(--r-md);font-size:13px;font-weight:600;border:1px solid var(--border-s);background:var(--surface);color:var(--text);transition:all 0.12s;cursor:pointer}
 .btn:hover{background:var(--bg)}
 .btn-primary{background:var(--primary);color:#fff;border-color:var(--primary)}
 .btn-primary:hover{opacity:0.88}
+.btn-danger{background:var(--red-light);color:var(--red);border-color:transparent}
+.btn-success{background:var(--teal-light);color:var(--teal);border-color:transparent}
 .btn-sm{padding:4px 10px;font-size:11px}
-.content{flex:1;overflow-y:auto;padding:24px}
+.content{flex:1;overflow-y:auto;padding:20px}
 .panel{display:none}
 .panel.active{display:block}
-.loading{text-align:center;padding:60px 20px;color:var(--text-m)}
-.loading-spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--primary-mid);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px}
+.loading{text-align:center;padding:50px 20px;color:var(--text-m)}
+.loading-spinner{width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--primary-mid);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.db-status{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px}
-.db-status.connected{background:var(--teal-light);color:var(--teal)}
-.db-status.disconnected{background:var(--red-light);color:var(--red)}
-.journey-bar{display:flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px 24px;margin-bottom:20px}
-.j-city{text-align:center;min-width:80px}
-.j-city-name{font-size:13px;font-weight:700}
-.j-city-date{font-size:11px;color:var(--text-m);margin-top:2px}
-.j-city.done .j-city-name{color:var(--teal-mid)}
-.j-city.active .j-city-name{color:var(--primary)}
-.j-arrow{flex:1;height:2px;background:var(--border);position:relative;margin:0 6px}
-.j-arrow.done{background:var(--teal-mid)}
-.j-arrow-lbl{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;color:var(--text-m);white-space:nowrap}
-.stat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 16px}
-.stat-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-m);margin-bottom:6px}
-.stat-val{font-size:28px;font-weight:700;line-height:1}
-.stat-val.blue{color:var(--primary-mid)}
-.stat-val.green{color:var(--teal-mid)}
-.stat-val.gold{color:var(--gold)}
-.stat-val.red{color:var(--red)}
-.stat-sub{font-size:11px;color:var(--text-m);margin-top:4px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:18px}
-.card-hdr{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* CARDS / TABLES */
+.stat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:13px 15px}
+.stat-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-m);margin-bottom:5px}
+.stat-val{font-size:26px;font-weight:700;line-height:1}
+.stat-val.blue{color:var(--primary-mid)}.stat-val.green{color:var(--teal-mid)}.stat-val.gold{color:var(--gold)}.stat-val.red{color:var(--red)}
+.stat-sub{font-size:11px;color:var(--text-m);margin-top:3px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:16px}
+.card-hdr{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .card-title{font-size:14px;font-weight:700}
-.card-pad{padding:16px 18px}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card-pad{padding:14px 16px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .tbl-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13px}
-th{padding:9px 14px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);background:var(--bg);border-bottom:1px solid var(--border);white-space:nowrap}
-td{padding:11px 14px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
+th{padding:8px 13px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);background:var(--bg);border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:10px 13px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
 tr:last-child td{border-bottom:none}
 tbody tr:hover td{background:#FAFAF8}
 .pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
@@ -161,73 +149,88 @@ tbody tr:hover td{background:#FAFAF8}
 .pill-red{background:var(--red-light);color:var(--red)}
 .pill-gray{background:var(--bg);color:var(--text-m);border:1px solid var(--border)}
 .pill-purple{background:var(--purple-light);color:var(--purple-mid)}
-.avatar{width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.avatar{width:32px;height:32px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
 .av-0{background:#B5D4F4;color:#0C447C}.av-1{background:#9FE1CB;color:#085041}
 .av-2{background:#FAC775;color:#633806}.av-3{background:#CECBF6;color:#3C3489}
 .av-4{background:#F5C4B3;color:#712B13}.av-5{background:#F4C0D1;color:#72243E}
 .av-6{background:#C0DD97;color:#27500A}.av-7{background:#B5D4F4;color:#0C447C}
 .name-cell{display:flex;align-items:center;gap:10px}
-.timeline{padding:4px 18px}
-.tl-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.timeline{padding:4px 16px}
+.tl-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
 .tl-item:last-child{border-bottom:none}
-.tl-time{font-size:12px;color:var(--text-m);min-width:46px;padding-top:3px;font-weight:700}
-.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.tl-time{font-size:12px;color:var(--text-m);min-width:44px;padding-top:2px;font-weight:700}
+.tl-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:4px}
 .tl-title{font-size:13px;font-weight:700}
-.tl-sub{font-size:12px;color:var(--text-s);margin-top:2px}
-.day-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.day-btn{padding:7px 16px;border-radius:var(--r-md);font-size:13px;font-weight:600;border:1px solid var(--border-s);background:var(--surface);color:var(--text-s);cursor:pointer;transition:all 0.12s}
+.tl-sub{font-size:12px;color:var(--text-s);margin-top:1px}
+.day-tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.day-btn{padding:6px 14px;border-radius:var(--r-md);font-size:13px;font-weight:600;border:1px solid var(--border-s);background:var(--surface);color:var(--text-s);cursor:pointer;transition:all 0.12s}
 .day-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-.session-card{border-left:4px solid var(--primary-mid);padding:12px 16px;margin-bottom:10px;background:var(--surface);border-radius:0 var(--r-md) var(--r-md) 0;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
-.session-card.keynote{border-left-color:var(--teal-mid)}
-.session-card.social{border-left-color:var(--gold)}
-.session-card.student{border-left-color:var(--purple-mid)}
-.session-card.transit{border-left-color:var(--text-m)}
-.session-time{font-size:11px;color:var(--text-m);font-weight:700;margin-bottom:4px}
+.session-card{border-left:4px solid var(--primary-mid);padding:11px 14px;margin-bottom:9px;background:var(--surface);border-radius:0 var(--r-md) var(--r-md) 0;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.session-card.keynote{border-left-color:var(--teal-mid)}.session-card.social{border-left-color:var(--gold)}
+.session-card.student{border-left-color:var(--purple-mid)}.session-card.transit{border-left-color:var(--text-m)}
+.session-time{font-size:11px;color:var(--text-m);font-weight:700;margin-bottom:3px}
 .session-title{font-size:14px;font-weight:700}
-.session-meta{font-size:12px;color:var(--text-s);margin-top:4px}
-.hotel-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:15px 17px;margin-bottom:12px}
+.session-meta{font-size:12px;color:var(--text-s);margin-top:3px}
+.hotel-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 16px;margin-bottom:10px}
 .hotel-name{font-size:14px;font-weight:700;margin-bottom:2px}
-.hotel-city{font-size:12px;color:var(--primary-mid);margin-bottom:10px;font-weight:600}
-.hotel-bar{background:var(--bg);border-radius:4px;height:6px;margin-bottom:10px;overflow:hidden}
+.hotel-city{font-size:12px;color:var(--primary-mid);margin-bottom:8px;font-weight:600}
+.hotel-bar{background:var(--bg);border-radius:4px;height:5px;margin-bottom:8px;overflow:hidden}
 .hotel-bar-fill{height:100%;border-radius:4px;background:var(--primary-mid)}
-.hotel-stats{display:flex;gap:18px;flex-wrap:wrap}
+.hotel-stats{display:flex;gap:16px;flex-wrap:wrap}
 .hstat{font-size:12px;color:var(--text-m)}
 .hstat strong{color:var(--text);font-weight:700}
-.sec-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-m);margin:16px 0 10px}
+.sec-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-m);margin:14px 0 8px}
 .sec-lbl:first-child{margin-top:0}
-.dep-summary{background:var(--bg);border-radius:var(--r-md);padding:10px 14px;margin-bottom:12px;font-size:13px;border-left:4px solid var(--gold)}
-.notif-item{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.1s}
+.notif-item{display:flex;gap:10px;align-items:flex-start;padding:11px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.1s}
 .notif-item:last-child{border-bottom:none}
 .notif-item:hover{background:var(--bg)}
 .notif-dot{width:8px;height:8px;border-radius:50%;background:var(--primary-mid);margin-top:5px;flex-shrink:0}
 .notif-dot.read{background:var(--border-s)}
 .notif-msg{font-size:13px;line-height:1.5}
-.notif-meta{font-size:11px;color:var(--text-m);margin-top:3px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:13px}
-.fg{display:flex;flex-direction:column;gap:5px}
-.fg label{font-size:12px;font-weight:700;color:var(--text-s)}
-.fg input,.fg select,.fg textarea{padding:9px 12px;border-radius:var(--r-md);border:1px solid var(--border-s);background:var(--bg);font-size:13px;color:var(--text);outline:none;width:100%;transition:border-color 0.12s}
+.notif-meta{font-size:11px;color:var(--text-m);margin-top:2px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.fg{display:flex;flex-direction:column;gap:4px}
+.fg label{font-size:11px;font-weight:700;color:var(--text-s)}
+.fg input,.fg select,.fg textarea{padding:9px 11px;border-radius:var(--r-md);border:1px solid var(--border-s);background:var(--bg);font-size:13px;color:var(--text);outline:none;width:100%;transition:border-color 0.12s}
 .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--primary-mid);background:var(--surface)}
-.search-inp{padding:7px 12px;border-radius:var(--r-md);border:1px solid var(--border-s);background:var(--bg);font-size:13px;color:var(--text);outline:none;width:200px;transition:all 0.12s}
-.search-inp:focus{border-color:var(--primary-mid);background:var(--surface);width:240px}
+.search-inp{padding:7px 11px;border-radius:var(--r-md);border:1px solid var(--border-s);background:var(--bg);font-size:13px;color:var(--text);outline:none;width:190px;transition:all 0.12s}
+.search-inp:focus{border-color:var(--primary-mid);background:var(--surface);width:230px}
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;align-items:center;justify-content:center}
 .modal-overlay.open{display:flex}
-.modal-box{background:var(--surface);border-radius:var(--r-lg);padding:28px;width:540px;max-height:88vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
-.modal-title{font-size:18px;font-weight:700;margin-bottom:20px}
-.modal-footer{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:18px;border-top:1px solid var(--border)}
-.toast{position:fixed;bottom:24px;right:24px;background:var(--text);color:#fff;padding:12px 20px;border-radius:var(--r-md);font-size:13px;font-weight:600;z-index:999;opacity:0;transform:translateY(8px);transition:all 0.25s;pointer-events:none;max-width:340px}
+.modal-box{background:var(--surface);border-radius:var(--r-lg);padding:26px;width:540px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+.modal-title{font-size:17px;font-weight:700;margin-bottom:18px}
+.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;padding-top:16px;border-top:1px solid var(--border)}
+.toast{position:fixed;bottom:22px;right:22px;background:var(--text);color:#fff;padding:11px 18px;border-radius:var(--r-md);font-size:13px;font-weight:600;z-index:999;opacity:0;transform:translateY(8px);transition:all 0.25s;pointer-events:none;max-width:340px}
 .toast.show{opacity:1;transform:translateY(0)}
-/* Admin-only elements */
-.admin-only{display:none}
-.role-admin .admin-only{display:flex}
-.role-admin .admin-only-block{display:block}
+
+/* USER MANAGEMENT SPECIFIC */
+.user-role-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px}
+.urb-admin{background:var(--primary-light);color:var(--primary)}
+.urb-coordinator{background:var(--teal-light);color:var(--teal)}
+.urb-delegate{background:var(--gold-light);color:var(--gold)}
+.perm-check{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.perm-check:last-child{border-bottom:none}
+.perm-check input[type=checkbox]{width:16px;height:16px;accent-color:var(--primary);cursor:pointer}
+.perm-label{flex:1}
+.perm-desc{font-size:11px;color:var(--text-m)}
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.team-opt{padding:10px 12px;border:1px solid var(--border-s);border-radius:var(--r-md);cursor:pointer;transition:all 0.12s;font-size:13px}
+.team-opt:hover{border-color:var(--primary-mid);background:var(--primary-light)}
+.team-opt.selected{border-color:var(--primary);background:var(--primary-light);color:var(--primary);font-weight:700}
+.user-status-active{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--teal)}
+.user-status-inactive{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--red)}
+.divider{border:none;border-top:1px solid var(--border);margin:14px 0}
+.info-box{background:var(--primary-light);border-radius:var(--r-md);padding:10px 14px;font-size:12px;color:var(--primary);margin-bottom:14px;font-weight:600}
+.warn-box{background:var(--red-light);border-radius:var(--r-md);padding:10px 14px;font-size:12px;color:var(--red);margin-bottom:14px;font-weight:600}
+.dep-summary{background:var(--bg);border-radius:var(--r-md);padding:10px 14px;margin-bottom:12px;font-size:13px;border-left:4px solid var(--gold)}
+
 @media(max-width:900px){.stat-grid{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}.sidebar{width:200px;min-width:200px}.dv-grid{grid-template-columns:1fr}.dv-full{grid-column:span 1}}
 @media(max-width:680px){.sidebar{display:none}.stat-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
 
-<!-- ══ LOGIN SCREEN ══ -->
+<!-- LOGIN SCREEN -->
 <div id="login-screen" class="login-screen">
   <div class="login-card">
     <div class="login-logo">
@@ -236,37 +239,31 @@ tbody tr:hover td{background:#FAFAF8}
       <div class="login-logo-conf">Chief Justices' Conference 2025</div>
     </div>
     <div class="login-title">Welcome — Please sign in</div>
-    <div class="login-sub">Use your assigned NyayPath credentials</div>
+    <div class="login-sub">Use your assigned NyayPath credentials to continue</div>
     <div class="login-error" id="login-error">Invalid email or password. Please try again.</div>
-    <div class="login-field">
-      <label>Email Address</label>
-      <input type="email" id="login-email" placeholder="you@cms.ac.in" autocomplete="email"/>
-    </div>
-    <div class="login-field">
-      <label>Password</label>
-      <input type="password" id="login-password" placeholder="Your password" autocomplete="current-password"/>
-    </div>
+    <div class="lf"><label>Email Address</label><input type="email" id="login-email" placeholder="you@cms.ac.in" autocomplete="email"/></div>
+    <div class="lf"><label>Password</label><input type="password" id="login-password" placeholder="Your password" autocomplete="current-password"/></div>
     <button class="login-btn" id="login-btn" onclick="doLogin()">Sign In to NyayPath</button>
-    <div class="role-badges">
-      <span class="role-badge rb-admin">👑 Admin</span>
-      <span class="role-badge rb-coord">🗂️ Coordinator</span>
-      <span class="role-badge rb-delegate">⚖️ Delegate</span>
+    <div class="login-roles">
+      <div class="login-roles-lbl">This system is for</div>
+      <div class="login-role-badges">
+        <span class="lrb lrb-admin">👑 Admin Team</span>
+        <span class="lrb lrb-coord">🗂️ Coordinators</span>
+        <span class="lrb lrb-delegate">⚖️ Delegates</span>
+      </div>
+      <div class="login-auto-note">Your role is automatically detected after sign in</div>
     </div>
   </div>
 </div>
 
-<!-- ══ DELEGATE PERSONAL VIEW ══ -->
+<!-- DELEGATE PERSONAL VIEW -->
 <div id="delegate-screen" style="display:none">
   <div class="delegate-view">
     <div class="dv-header">
       <div class="dv-avatar" id="dv-initials">??</div>
-      <div>
-        <div class="dv-name" id="dv-name">Loading…</div>
-        <div class="dv-role" id="dv-role">Chief Justice</div>
-      </div>
+      <div><div class="dv-name" id="dv-name">Loading…</div><div class="dv-role" id="dv-role">—</div></div>
       <button class="dv-logout" onclick="doLogout()">Sign Out</button>
     </div>
-
     <div class="dv-grid">
       <div class="dv-card">
         <div class="dv-card-title">✈️ Arrival Details</div>
@@ -280,17 +277,17 @@ tbody tr:hover td{background:#FAFAF8}
         <div class="dv-row"><span class="dv-row-label">Return Flight</span><span class="dv-row-val" id="dv-dep-flight">—</span></div>
         <div class="dv-row"><span class="dv-row-label">Airport</span><span class="dv-row-val" id="dv-dep-airport">—</span></div>
         <div class="dv-row"><span class="dv-row-label">Departure Time</span><span class="dv-row-val" id="dv-dep-time">—</span></div>
-        <div class="dv-row"><span class="dv-row-label">Checkout Time</span><span class="dv-row-val" id="dv-checkout">—</span></div>
+        <div class="dv-row"><span class="dv-row-label">Checkout</span><span class="dv-row-val" id="dv-checkout">—</span></div>
       </div>
       <div class="dv-card">
-        <div class="dv-card-title">🏨 Delhi Accommodation</div>
+        <div class="dv-card-title">🏨 Delhi Hotel</div>
         <div class="dv-row"><span class="dv-row-label">Hotel</span><span class="dv-row-val" id="dv-hotel-delhi">—</span></div>
         <div class="dv-row"><span class="dv-row-label">Room</span><span class="dv-row-val" id="dv-room-delhi">—</span></div>
         <div class="dv-row"><span class="dv-row-label">Check-in</span><span class="dv-row-val">Nov 12, 2025</span></div>
         <div class="dv-row"><span class="dv-row-label">Check-out</span><span class="dv-row-val">Nov 13, 2025</span></div>
       </div>
       <div class="dv-card">
-        <div class="dv-card-title">🏨 Lucknow Accommodation</div>
+        <div class="dv-card-title">🏨 Lucknow Hotel</div>
         <div class="dv-row"><span class="dv-row-label">Hotel</span><span class="dv-row-val" id="dv-hotel-lko">—</span></div>
         <div class="dv-row"><span class="dv-row-label">Room</span><span class="dv-row-val" id="dv-room-lko">—</span></div>
         <div class="dv-row"><span class="dv-row-label">Check-in</span><span class="dv-row-val">Nov 14, 2025</span></div>
@@ -300,64 +297,59 @@ tbody tr:hover td{background:#FAFAF8}
         <div class="dv-card-title">🍽️ My Requirements</div>
         <div class="dv-row"><span class="dv-row-label">Dietary</span><span class="dv-row-val" id="dv-diet">—</span></div>
         <div class="dv-row"><span class="dv-row-label">Special Needs</span><span class="dv-row-val" id="dv-special">—</span></div>
-        <div class="dv-row"><span class="dv-row-label">Escort (Dep.)</span><span class="dv-row-val" id="dv-escort">—</span></div>
+        <div class="dv-row"><span class="dv-row-label">Dep. Escort</span><span class="dv-row-val" id="dv-escort">—</span></div>
       </div>
       <div class="dv-card">
         <div class="dv-card-title">📍 Current Status</div>
-        <div style="padding:16px 0;text-align:center">
+        <div style="padding:14px 0;text-align:center">
           <div id="dv-status-pill" style="display:inline-block;font-size:14px;font-weight:700;padding:8px 20px;border-radius:20px;background:var(--teal-light);color:var(--teal)">—</div>
-          <div style="font-size:12px;color:var(--text-m);margin-top:8px">Your current conference status</div>
+          <div style="font-size:11px;color:var(--text-m);margin-top:6px">Your current conference status</div>
         </div>
       </div>
-    </div>
-
-    <!-- Programme for delegates -->
-    <div class="dv-card dv-full" style="margin-bottom:14px">
-      <div class="dv-card-title">📅 Conference Programme</div>
-      <div class="dv-day-tabs" style="margin-top:10px">
-        <button class="dv-day-btn active" onclick="dvShowDay(1,this)">Day 1 · Nov 12</button>
-        <button class="dv-day-btn" onclick="dvShowDay(2,this)">Day 2 · Nov 13</button>
-        <button class="dv-day-btn" onclick="dvShowDay(3,this)">Day 3 · Nov 14</button>
-        <button class="dv-day-btn" onclick="dvShowDay(4,this)">Day 4 · Nov 15</button>
+      <div class="dv-card dv-full">
+        <div class="dv-card-title">📅 Conference Programme</div>
+        <div style="display:flex;gap:8px;margin:10px 0 14px;flex-wrap:wrap">
+          <button class="day-btn active" onclick="dvDay(1,this)">Day 1 · Nov 12</button>
+          <button class="day-btn" onclick="dvDay(2,this)">Day 2 · Nov 13</button>
+          <button class="day-btn" onclick="dvDay(3,this)">Day 3 · Nov 14</button>
+          <button class="day-btn" onclick="dvDay(4,this)">Day 4 · Nov 15</button>
+        </div>
+        <div id="dv-sessions"></div>
       </div>
-      <div id="dv-sessions"></div>
     </div>
-
-    <!-- Emergency contacts -->
     <div class="emergency-card">
       <div class="emergency-title">🆘 Emergency Contacts — NyayPath Team</div>
       <div class="emergency-row"><span>Conference Helpdesk (24/7)</span><span style="font-weight:700">+91 98765 00001</span></div>
       <div class="emergency-row"><span>Airport Coordinator</span><span style="font-weight:700">+91 98765 00002</span></div>
-      <div class="emergency-row"><span>Hotel Coordinator Delhi</span><span style="font-weight:700">+91 98765 00003</span></div>
-      <div class="emergency-row"><span>Hotel Coordinator Lucknow</span><span style="font-weight:700">+91 98765 00004</span></div>
+      <div class="emergency-row"><span>Delhi Hotel Coordinator</span><span style="font-weight:700">+91 98765 00003</span></div>
+      <div class="emergency-row"><span>Lucknow Coordinator</span><span style="font-weight:700">+91 98765 00004</span></div>
       <div class="emergency-row" style="border:none"><span>CMS Main Office</span><span style="font-weight:700">+91 522 239 5881</span></div>
     </div>
   </div>
 </div>
 
-<!-- ══ MAIN ADMIN / COORDINATOR APP ══ -->
+<!-- MAIN ADMIN / COORDINATOR APP -->
 <div id="main-app" style="display:none" class="app">
   <aside class="sidebar">
     <div class="sb-brand">
       <div class="sb-org">City Montessori School</div>
       <div class="sb-name">Nyay<span>Path</span></div>
       <div class="sb-sub">न्यायपथ · Conference Manager</div>
-      <div class="sb-tag">Nov 12–15, 2025 · Lucknow</div>
+      <div class="sb-tag">Nov 12–15, 2025</div>
     </div>
-    <!-- Logged-in user info -->
     <div class="sb-user">
-      <div class="sb-user-av av-0" id="sb-user-av">?</div>
-      <div>
-        <div class="sb-user-name" id="sb-user-name">Loading…</div>
-        <div class="sb-user-role" id="sb-user-role">—</div>
+      <div class="sb-user-av av-0" id="sb-av">?</div>
+      <div class="sb-user-info">
+        <div class="sb-user-name" id="sb-name">Loading…</div>
+        <div class="sb-user-role" id="sb-role">—</div>
       </div>
       <button class="sb-logout" onclick="doLogout()" title="Sign out">↩</button>
     </div>
     <nav class="nav">
       <div class="nav-sec">Overview</div>
       <button class="nav-item active" onclick="showPanel('dashboard',this)"><div class="nav-icon">📊</div>Dashboard</button>
-      <button class="nav-item" onclick="showPanel('arrivals',this)"><div class="nav-icon">✈️</div>Arrivals<span class="nav-badge" id="badge-arrivals">—</span></button>
-      <button class="nav-item" onclick="showPanel('departures',this)"><div class="nav-icon">🛫</div>Departures<span class="nav-badge" id="badge-departures">—</span></button>
+      <button class="nav-item" onclick="showPanel('arrivals',this)"><div class="nav-icon">✈️</div>Arrivals<span class="nav-badge" id="badge-arr">—</span></button>
+      <button class="nav-item" onclick="showPanel('departures',this)"><div class="nav-icon">🛫</div>Departures<span class="nav-badge" id="badge-dep">—</span></button>
       <div class="nav-sec">Delegates</div>
       <button class="nav-item" onclick="showPanel('delegates',this)"><div class="nav-icon">👥</div>All Delegates</button>
       <button class="nav-item" onclick="showPanel('schedule',this)"><div class="nav-icon">📅</div>Programme</button>
@@ -366,6 +358,11 @@ tbody tr:hover td{background:#FAFAF8}
       <button class="nav-item" onclick="showPanel('transport',this)"><div class="nav-icon">🚗</div>Transport</button>
       <div class="nav-sec">Communications</div>
       <button class="nav-item" onclick="showPanel('notifications',this)"><div class="nav-icon">🔔</div>Notifications<span class="nav-badge" id="badge-notif">—</span></button>
+      <!-- Admin only -->
+      <div id="admin-nav-section">
+        <div class="nav-sec">Admin</div>
+        <button class="nav-item" onclick="showPanel('users',this)"><div class="nav-icon">🔐</div>User Management<span class="nav-badge" id="badge-users" style="background:var(--primary-light);color:var(--primary)">—</span></button>
+      </div>
     </nav>
   </aside>
 
@@ -375,29 +372,29 @@ tbody tr:hover td{background:#FAFAF8}
       <div class="live-pill"><div class="live-dot"></div>Live</div>
       <div id="db-status" class="db-status disconnected">⚪ Connecting…</div>
       <div class="topbar-date">Day 1 of 4 · November 12, 2025</div>
-      <button class="btn btn-primary admin-only" id="add-delegate-btn" onclick="openModal()">+ Add Delegate</button>
+      <button class="btn btn-primary" id="add-delegate-btn" onclick="openModal('modal-add')" style="display:none">+ Add Delegate</button>
     </header>
 
     <main class="content">
 
       <!-- DASHBOARD -->
       <section class="panel active" id="panel-dashboard">
-        <div class="journey-bar">
-          <div class="j-city active"><div class="j-city-name">🏠 Home</div><div class="j-city-date">Departure</div></div>
-          <div class="j-arrow done"><div class="j-arrow-lbl">Arrival flight</div></div>
-          <div class="j-city done"><div class="j-city-name">Delhi</div><div class="j-city-date">Nov 12–13</div></div>
-          <div class="j-arrow"><div class="j-arrow-lbl">Nov 13 AM</div></div>
-          <div class="j-city"><div class="j-city-name">Agra</div><div class="j-city-date">Nov 13 night</div></div>
-          <div class="j-arrow"><div class="j-arrow-lbl">Nov 14 AM</div></div>
-          <div class="j-city"><div class="j-city-name">Lucknow</div><div class="j-city-date">Nov 14–15</div></div>
-          <div class="j-arrow"><div class="j-arrow-lbl">Return flight</div></div>
-          <div class="j-city"><div class="j-city-name">🏠 Home</div><div class="j-city-date">Safe return</div></div>
+        <div style="display:flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 20px;margin-bottom:18px;gap:0">
+          <div style="text-align:center;min-width:75px"><div style="font-size:12px;font-weight:700;color:var(--primary)">🏠 Home</div><div style="font-size:10px;color:var(--text-m)">Departure</div></div>
+          <div style="flex:1;height:2px;background:var(--teal-mid);position:relative;margin:0 6px"><div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;color:var(--text-m);white-space:nowrap">Arrival flight</div></div>
+          <div style="text-align:center;min-width:75px"><div style="font-size:12px;font-weight:700;color:var(--teal-mid)">Delhi</div><div style="font-size:10px;color:var(--text-m)">Nov 12–13</div></div>
+          <div style="flex:1;height:2px;background:var(--border);position:relative;margin:0 6px"><div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;color:var(--text-m);white-space:nowrap">Nov 13 AM</div></div>
+          <div style="text-align:center;min-width:75px"><div style="font-size:12px;font-weight:700">Agra</div><div style="font-size:10px;color:var(--text-m)">Nov 13 night</div></div>
+          <div style="flex:1;height:2px;background:var(--border);position:relative;margin:0 6px"><div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;color:var(--text-m);white-space:nowrap">Nov 14 AM</div></div>
+          <div style="text-align:center;min-width:75px"><div style="font-size:12px;font-weight:700">Lucknow</div><div style="font-size:10px;color:var(--text-m)">Nov 14–15</div></div>
+          <div style="flex:1;height:2px;background:var(--border);position:relative;margin:0 6px"><div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;color:var(--text-m);white-space:nowrap">Return flight</div></div>
+          <div style="text-align:center;min-width:75px"><div style="font-size:12px;font-weight:700">🏠 Home</div><div style="font-size:10px;color:var(--text-m)">Safe return</div></div>
         </div>
         <div class="stat-grid">
           <div class="stat-card"><div class="stat-lbl">Total Delegates</div><div class="stat-val" id="stat-total">—</div><div class="stat-sub">from multiple countries</div></div>
           <div class="stat-card"><div class="stat-lbl">In Transit</div><div class="stat-val blue" id="stat-arriving">—</div><div class="stat-sub">need coordination</div></div>
-          <div class="stat-card"><div class="stat-lbl">Checked In</div><div class="stat-val green" id="stat-checkedin">—</div><div class="stat-sub">confirmed today</div></div>
-          <div class="stat-card"><div class="stat-lbl">Departing Nov 15</div><div class="stat-val red" id="stat-departing">—</div><div class="stat-sub">need drop arrangements</div></div>
+          <div class="stat-card"><div class="stat-lbl">Checked In</div><div class="stat-val green" id="stat-checkedin">—</div><div class="stat-sub">confirmed</div></div>
+          <div class="stat-card"><div class="stat-lbl">Departing Nov 15</div><div class="stat-val red" id="stat-departing">—</div><div class="stat-sub">need drop</div></div>
           <div class="stat-card"><div class="stat-lbl">Unread Alerts</div><div class="stat-val gold" id="stat-alerts">—</div><div class="stat-sub">require attention</div></div>
         </div>
         <div class="two-col">
@@ -411,7 +408,7 @@ tbody tr:hover td{background:#FAFAF8}
           </div>
         </div>
         <div class="card">
-          <div class="card-hdr"><span class="card-title">Pending Actions</span><span class="pill pill-amber">Requires Attention</span></div>
+          <div class="card-hdr"><span class="card-title">Pending Actions</span><span class="pill pill-amber">Needs Attention</span></div>
           <div class="tbl-wrap"><table>
             <thead><tr><th>Delegate</th><th>Status</th><th>Action Required</th><th>Assigned To</th></tr></thead>
             <tbody id="pending-tbody"><tr><td colspan="4" style="text-align:center;padding:20px;color:var(--text-m)">Loading…</td></tr></tbody>
@@ -432,12 +429,12 @@ tbody tr:hover td{background:#FAFAF8}
 
       <!-- DEPARTURES -->
       <section class="panel" id="panel-departures">
-        <div class="dep-summary"><strong>Departure Overview:</strong> All delegates depart Nov 15. Some from Lucknow (LKO), others return to Delhi (DEL) first.</div>
+        <div class="dep-summary"><strong>Departure Overview:</strong> All delegates depart Nov 15. Some from Lucknow (LKO), others return to Delhi (DEL) first for onward international flights.</div>
         <div class="card">
           <div class="card-hdr"><span class="card-title">Departure Schedule — November 15</span>
             <div style="display:flex;gap:8px">
               <input class="search-inp" id="dep-search" placeholder="Search delegate…"/>
-              <select id="dep-filter" onchange="filterDepartures()" style="padding:7px 10px;border-radius:var(--r-md);border:1px solid var(--border-s);background:var(--bg);font-size:13px;outline:none">
+              <select id="dep-filter" onchange="filterDep()" style="padding:7px 10px;border-radius:var(--r-md);border:1px solid var(--border-s);background:var(--bg);font-size:13px;outline:none">
                 <option value="">All Airports</option><option value="LKO">Lucknow (LKO)</option><option value="DEL">Delhi (DEL)</option>
               </select>
             </div>
@@ -475,17 +472,14 @@ tbody tr:hover td{background:#FAFAF8}
       <section class="panel" id="panel-hotels">
         <div class="two-col">
           <div><div class="sec-lbl">Delhi Hotels</div><div id="hotels-delhi"></div></div>
-          <div>
-            <div class="sec-lbl">Lucknow Hotels</div><div id="hotels-lucknow"></div>
-            <div class="sec-lbl">Agra — Transit Night</div><div id="hotels-agra"></div>
-          </div>
+          <div><div class="sec-lbl">Lucknow Hotels</div><div id="hotels-lucknow"></div><div class="sec-lbl">Agra — Transit Night</div><div id="hotels-agra"></div></div>
         </div>
       </section>
 
       <!-- TRANSPORT -->
       <section class="panel" id="panel-transport">
         <div class="card">
-          <div class="card-hdr"><span class="card-title">All Vehicle & Driver Assignments</span></div>
+          <div class="card-hdr"><span class="card-title">All Vehicle & Driver Assignments</span><span class="pill pill-blue">Arrivals + Departures</span></div>
           <div class="tbl-wrap"><table>
             <thead><tr><th>Delegate</th><th>Leg</th><th>Driver & Phone</th><th>Vehicle</th><th>Time</th><th>Date</th><th>Status</th></tr></thead>
             <tbody id="transport-tbody"><tr><td colspan="7" style="text-align:center;padding:20px;color:var(--text-m)">Loading…</td></tr></tbody>
@@ -496,14 +490,14 @@ tbody tr:hover td{background:#FAFAF8}
       <!-- NOTIFICATIONS -->
       <section class="panel" id="panel-notifications">
         <div class="two-col">
-          <div class="card admin-only-block" id="broadcast-card">
+          <div class="card" id="broadcast-card" style="display:none">
             <div class="card-hdr"><span class="card-title">Send Broadcast</span></div>
             <div class="card-pad">
               <div class="fg" style="margin-bottom:12px"><label>Target Group</label>
                 <select id="broadcast-group"><option>All Delegates</option><option>Delhi Coordinators</option><option>Airport Team</option><option>Hotel Teams</option><option>Transport Team</option><option>All Staff</option><option>Lucknow Team</option></select>
               </div>
-              <div class="fg" style="margin-bottom:16px"><label>Message</label>
-                <textarea id="broadcast-msg" rows="4" placeholder="Type your message here…" style="resize:vertical"></textarea>
+              <div class="fg" style="margin-bottom:14px"><label>Message</label>
+                <textarea id="broadcast-msg" rows="4" placeholder="Type your message…" style="resize:vertical"></textarea>
               </div>
               <button class="btn btn-primary" style="width:100%" onclick="sendBroadcast()">Send Broadcast Now</button>
             </div>
@@ -515,11 +509,61 @@ tbody tr:hover td{background:#FAFAF8}
         </div>
       </section>
 
+      <!-- USER MANAGEMENT (Admin only) -->
+      <section class="panel" id="panel-users">
+        <div class="info-box">👑 Admin Panel — Only you can see this section. You have full control over all user accounts and their permissions.</div>
+        <div class="card">
+          <div class="card-hdr">
+            <span class="card-title">All NyayPath Users</span>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input class="search-inp" id="users-search" placeholder="Search user…"/>
+              <button class="btn btn-primary" onclick="openModal('modal-create-user')">+ Create User</button>
+            </div>
+          </div>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Team</th><th>Can Edit</th><th>Broadcast</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="users-tbody"><tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-m)">Loading users…</td></tr></tbody>
+          </table></div>
+        </div>
+
+        <!-- Permission Groups quick-create -->
+        <div class="card">
+          <div class="card-hdr"><span class="card-title">Quick Create — Coordinator by Team</span><span style="font-size:12px;color:var(--text-m)">Select a team template then fill details</span></div>
+          <div class="card-pad">
+            <div class="team-grid" id="team-grid">
+              <div class="team-opt" onclick="selectTeam(this,'Airport Team','can_edit:arrivals,transport')">✈️ Airport Team<div style="font-size:11px;color:var(--text-m);margin-top:2px;font-weight:400">Arrivals · Transport</div></div>
+              <div class="team-opt" onclick="selectTeam(this,'Delhi Hotel Team','can_edit:hotels')">🏨 Delhi Hotel Team<div style="font-size:11px;color:var(--text-m);margin-top:2px;font-weight:400">Delhi hotels · Check-ins</div></div>
+              <div class="team-opt" onclick="selectTeam(this,'Lucknow Hotel Team','can_edit:hotels')">🏨 Lucknow Hotel Team<div style="font-size:11px;color:var(--text-m);margin-top:2px;font-weight:400">Lucknow hotels · Check-ins</div></div>
+              <div class="team-opt" onclick="selectTeam(this,'Transport Team','can_edit:transport')">🚗 Transport Team<div style="font-size:11px;color:var(--text-m);margin-top:2px;font-weight:400">Vehicles · Drivers</div></div>
+              <div class="team-opt" onclick="selectTeam(this,'Top Management','can_edit:all,can_broadcast:true')">👔 Top Management<div style="font-size:11px;color:var(--text-m);margin-top:2px;font-weight:400">Full view · Edit · Broadcast</div></div>
+              <div class="team-opt" onclick="selectTeam(this,'General Coordinator','can_edit:none')">📋 General Coordinator<div style="font-size:11px;color:var(--text-m);margin-top:2px;font-weight:400">View only · No edit</div></div>
+            </div>
+            <div id="quick-create-form" style="display:none;margin-top:4px">
+              <div style="background:var(--primary-light);border-radius:var(--r-md);padding:10px 14px;font-size:12px;color:var(--primary);font-weight:700;margin-bottom:14px">
+                Selected team: <span id="selected-team-name">—</span>
+              </div>
+              <div class="form-grid">
+                <div class="fg"><label>Full Name *</label><input id="qc-name" placeholder="Staff full name"/></div>
+                <div class="fg"><label>Email *</label><input id="qc-email" type="email" placeholder="staff@cms.ac.in"/></div>
+              </div>
+              <div class="form-grid">
+                <div class="fg"><label>Temporary Password *</label><input id="qc-password" type="password" placeholder="Min 8 characters"/></div>
+                <div class="fg"><label>Notes (optional)</label><input id="qc-notes" placeholder="e.g. Senior coordinator"/></div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button class="btn btn-primary" onclick="quickCreateUser()">Create User Account</button>
+                <button class="btn" onclick="cancelQuickCreate()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </main>
   </div>
 </div>
 
-<!-- MODAL: ADD DELEGATE (admin only) -->
+<!-- MODAL: ADD DELEGATE -->
 <div class="modal-overlay" id="modal-add">
   <div class="modal-box">
     <div class="modal-title">Add New Delegate</div>
@@ -539,7 +583,7 @@ tbody tr:hover td{background:#FAFAF8}
       <div class="fg"><label>Delhi Hotel</label><select id="new-hotel-delhi"><option>Taj Diplomats</option><option>The Leela Palace</option><option>ITC Maurya</option></select></div>
       <div class="fg"><label>Lucknow Hotel</label><select id="new-hotel-lko"><option>Taj Hotel Lucknow</option><option>Vivanta Lucknow</option></select></div>
     </div>
-    <div style="border-top:1px solid var(--border);padding-top:14px;margin:4px 0 14px;font-size:11px;font-weight:700;color:var(--text-m);text-transform:uppercase;letter-spacing:0.06em">Return / Departure</div>
+    <hr class="divider"/>
     <div class="form-grid">
       <div class="fg"><label>Return Flight</label><input id="new-ret-flight" placeholder="e.g. AI 203"/></div>
       <div class="fg"><label>Departure Airport</label><select id="new-dep-airport"><option value="LKO">Lucknow (LKO)</option><option value="DEL">Delhi (DEL)</option></select></div>
@@ -554,8 +598,102 @@ tbody tr:hover td{background:#FAFAF8}
     </div>
     <div class="fg"><label>Special Requirements</label><input id="new-special" placeholder="e.g. Wheelchair, VIP lounge…"/></div>
     <div class="modal-footer">
-      <button class="btn" onclick="closeModal()">Cancel</button>
+      <button class="btn" onclick="closeModal('modal-add')">Cancel</button>
       <button class="btn btn-primary" onclick="saveDelegate()">Add Delegate</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CREATE USER (full) -->
+<div class="modal-overlay" id="modal-create-user">
+  <div class="modal-box">
+    <div class="modal-title">Create New User Account</div>
+    <div class="form-grid">
+      <div class="fg"><label>Full Name *</label><input id="cu-name" placeholder="Full name"/></div>
+      <div class="fg"><label>Email Address *</label><input id="cu-email" type="email" placeholder="email@cms.ac.in"/></div>
+    </div>
+    <div class="form-grid">
+      <div class="fg"><label>Password *</label><input id="cu-password" type="password" placeholder="Minimum 8 characters"/></div>
+      <div class="fg"><label>Role *</label>
+        <select id="cu-role" onchange="toggleRoleFields()">
+          <option value="coordinator">🗂️ Coordinator</option>
+          <option value="admin">👑 Admin (Full Rights)</option>
+          <option value="delegate">⚖️ Delegate (Personal view only)</option>
+        </select>
+      </div>
+    </div>
+    <div id="cu-team-row" class="fg" style="margin-bottom:12px">
+      <label>Team / Department</label>
+      <select id="cu-team">
+        <option value="Airport Team">✈️ Airport Team</option>
+        <option value="Delhi Hotel Team">🏨 Delhi Hotel Team</option>
+        <option value="Lucknow Hotel Team">🏨 Lucknow Hotel Team</option>
+        <option value="Transport Team">🚗 Transport Team</option>
+        <option value="Top Management">👔 Top Management</option>
+        <option value="General Coordinator">📋 General Coordinator</option>
+        <option value="Agra Team">🏛️ Agra Team</option>
+        <option value="Protocol Team">🎖️ Protocol Team</option>
+        <option value="Media Team">📸 Media Team</option>
+      </select>
+    </div>
+    <hr class="divider"/>
+    <div style="font-size:12px;font-weight:700;color:var(--text-s);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em">Permissions</div>
+    <div id="cu-perms-row">
+      <div class="perm-check"><input type="checkbox" id="cu-can-edit"/><div class="perm-label"><div style="font-weight:600">Can Edit Records</div><div class="perm-desc">Update delegate status, hotel rooms, transport details</div></div></div>
+      <div class="perm-check"><input type="checkbox" id="cu-can-broadcast"/><div class="perm-label"><div style="font-weight:600">Can Send Broadcasts</div><div class="perm-desc">Send notifications to delegates and staff groups</div></div></div>
+    </div>
+    <div id="cu-delegate-row" style="display:none;margin-top:12px">
+      <div class="fg"><label>Link to Delegate Record (for Delegate role)</label>
+        <select id="cu-delegate-id"><option value="">— Select Delegate —</option></select>
+      </div>
+    </div>
+    <div class="fg" style="margin-top:12px"><label>Notes (optional)</label><input id="cu-notes" placeholder="e.g. Senior coordinator, emergency contact"/></div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('modal-create-user')">Cancel</button>
+      <button class="btn btn-primary" onclick="createUser()">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: EDIT USER -->
+<div class="modal-overlay" id="modal-edit-user">
+  <div class="modal-box">
+    <div class="modal-title">Edit User Permissions</div>
+    <input type="hidden" id="eu-id"/>
+    <div style="background:var(--bg);border-radius:var(--r-md);padding:12px;margin-bottom:16px">
+      <div style="font-size:15px;font-weight:700" id="eu-display-name">—</div>
+      <div style="font-size:12px;color:var(--text-m)" id="eu-display-email">—</div>
+    </div>
+    <div class="form-grid">
+      <div class="fg"><label>Role</label>
+        <select id="eu-role">
+          <option value="coordinator">🗂️ Coordinator</option>
+          <option value="admin">👑 Admin</option>
+          <option value="delegate">⚖️ Delegate</option>
+        </select>
+      </div>
+      <div class="fg"><label>Team</label>
+        <select id="eu-team">
+          <option value="Airport Team">✈️ Airport Team</option>
+          <option value="Delhi Hotel Team">🏨 Delhi Hotel Team</option>
+          <option value="Lucknow Hotel Team">🏨 Lucknow Hotel Team</option>
+          <option value="Transport Team">🚗 Transport Team</option>
+          <option value="Top Management">👔 Top Management</option>
+          <option value="General Coordinator">📋 General Coordinator</option>
+          <option value="Agra Team">🏛️ Agra Team</option>
+          <option value="Protocol Team">🎖️ Protocol Team</option>
+          <option value="Media Team">📸 Media Team</option>
+        </select>
+      </div>
+    </div>
+    <div class="perm-check"><input type="checkbox" id="eu-can-edit"/><div class="perm-label"><div style="font-weight:600">Can Edit Records</div><div class="perm-desc">Update delegate status, hotels, transport</div></div></div>
+    <div class="perm-check"><input type="checkbox" id="eu-can-broadcast"/><div class="perm-label"><div style="font-weight:600">Can Send Broadcasts</div><div class="perm-desc">Send notifications to groups</div></div></div>
+    <div class="perm-check"><input type="checkbox" id="eu-is-active"/><div class="perm-label"><div style="font-weight:600">Account Active</div><div class="perm-desc">Uncheck to revoke access immediately</div></div></div>
+    <div class="fg" style="margin-top:12px"><label>Notes</label><input id="eu-notes" placeholder="Internal notes about this user"/></div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" onclick="revokeUser()">🔒 Revoke Access</button>
+      <button class="btn" onclick="closeModal('modal-edit-user')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveUserEdit()">Save Changes</button>
     </div>
   </div>
 </div>
@@ -563,7 +701,7 @@ tbody tr:hover td{background:#FAFAF8}
 <!-- MODAL: VIEW DELEGATE -->
 <div class="modal-overlay" id="modal-view">
   <div class="modal-box"><div id="view-content"></div>
-    <div class="modal-footer"><button class="btn" onclick="document.getElementById('modal-view').classList.remove('open')">Close</button></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-view')">Close</button></div>
   </div>
 </div>
 
@@ -575,272 +713,255 @@ const SUPA_URL = 'https://hsvhlhoflxngzkdwehoz.supabase.co';
 const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhzdmhsaG9mbHhuZ3prZHdlaG96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1ODg1MTYsImV4cCI6MjA5MjE2NDUxNn0.Azg34yYTdXxadfCOQ2ZNQgQhx8WzchlGCT3Evc7Um4U';
 
 let SESSION = null;
-let USER_PROFILE = null;
-let CACHE = {delegates:[],hotels:[],transport:[],programme:[],notifications:[]};
+let PROFILE = null;
+let CACHE   = {delegates:[],hotels:[],transport:[],programme:[],notifications:[],users:[]};
+let SELECTED_TEAM = null;
 
-// ── API HELPERS ───────────────────────────────────────────────────────────────
-const authHeaders = () => ({
-  'apikey': SUPA_KEY,
-  'Authorization': `Bearer ${SESSION?.access_token || SUPA_KEY}`,
-  'Content-Type': 'application/json',
-  'Prefer': 'return=representation'
-});
+// ── API ───────────────────────────────────────────────────────────────────────
+const H = () => ({'apikey':SUPA_KEY,'Authorization':`Bearer ${SESSION?.access_token||SUPA_KEY}`,'Content-Type':'application/json','Prefer':'return=representation'});
 
-async function apiGet(table, params='') {
-  const r = await fetch(`${SUPA_URL}/rest/v1/${table}?${params}`, {headers: authHeaders()});
+async function GET(table,q=''){
+  const r=await fetch(`${SUPA_URL}/rest/v1/${table}?${q}`,{headers:H()});
   if(!r.ok) throw new Error(await r.text());
   return r.json();
 }
-
-async function apiPost(table, data) {
-  const r = await fetch(`${SUPA_URL}/rest/v1/${table}`, {method:'POST', headers: authHeaders(), body: JSON.stringify(data)});
+async function POST(table,data){
+  const r=await fetch(`${SUPA_URL}/rest/v1/${table}`,{method:'POST',headers:H(),body:JSON.stringify(data)});
   if(!r.ok) throw new Error(await r.text());
   return r.json();
 }
-
-async function apiPatch(table, id, data) {
-  const r = await fetch(`${SUPA_URL}/rest/v1/${table}?id=eq.${id}`, {method:'PATCH', headers: authHeaders(), body: JSON.stringify(data)});
+async function PATCH(table,id,data){
+  const r=await fetch(`${SUPA_URL}/rest/v1/${table}?id=eq.${id}`,{method:'PATCH',headers:H(),body:JSON.stringify(data)});
   if(!r.ok) throw new Error(await r.text());
   return r.json();
 }
+async function authSignUp(email,password,meta){
+  const r=await fetch(`${SUPA_URL}/auth/v1/admin/users`,{
+    method:'POST',
+    headers:{...H(),'Authorization':`Bearer ${SESSION?.access_token}`},
+    body:JSON.stringify({email,password,email_confirm:true,user_metadata:meta})
+  });
+  if(!r.ok) throw new Error((await r.json()).message||'Signup failed');
+  return r.json();
+}
 
-// ── AUTH ──────────────────────────────────────────────────────────────────────
-async function doLogin() {
-  const email    = document.getElementById('login-email').value.trim();
-  const password = document.getElementById('login-password').value;
-  const errEl    = document.getElementById('login-error');
-  const btn      = document.getElementById('login-btn');
-
-  if(!email || !password){ errEl.textContent='Please enter email and password.'; errEl.classList.add('show'); return; }
-
-  btn.disabled = true;
-  btn.textContent = 'Signing in…';
-  errEl.classList.remove('show');
-
-  try {
-    const r = await fetch(`${SUPA_URL}/auth/v1/token?grant_type=password`, {
-      method: 'POST',
-      headers: {'apikey': SUPA_KEY, 'Content-Type': 'application/json'},
-      body: JSON.stringify({email, password})
+// ── LOGIN ─────────────────────────────────────────────────────────────────────
+async function doLogin(){
+  const email=document.getElementById('login-email').value.trim();
+  const pass =document.getElementById('login-password').value;
+  const errEl=document.getElementById('login-error');
+  const btn  =document.getElementById('login-btn');
+  if(!email||!pass){errEl.textContent='Please enter email and password.';errEl.classList.add('show');return;}
+  btn.disabled=true; btn.textContent='Signing in…'; errEl.classList.remove('show');
+  try{
+    const r=await fetch(`${SUPA_URL}/auth/v1/token?grant_type=password`,{
+      method:'POST',headers:{'apikey':SUPA_KEY,'Content-Type':'application/json'},
+      body:JSON.stringify({email,password:pass})
     });
-    const data = await r.json();
-    if(!r.ok || data.error){ throw new Error(data.error_description || data.msg || 'Login failed'); }
-
-    SESSION = data;
-    // Get user profile (role)
-    const profiles = await apiGet('user_profiles', `id=eq.${data.user.id}&select=*`);
-    USER_PROFILE = profiles[0];
-
-    if(!USER_PROFILE){ throw new Error('Profile not found. Contact admin.'); }
-
-    // Route to correct view based on role
-    if(USER_PROFILE.role === 'delegate') {
-      await loadDelegateView();
-    } else {
-      await loadAdminApp();
-    }
-  } catch(e) {
-    errEl.textContent = e.message || 'Login failed. Please check your credentials.';
+    const data=await r.json();
+    if(!r.ok||data.error) throw new Error(data.error_description||'Login failed');
+    SESSION=data;
+    const profiles=await GET('user_profiles',`id=eq.${data.user.id}&select=*`);
+    PROFILE=profiles[0];
+    if(!PROFILE) throw new Error('Profile not found. Contact admin.');
+    if(!PROFILE.is_active) throw new Error('Your account has been deactivated. Contact admin.');
+    if(PROFILE.role==='delegate') await loadDelegateView();
+    else await loadAdminApp();
+  }catch(e){
+    errEl.textContent=e.message||'Login failed.';
     errEl.classList.add('show');
-    btn.disabled = false;
-    btn.textContent = 'Sign In to NyayPath';
+    btn.disabled=false; btn.textContent='Sign In to NyayPath';
   }
 }
 
-function doLogout() {
-  SESSION = null;
-  USER_PROFILE = null;
-  CACHE = {delegates:[],hotels:[],transport:[],programme:[],notifications:[]};
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('delegate-screen').style.display = 'none';
-  document.getElementById('main-app').style.display = 'none';
-  document.getElementById('login-email').value = '';
-  document.getElementById('login-password').value = '';
+function doLogout(){
+  SESSION=null; PROFILE=null;
+  CACHE={delegates:[],hotels:[],transport:[],programme:[],notifications:[],users:[]};
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('delegate-screen').style.display='none';
+  document.getElementById('main-app').style.display='none';
+  document.getElementById('login-email').value='';
+  document.getElementById('login-password').value='';
   showToast('Signed out successfully');
 }
 
-// Allow Enter key on login
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('login-password').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
-  document.getElementById('login-email').addEventListener('keydown',    e => { if(e.key==='Enter') doLogin(); });
+document.addEventListener('DOMContentLoaded',()=>{
+  ['login-password','login-email'].forEach(id=>
+    document.getElementById(id).addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();}));
+  document.getElementById('arrivals-search').addEventListener('input',e=>renderArrivals(e.target.value));
+  document.getElementById('dep-search').addEventListener('input',()=>filterDep());
+  document.getElementById('delegates-search').addEventListener('input',e=>renderDelegates(e.target.value));
+  document.getElementById('users-search').addEventListener('input',e=>renderUsers(e.target.value));
 });
 
-// ── DELEGATE PERSONAL VIEW ────────────────────────────────────────────────────
-async function loadDelegateView() {
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('delegate-screen').style.display = 'block';
-
-  try {
-    // Load delegate record
-    const delegates = await apiGet('delegates', `id=eq.${USER_PROFILE.delegate_id}&select=*`);
-    const d = delegates[0];
-    if(!d){ showToast('Delegate record not found — contact admin'); return; }
-
-    // Load programme
-    const programme = await apiGet('programme', 'select=*&order=day_number,session_time');
-
-    const initials = d.full_name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-    document.getElementById('dv-initials').textContent = initials;
-    document.getElementById('dv-name').textContent     = d.full_name;
-    document.getElementById('dv-role').textContent     = `${d.role} · ${d.country}`;
-
-    document.getElementById('dv-arr-flight').textContent    = d.arrival_flight||'—';
-    document.getElementById('dv-arr-terminal').textContent  = d.arrival_terminal||'—';
-    document.getElementById('dv-arr-time').textContent      = d.arrival_time||'—';
-    document.getElementById('dv-receiver').textContent      = d.receiver||'—';
-    document.getElementById('dv-dep-flight').textContent    = d.departure_flight||'—';
-    document.getElementById('dv-dep-airport').textContent   = d.departure_airport||'—';
-    document.getElementById('dv-dep-time').textContent      = d.departure_time||'—';
-    document.getElementById('dv-checkout').textContent      = d.checkout_time||'14:00';
-    document.getElementById('dv-hotel-delhi').textContent   = d.hotel_delhi||'—';
-    document.getElementById('dv-room-delhi').textContent    = d.room_delhi||'TBC';
-    document.getElementById('dv-hotel-lko').textContent     = d.hotel_lucknow||'—';
-    document.getElementById('dv-room-lko').textContent      = d.room_lucknow||'TBC';
-    document.getElementById('dv-diet').textContent          = d.diet||'None';
-    document.getElementById('dv-special').textContent       = d.special_needs||'None';
-    document.getElementById('dv-escort').textContent        = d.dep_escort||d.receiver||'—';
-
-    const SC = {'checked-in':'Checked In ✓','en-route':'En Route','landed':'Landed','awaiting':'Awaiting Pickup','scheduled':'Scheduled','departed':'Departed'};
-    document.getElementById('dv-status-pill').textContent = SC[d.status]||d.status;
-
-    // Store programme for day switching
-    window._dvProgramme = programme;
-    dvShowDay(1);
-
-  } catch(e) { showToast('Error loading your details: '+e.message); }
+// ── DELEGATE VIEW ─────────────────────────────────────────────────────────────
+async function loadDelegateView(){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('delegate-screen').style.display='block';
+  try{
+    const [delegates,programme]=await Promise.all([
+      GET('delegates',`id=eq.${PROFILE.delegate_id}&select=*`),
+      GET('programme','select=*&order=day_number,session_time')
+    ]);
+    const d=delegates[0];
+    if(!d){showToast('Delegate record not found');return;}
+    const ini=d.full_name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    document.getElementById('dv-initials').textContent=ini;
+    document.getElementById('dv-name').textContent=d.full_name;
+    document.getElementById('dv-role').textContent=`${d.role} · ${d.country}`;
+    document.getElementById('dv-arr-flight').textContent=d.arrival_flight||'—';
+    document.getElementById('dv-arr-terminal').textContent=d.arrival_terminal||'—';
+    document.getElementById('dv-arr-time').textContent=d.arrival_time||'—';
+    document.getElementById('dv-receiver').textContent=d.receiver||'—';
+    document.getElementById('dv-dep-flight').textContent=d.departure_flight||'—';
+    document.getElementById('dv-dep-airport').textContent=d.departure_airport||'—';
+    document.getElementById('dv-dep-time').textContent=d.departure_time||'—';
+    document.getElementById('dv-checkout').textContent=d.checkout_time||'14:00';
+    document.getElementById('dv-hotel-delhi').textContent=d.hotel_delhi||'—';
+    document.getElementById('dv-room-delhi').textContent=d.room_delhi||'TBC';
+    document.getElementById('dv-hotel-lko').textContent=d.hotel_lucknow||'—';
+    document.getElementById('dv-room-lko').textContent=d.room_lucknow||'TBC';
+    document.getElementById('dv-diet').textContent=d.diet||'None';
+    document.getElementById('dv-special').textContent=d.special_needs||'None';
+    document.getElementById('dv-escort').textContent=d.dep_escort||d.receiver||'—';
+    const SL={'checked-in':'✅ Checked In','en-route':'🚗 En Route','landed':'🛬 Landed','awaiting':'⏳ Awaiting Pickup','scheduled':'📅 Scheduled','departed':'✈️ Departed'};
+    document.getElementById('dv-status-pill').textContent=SL[d.status]||d.status;
+    window._dvProg=programme;
+    dvDay(1);
+  }catch(e){showToast('Error: '+e.message);}
 }
 
-function dvShowDay(day, btn) {
-  document.querySelectorAll('.dv-day-btn').forEach(b=>b.classList.remove('active'));
+function dvDay(day,btn){
+  document.querySelectorAll('#delegate-screen .day-btn').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
-  else document.querySelectorAll('.dv-day-btn')[day-1]?.classList.add('active');
-  const sessions = (window._dvProgramme||[]).filter(p=>p.day_number===day);
-  document.getElementById('dv-sessions').innerHTML = sessions.map(s=>`
-    <div class="dv-session ${s.session_type||''}">
-      <div class="dv-session-time">${s.session_time} · ${s.tag||''}</div>
-      <div class="dv-session-title">${s.session_title}</div>
-      <div class="dv-session-venue">${s.venue||''}</div>
-    </div>`).join('') || '<div style="padding:16px;text-align:center;color:var(--text-m)">No sessions</div>';
+  else document.querySelectorAll('#delegate-screen .day-btn')[day-1]?.classList.add('active');
+  const s=(window._dvProg||[]).filter(p=>p.day_number===day);
+  document.getElementById('dv-sessions').innerHTML=s.map(x=>`
+    <div class="dv-session ${x.session_type||''}">
+      <div class="session-time">${x.session_time} · ${x.tag||''}</div>
+      <div class="session-title">${x.session_title}</div>
+      <div style="font-size:12px;color:var(--text-s);margin-top:2px">${x.venue||''}</div>
+    </div>`).join('')||'<div style="padding:16px;text-align:center;color:var(--text-m)">No sessions</div>';
 }
 
-// ── ADMIN / COORDINATOR APP ───────────────────────────────────────────────────
-async function loadAdminApp() {
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('main-app').style.display    = 'flex';
+// ── ADMIN APP ─────────────────────────────────────────────────────────────────
+async function loadAdminApp(){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('main-app').style.display='flex';
+  const ini=PROFILE.full_name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  document.getElementById('sb-av').textContent=ini;
+  document.getElementById('sb-name').textContent=PROFILE.full_name;
+  const roleLabel=PROFILE.role==='admin'?'👑 Admin':'🗂️ '+(PROFILE.team||'Coordinator');
+  document.getElementById('sb-role').textContent=roleLabel;
 
-  // Apply role class for showing/hiding admin-only elements
-  const app = document.getElementById('main-app');
-  if(USER_PROFILE.role === 'admin') app.classList.add('role-admin');
-
-  // Show user in sidebar
-  const initials = USER_PROFILE.full_name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  document.getElementById('sb-user-av').textContent   = initials;
-  document.getElementById('sb-user-name').textContent = USER_PROFILE.full_name;
-  document.getElementById('sb-user-role').textContent = USER_PROFILE.role === 'admin' ? '👑 Admin' : '🗂️ Coordinator' + (USER_PROFILE.team ? ' · '+USER_PROFILE.team : '');
+  // Show/hide admin-only elements
+  const isAdmin=PROFILE.role==='admin';
+  document.getElementById('admin-nav-section').style.display=isAdmin?'block':'none';
+  document.getElementById('add-delegate-btn').style.display=isAdmin?'flex':'none';
+  document.getElementById('broadcast-card').style.display=(isAdmin||PROFILE.can_broadcast)?'block':'none';
 
   await loadAll();
-  setInterval(loadAll, 30000);
+  setInterval(loadAll,30000);
 }
 
-// ── LOAD DATA ─────────────────────────────────────────────────────────────────
-async function loadAll() {
-  try {
-    const [delegates, hotels, transport, programme, notifications] = await Promise.all([
-      apiGet('delegates',     'select=*&order=id'),
-      apiGet('hotels',        'select=*&order=id'),
-      apiGet('transport',     'select=*&order=pickup_date,pickup_time'),
-      apiGet('programme',     'select=*&order=day_number,session_time'),
-      apiGet('notifications', 'select=*&order=created_at.desc&limit=20'),
-    ]);
-    CACHE = {delegates, hotels, transport, programme, notifications};
-    const dbEl = document.getElementById('db-status');
-    dbEl.className = 'db-status connected';
-    dbEl.textContent = '🟢 Supabase Live';
+// ── DATA ──────────────────────────────────────────────────────────────────────
+async function loadAll(){
+  try{
+    const promises=[
+      GET('delegates','select=*&order=id'),
+      GET('hotels','select=*&order=id'),
+      GET('transport','select=*&order=pickup_date,pickup_time'),
+      GET('programme','select=*&order=day_number,session_time'),
+      GET('notifications','select=*&order=created_at.desc&limit=20'),
+    ];
+    if(PROFILE?.role==='admin') promises.push(GET('user_profiles','select=*&order=created_at'));
+    const results=await Promise.all(promises);
+    CACHE={delegates:results[0],hotels:results[1],transport:results[2],programme:results[3],notifications:results[4],users:results[5]||[]};
+    const dbEl=document.getElementById('db-status');
+    dbEl.className='db-status connected'; dbEl.textContent='🟢 Supabase Live';
     renderAll();
-  } catch(e) {
-    const dbEl = document.getElementById('db-status');
-    if(dbEl){ dbEl.className='db-status disconnected'; dbEl.textContent='🔴 DB Error'; }
+  }catch(e){
+    const dbEl=document.getElementById('db-status');
+    if(dbEl){dbEl.className='db-status disconnected';dbEl.textContent='🔴 DB Error';}
   }
 }
 
-function renderAll() {
-  renderDashboard(); renderArrivals(); renderDepartures();
-  renderDelegates(); showDay(1); renderHotels();
-  renderTransport(); renderNotifications(); updateBadges();
+function renderAll(){
+  renderDashboard();renderArrivals();renderDepartures();
+  renderDelegates();showDay(1);renderHotels();
+  renderTransport();renderNotifications();updateBadges();
+  if(PROFILE?.role==='admin') renderUsers();
 }
 
-// ── STATUS / HELPERS ──────────────────────────────────────────────────────────
-const SC = {'scheduled':{l:'Scheduled',c:'pill-gray'},'awaiting':{l:'Awaiting',c:'pill-amber'},'landed':{l:'Landed',c:'pill-blue'},'en-route':{l:'En Route',c:'pill-blue'},'in-transit':{l:'In Transit',c:'pill-amber'},'checked-in':{l:'Checked In',c:'pill-green'},'departed':{l:'Departed',c:'pill-purple'},'done':{l:'Done',c:'pill-green'},'dispatched':{l:'Dispatched',c:'pill-blue'},'standby':{l:'Standby',c:'pill-amber'}};
-const pill = s => { const c=SC[s]||{l:s,c:'pill-gray'}; return `<span class="pill ${c.c}">${c.l}</span>`; };
-const av   = (d,i) => `<div class="avatar av-${(i||0)%8}">${d.initials||d.full_name?.split(' ').map(w=>w[0]).join('').slice(0,2)||'??'}</div>`;
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+const SC={'scheduled':{l:'Scheduled',c:'pill-gray'},'awaiting':{l:'Awaiting',c:'pill-amber'},'landed':{l:'Landed',c:'pill-blue'},'en-route':{l:'En Route',c:'pill-blue'},'in-transit':{l:'In Transit',c:'pill-amber'},'checked-in':{l:'Checked In',c:'pill-green'},'departed':{l:'Departed',c:'pill-purple'},'done':{l:'Done',c:'pill-green'},'dispatched':{l:'Dispatched',c:'pill-blue'},'standby':{l:'Standby',c:'pill-amber'}};
+const pill=s=>{const c=SC[s]||{l:s,c:'pill-gray'};return `<span class="pill ${c.c}">${c.l}</span>`;};
+const av=(d,i)=>`<div class="avatar av-${(i||0)%8}">${d.initials||d.full_name?.split(' ').map(w=>w[0]).join('').slice(0,2)||'??'}</div>`;
+const TITLES={dashboard:'Dashboard',arrivals:'Arrivals — Today',departures:'Departures — Nov 15',delegates:'All Delegates',schedule:'Conference Programme',hotels:'Hotel Management',transport:'Transport & Logistics',notifications:'Notifications & Broadcast',users:'User Management'};
 
-const TITLES = {dashboard:'Dashboard',arrivals:'Arrivals — Today',departures:'Departures — Nov 15',delegates:'All Delegates',schedule:'Conference Programme',hotels:'Hotel Management',transport:'Transport & Logistics',notifications:'Notifications & Broadcast'};
-function showPanel(id, btn) {
+function showPanel(id,btn){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   document.getElementById('panel-'+id).classList.add('active');
   if(btn) btn.classList.add('active');
-  document.getElementById('topbar-title').textContent = TITLES[id]||id;
+  document.getElementById('topbar-title').textContent=TITLES[id]||id;
 }
 
-function updateBadges() {
-  const arr = CACHE.delegates.filter(d=>['awaiting','landed','en-route','in-transit'].includes(d.status)).length;
-  const unr = CACHE.notifications.filter(n=>!n.is_read).length;
-  document.getElementById('badge-arrivals').textContent   = arr||'0';
-  document.getElementById('badge-departures').textContent = CACHE.delegates.length;
-  document.getElementById('badge-notif').textContent      = unr||'0';
-  document.getElementById('notif-count').textContent      = unr+' unread';
+function updateBadges(){
+  const arr=CACHE.delegates.filter(d=>['awaiting','landed','en-route','in-transit'].includes(d.status)).length;
+  const unr=CACHE.notifications.filter(n=>!n.is_read).length;
+  document.getElementById('badge-arr').textContent=arr||'0';
+  document.getElementById('badge-dep').textContent=CACHE.delegates.length;
+  document.getElementById('badge-notif').textContent=unr||'0';
+  document.getElementById('notif-count').textContent=unr+' unread';
+  if(PROFILE?.role==='admin') document.getElementById('badge-users').textContent=CACHE.users.length;
 }
 
-// ── RENDER FUNCTIONS ──────────────────────────────────────────────────────────
-function renderDashboard() {
-  const d = CACHE.delegates;
-  document.getElementById('stat-total').textContent     = d.length;
-  document.getElementById('stat-arriving').textContent  = d.filter(x=>['awaiting','landed','en-route','in-transit'].includes(x.status)).length;
-  document.getElementById('stat-checkedin').textContent = d.filter(x=>x.status==='checked-in').length;
-  document.getElementById('stat-departing').textContent = d.length;
-  document.getElementById('stat-alerts').textContent    = CACHE.notifications.filter(n=>!n.is_read).length;
-
-  document.getElementById('recent-arrivals').innerHTML = CACHE.notifications.slice(0,5).map(n=>`
+// ── RENDER PANELS ─────────────────────────────────────────────────────────────
+function renderDashboard(){
+  const d=CACHE.delegates;
+  document.getElementById('stat-total').textContent=d.length;
+  document.getElementById('stat-arriving').textContent=d.filter(x=>['awaiting','landed','en-route','in-transit'].includes(x.status)).length;
+  document.getElementById('stat-checkedin').textContent=d.filter(x=>x.status==='checked-in').length;
+  document.getElementById('stat-departing').textContent=d.length;
+  document.getElementById('stat-alerts').textContent=CACHE.notifications.filter(n=>!n.is_read).length;
+  document.getElementById('recent-arrivals').innerHTML=CACHE.notifications.slice(0,5).map(n=>`
     <div class="notif-item" onclick="markRead(${n.id})">
       <div class="notif-dot ${n.is_read?'read':''}"></div>
       <div><div class="notif-msg">${n.message}</div>
       <div class="notif-meta">${new Date(n.created_at).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})} · ${n.sent_by}</div></div>
-    </div>`).join('') || '<div style="padding:20px;text-align:center;color:var(--text-m)">No notifications yet</div>';
-
-  const dotC = {keynote:'var(--teal-mid)',social:'var(--gold)',student:'var(--purple-mid)',transit:'var(--text-m)','':"var(--primary-mid)"};
-  document.getElementById('today-programme').innerHTML = CACHE.programme.filter(p=>p.day_number===1).map(s=>`
-    <div class="tl-item">
-      <div class="tl-time">${s.session_time}</div>
-      <div class="tl-dot" style="background:${dotC[s.session_type]||dotC['']}"></div>
-      <div><div class="tl-title">${s.session_title}</div><div class="tl-sub">${s.venue}</div></div>
-    </div>`).join('');
-
-  const pending = d.filter(x=>['awaiting','in-transit','landed'].includes(x.status));
-  document.getElementById('pending-tbody').innerHTML = pending.length ? pending.map((x,i)=>`
+    </div>`).join('')||'<div style="padding:20px;text-align:center;color:var(--text-m)">No notifications yet</div>';
+  const dc={keynote:'var(--teal-mid)',social:'var(--gold)',student:'var(--purple-mid)',transit:'var(--text-m)','':"var(--primary-mid)"};
+  document.getElementById('today-programme').innerHTML=CACHE.programme.filter(p=>p.day_number===1).map(s=>`
+    <div class="tl-item"><div class="tl-time">${s.session_time}</div>
+    <div class="tl-dot" style="background:${dc[s.session_type]||dc['']}"></div>
+    <div><div class="tl-title">${s.session_title}</div><div class="tl-sub">${s.venue}</div></div></div>`).join('');
+  const pending=d.filter(x=>['awaiting','in-transit','landed'].includes(x.status));
+  document.getElementById('pending-tbody').innerHTML=pending.length?pending.map((x,i)=>`
     <tr><td><div class="name-cell">${av(x,i)}<span style="font-weight:700">${x.full_name}</span></div></td>
     <td>${pill(x.status)}</td>
     <td>${x.status==='awaiting'?'Airport pickup needed':x.status==='landed'?'Car dispatched, waiting':'Room confirmation needed'}</td>
     <td>${x.receiver||'—'}</td></tr>`).join('')
-    : '<tr><td colspan="4" style="text-align:center;padding:20px;color:var(--text-m)">No pending actions 🎉</td></tr>';
+    :'<tr><td colspan="4" style="text-align:center;padding:20px;color:var(--text-m)">No pending actions 🎉</td></tr>';
 }
 
-function renderArrivals(filter='') {
-  const list = filter ? CACHE.delegates.filter(d=>d.full_name.toLowerCase().includes(filter.toLowerCase())||d.arrival_flight?.toLowerCase().includes(filter.toLowerCase())||d.country.toLowerCase().includes(filter.toLowerCase())) : CACHE.delegates;
-  document.getElementById('arrivals-tbody').innerHTML = list.map((d,i)=>`
+function renderArrivals(filter=''){
+  const list=filter?CACHE.delegates.filter(d=>d.full_name.toLowerCase().includes(filter.toLowerCase())||d.arrival_flight?.toLowerCase().includes(filter.toLowerCase())||d.country.toLowerCase().includes(filter.toLowerCase())):CACHE.delegates;
+  const canEdit=PROFILE?.role==='admin'||PROFILE?.can_edit;
+  document.getElementById('arrivals-tbody').innerHTML=list.map((d,i)=>`
     <tr><td><div class="name-cell">${av(d,i)}<div><div style="font-weight:700">${d.full_name}</div></div></div></td>
     <td>${d.country}</td><td>${d.arrival_flight||'—'}</td><td>${d.arrival_terminal||'—'}</td>
     <td style="font-weight:700">${d.arrival_time||'—'}</td><td>${pill(d.status)}</td>
     <td>${d.receiver||'—'}</td><td>${d.hotel_delhi||'—'}</td>
-    <td><button class="btn btn-sm" onclick="advanceStatus(${d.id},'${d.status}')">Update ↑</button></td></tr>`).join('')
-    || '<tr><td colspan="9" style="text-align:center;padding:20px;color:var(--text-m)">No delegates found</td></tr>';
+    <td>${canEdit?`<button class="btn btn-sm" onclick="advanceStatus(${d.id},'${d.status}')">Update ↑</button>`:'<span style="font-size:11px;color:var(--text-m)">View only</span>'}</td></tr>`).join('')
+    ||'<tr><td colspan="9" style="text-align:center;padding:20px;color:var(--text-m)">No delegates found</td></tr>';
 }
 
-function renderDepartures(filter='', airport='') {
-  let list = CACHE.delegates;
-  if(filter)  list = list.filter(d=>d.full_name.toLowerCase().includes(filter.toLowerCase()));
-  if(airport) list = list.filter(d=>d.departure_airport===airport);
-  document.getElementById('dep-tbody').innerHTML = list.map((d,i)=>`
+function renderDepartures(filter='',airport=''){
+  let list=CACHE.delegates;
+  if(filter) list=list.filter(d=>d.full_name.toLowerCase().includes(filter.toLowerCase()));
+  if(airport) list=list.filter(d=>d.departure_airport===airport);
+  document.getElementById('dep-tbody').innerHTML=list.map((d,i)=>`
     <tr><td><div class="name-cell">${av(d,i)}<div><div style="font-weight:700">${d.full_name}</div><div style="font-size:11px;color:var(--text-m)">${d.country}</div></div></div></td>
     <td>${d.country}</td>
     <td><span class="pill ${d.departure_airport==='LKO'?'pill-blue':'pill-amber'}">${d.departure_airport||'—'}</span></td>
@@ -848,13 +969,13 @@ function renderDepartures(filter='', airport='') {
     <td style="font-weight:700">${d.departure_time||'—'}</td>
     <td>${d.checkout_time||'14:00'}</td><td>${d.dep_escort||d.receiver||'—'}</td>
     <td style="font-size:12px;color:var(--text-s)">${d.special_needs||'—'}</td></tr>`).join('')
-    || '<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-m)">No delegates found</td></tr>';
+    ||'<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-m)">No delegates found</td></tr>';
 }
-function filterDepartures(){ renderDepartures(document.getElementById('dep-search').value, document.getElementById('dep-filter').value); }
+function filterDep(){renderDepartures(document.getElementById('dep-search').value,document.getElementById('dep-filter').value);}
 
-function renderDelegates(filter='') {
-  const list = filter ? CACHE.delegates.filter(d=>d.full_name.toLowerCase().includes(filter.toLowerCase())||d.country.toLowerCase().includes(filter.toLowerCase())) : CACHE.delegates;
-  document.getElementById('delegates-tbody').innerHTML = list.map((d,i)=>`
+function renderDelegates(filter=''){
+  const list=filter?CACHE.delegates.filter(d=>d.full_name.toLowerCase().includes(filter.toLowerCase())||d.country.toLowerCase().includes(filter.toLowerCase())):CACHE.delegates;
+  document.getElementById('delegates-tbody').innerHTML=list.map((d,i)=>`
     <tr><td><div class="name-cell">${av(d,i)}<div><div style="font-weight:700">${d.full_name}</div><div style="font-size:11px;color:var(--text-m)">${d.role}</div></div></div></td>
     <td>${d.country}</td>
     <td>${d.hotel_delhi||'—'} <span style="color:var(--text-m)">Rm ${d.room_delhi||'TBC'}</span></td>
@@ -863,154 +984,313 @@ function renderDelegates(filter='') {
     <td>${d.departure_flight||'—'} <span class="pill ${d.departure_airport==='LKO'?'pill-blue':'pill-amber'}" style="margin-left:4px">${d.departure_airport||''}</span></td>
     <td>${d.diet||'None'}</td><td>${pill(d.status)}</td>
     <td><button class="btn btn-sm" onclick="viewDelegate(${d.id})">View</button></td></tr>`).join('')
-    || '<tr><td colspan="9" style="text-align:center;padding:20px;color:var(--text-m)">No delegates found</td></tr>';
+    ||'<tr><td colspan="9" style="text-align:center;padding:20px;color:var(--text-m)">No delegates found</td></tr>';
 }
 
-function showDay(day, btn) {
-  document.querySelectorAll('.day-btn').forEach(b=>b.classList.remove('active'));
+function showDay(day,btn){
+  document.querySelectorAll('#panel-schedule .day-btn').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
-  else document.querySelectorAll('.day-btn')[day-1]?.classList.add('active');
-  document.getElementById('day-content').innerHTML = CACHE.programme.filter(p=>p.day_number===day).map(s=>`
+  else document.querySelectorAll('#panel-schedule .day-btn')[day-1]?.classList.add('active');
+  document.getElementById('day-content').innerHTML=CACHE.programme.filter(p=>p.day_number===day).map(s=>`
     <div class="session-card ${s.session_type||''}">
       <div class="session-time">${s.session_time} · ${s.tag||''}</div>
       <div class="session-title">${s.session_title}</div>
       <div class="session-meta">${s.venue||''} ${s.speakers?'· '+s.speakers:''}</div>
-    </div>`).join('') || '<div style="padding:20px;text-align:center;color:var(--text-m)">No sessions</div>';
+    </div>`).join('')||'<div style="padding:20px;text-align:center;color:var(--text-m)">No sessions</div>';
 }
 
-function renderHotels() {
-  const hCard = h => {
-    const pct = h.total_rooms ? Math.round((h.occupied_rooms/h.total_rooms)*100) : 0;
-    return `<div class="hotel-block"><div class="hotel-name">${h.name}</div>
-      <div class="hotel-city">${h.address||h.city}</div>
-      <div class="hotel-bar"><div class="hotel-bar-fill" style="width:${pct||2}%"></div></div>
-      <div class="hotel-stats">
-        <div class="hstat">Rooms: <strong>${h.occupied_rooms}/${h.total_rooms}</strong></div>
-        <div class="hstat">Stay: <strong>${h.stay_date||'—'}</strong></div>
-        <div class="hstat">Coordinator: <strong>${h.coordinator||'—'}</strong></div>
-        <div class="hstat">📞 <strong>${h.phone||'—'}</strong></div>
-      </div></div>`;
-  };
-  document.getElementById('hotels-delhi').innerHTML   = CACHE.hotels.filter(h=>h.city==='Delhi').map(hCard).join('')   || '<div style="padding:20px;color:var(--text-m)">No hotels</div>';
-  document.getElementById('hotels-agra').innerHTML    = CACHE.hotels.filter(h=>h.city==='Agra').map(hCard).join('')    || '';
-  document.getElementById('hotels-lucknow').innerHTML = CACHE.hotels.filter(h=>h.city==='Lucknow').map(hCard).join('') || '';
+function renderHotels(){
+  const hc=h=>{const pct=h.total_rooms?Math.round((h.occupied_rooms/h.total_rooms)*100):0;return `
+    <div class="hotel-block"><div class="hotel-name">${h.name}</div>
+    <div class="hotel-city">${h.address||h.city}</div>
+    <div class="hotel-bar"><div class="hotel-bar-fill" style="width:${pct||2}%"></div></div>
+    <div class="hotel-stats">
+      <div class="hstat">Rooms: <strong>${h.occupied_rooms}/${h.total_rooms}</strong></div>
+      <div class="hstat">Stay: <strong>${h.stay_date||'—'}</strong></div>
+      <div class="hstat">Coordinator: <strong>${h.coordinator||'—'}</strong></div>
+      <div class="hstat">📞 <strong>${h.phone||'—'}</strong></div>
+    </div></div>`;};
+  document.getElementById('hotels-delhi').innerHTML=CACHE.hotels.filter(h=>h.city==='Delhi').map(hc).join('')||'<div style="padding:16px;color:var(--text-m)">No hotels</div>';
+  document.getElementById('hotels-agra').innerHTML=CACHE.hotels.filter(h=>h.city==='Agra').map(hc).join('')||'';
+  document.getElementById('hotels-lucknow').innerHTML=CACHE.hotels.filter(h=>h.city==='Lucknow').map(hc).join('')||'';
 }
 
-function renderTransport() {
-  document.getElementById('transport-tbody').innerHTML = CACHE.transport.map(t=>`
+function renderTransport(){
+  document.getElementById('transport-tbody').innerHTML=CACHE.transport.map(t=>`
     <tr><td style="font-weight:700">${t.delegate_name}</td><td>${t.leg}</td>
     <td>${t.driver_name||'—'}<br><span style="font-size:11px;color:var(--text-m)">${t.driver_phone||''}</span></td>
     <td style="font-size:12px">${t.vehicle||'—'}</td>
     <td style="font-weight:700">${t.pickup_time||'—'}</td>
     <td style="font-size:12px;color:var(--text-m)">${t.pickup_date||'—'}</td>
-    <td>${pill(t.status)}</td></tr>`).join('')
-    || '<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--text-m)">No transport data</td></tr>';
+    <td>${pill(t.status)}</td></tr>`).join('')||'<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--text-m)">No data</td></tr>';
 }
 
-function renderNotifications() {
-  const unread = CACHE.notifications.filter(n=>!n.is_read).length;
-  document.getElementById('notif-count').textContent = unread+' unread';
-  document.getElementById('notif-list').innerHTML = CACHE.notifications.map(n=>`
+function renderNotifications(){
+  const unread=CACHE.notifications.filter(n=>!n.is_read).length;
+  document.getElementById('notif-count').textContent=unread+' unread';
+  document.getElementById('notif-list').innerHTML=CACHE.notifications.map(n=>`
     <div class="notif-item" onclick="markRead(${n.id})">
       <div class="notif-dot ${n.is_read?'read':''}"></div>
       <div><div class="notif-msg">${n.message}</div>
       <div class="notif-meta">${new Date(n.created_at).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})} · ${n.sent_by} → ${n.target_group}</div></div>
-    </div>`).join('') || '<div style="padding:20px;text-align:center;color:var(--text-m)">No notifications</div>';
+    </div>`).join('')||'<div style="padding:20px;text-align:center;color:var(--text-m)">No notifications</div>';
 }
 
-async function markRead(id) {
-  try {
-    await apiPatch('notifications', id, {is_read:true});
-    const n = CACHE.notifications.find(x=>x.id===id);
-    if(n) n.is_read = true;
-    renderNotifications(); renderDashboard(); updateBadges();
-  } catch(e) {}
+// ── USER MANAGEMENT ───────────────────────────────────────────────────────────
+function renderUsers(filter=''){
+  const list=filter?CACHE.users.filter(u=>u.full_name?.toLowerCase().includes(filter.toLowerCase())||u.email?.toLowerCase().includes(filter.toLowerCase())):CACHE.users;
+  const roleB={admin:`<span class="user-role-badge urb-admin">👑 Admin</span>`,coordinator:`<span class="user-role-badge urb-coordinator">🗂️ Coordinator</span>`,delegate:`<span class="user-role-badge urb-delegate">⚖️ Delegate</span>`};
+  document.getElementById('users-tbody').innerHTML=list.map(u=>`
+    <tr>
+      <td><div style="font-weight:700">${u.full_name||'—'}</div><div style="font-size:11px;color:var(--text-m)">${u.notes||''}</div></td>
+      <td style="font-size:12px">${u.email||'—'}</td>
+      <td>${roleB[u.role]||u.role}</td>
+      <td style="font-size:12px">${u.team||'—'}</td>
+      <td style="text-align:center">${u.can_edit||u.role==='admin'?'<span style="color:var(--teal-mid);font-weight:700">✓</span>':'<span style="color:var(--text-m)">—</span>'}</td>
+      <td style="text-align:center">${u.can_broadcast||u.role==='admin'?'<span style="color:var(--teal-mid);font-weight:700">✓</span>':'<span style="color:var(--text-m)">—</span>'}</td>
+      <td>${u.is_active!==false?'<span class="user-status-active">● Active</span>':'<span class="user-status-inactive">● Revoked</span>'}</td>
+      <td>
+        <button class="btn btn-sm" onclick="editUser('${u.id}')" style="margin-right:4px">Edit</button>
+        ${u.is_active!==false?`<button class="btn btn-sm btn-danger" onclick="quickRevoke('${u.id}','${u.full_name}')">Revoke</button>`:`<button class="btn btn-sm btn-success" onclick="quickRestore('${u.id}','${u.full_name}')">Restore</button>`}
+      </td>
+    </tr>`).join('')||'<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-m)">No users yet — create your first coordinator above</td></tr>';
 }
 
-async function sendBroadcast() {
-  if(USER_PROFILE?.role !== 'admin'){ showToast('Only admins can send broadcasts'); return; }
-  const msg = document.getElementById('broadcast-msg').value.trim();
-  const grp = document.getElementById('broadcast-group').value;
-  if(!msg){ showToast('Please type a message first.'); return; }
-  try {
-    const result = await apiPost('notifications', {message:msg, sent_by:USER_PROFILE.full_name, target_group:grp, is_read:false, category:'info'});
-    CACHE.notifications.unshift(result[0]);
-    document.getElementById('broadcast-msg').value = '';
-    renderNotifications(); renderDashboard(); updateBadges();
+// Team quick-select
+function selectTeam(el,teamName,perms){
+  document.querySelectorAll('.team-opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  SELECTED_TEAM=teamName;
+  document.getElementById('selected-team-name').textContent=teamName;
+  document.getElementById('quick-create-form').style.display='block';
+}
+function cancelQuickCreate(){
+  document.querySelectorAll('.team-opt').forEach(o=>o.classList.remove('selected'));
+  document.getElementById('quick-create-form').style.display='none';
+  SELECTED_TEAM=null;
+}
+
+async function quickCreateUser(){
+  const name=document.getElementById('qc-name').value.trim();
+  const email=document.getElementById('qc-email').value.trim();
+  const pass=document.getElementById('qc-password').value;
+  const notes=document.getElementById('qc-notes').value.trim();
+  if(!name||!email||!pass){showToast('Please fill name, email and password.');return;}
+  if(pass.length<8){showToast('Password must be at least 8 characters.');return;}
+  const isTopMgmt=SELECTED_TEAM==='Top Management';
+  try{
+    const user=await authSignUp(email,pass,{full_name:name,role:'coordinator'});
+    // Update the auto-created profile
+    await fetch(`${SUPA_URL}/rest/v1/user_profiles?id=eq.${user.id}`,{
+      method:'PATCH',
+      headers:H(),
+      body:JSON.stringify({
+        full_name:name,email,role:'coordinator',team:SELECTED_TEAM,
+        can_edit:isTopMgmt||['Airport Team','Delhi Hotel Team','Lucknow Hotel Team','Transport Team'].includes(SELECTED_TEAM),
+        can_broadcast:isTopMgmt,
+        is_active:true,notes,created_by:SESSION.user.id
+      })
+    });
+    showToast(`✓ ${name} account created — Team: ${SELECTED_TEAM}`);
+    cancelQuickCreate();
+    document.getElementById('qc-name').value='';
+    document.getElementById('qc-email').value='';
+    document.getElementById('qc-password').value='';
+    document.getElementById('qc-notes').value='';
+    await loadAll();
+  }catch(e){showToast('Error: '+e.message);}
+}
+
+function toggleRoleFields(){
+  const role=document.getElementById('cu-role').value;
+  document.getElementById('cu-team-row').style.display=role==='coordinator'?'flex':'none';
+  document.getElementById('cu-perms-row').style.display=role==='coordinator'?'block':'none';
+  document.getElementById('cu-delegate-row').style.display=role==='delegate'?'block':'none';
+}
+
+async function createUser(){
+  const name=document.getElementById('cu-name').value.trim();
+  const email=document.getElementById('cu-email').value.trim();
+  const pass=document.getElementById('cu-password').value;
+  const role=document.getElementById('cu-role').value;
+  if(!name||!email||!pass){showToast('Please fill all required fields.');return;}
+  if(pass.length<8){showToast('Password must be at least 8 characters.');return;}
+  try{
+    const user=await authSignUp(email,pass,{full_name:name,role});
+    const upd={full_name:name,email,role,is_active:true,created_by:SESSION.user.id,notes:document.getElementById('cu-notes').value.trim()};
+    if(role==='coordinator'){
+      upd.team=document.getElementById('cu-team').value;
+      upd.can_edit=document.getElementById('cu-can-edit').checked;
+      upd.can_broadcast=document.getElementById('cu-can-broadcast').checked;
+    }
+    if(role==='admin'){upd.can_edit=true;upd.can_broadcast=true;}
+    if(role==='delegate'){
+      const did=document.getElementById('cu-delegate-id').value;
+      if(did) upd.delegate_id=parseInt(did);
+    }
+    await fetch(`${SUPA_URL}/rest/v1/user_profiles?id=eq.${user.id}`,{method:'PATCH',headers:H(),body:JSON.stringify(upd)});
+    closeModal('modal-create-user');
+    showToast(`✓ ${name} created as ${role}`);
+    await loadAll();
+  }catch(e){showToast('Error: '+e.message);}
+}
+
+function editUser(uid){
+  const u=CACHE.users.find(x=>x.id===uid);
+  if(!u) return;
+  document.getElementById('eu-id').value=uid;
+  document.getElementById('eu-display-name').textContent=u.full_name||'—';
+  document.getElementById('eu-display-email').textContent=u.email||'—';
+  document.getElementById('eu-role').value=u.role||'coordinator';
+  document.getElementById('eu-team').value=u.team||'General Coordinator';
+  document.getElementById('eu-can-edit').checked=u.can_edit||false;
+  document.getElementById('eu-can-broadcast').checked=u.can_broadcast||false;
+  document.getElementById('eu-is-active').checked=u.is_active!==false;
+  document.getElementById('eu-notes').value=u.notes||'';
+  openModal('modal-edit-user');
+}
+
+async function saveUserEdit(){
+  const uid=document.getElementById('eu-id').value;
+  const data={
+    role:document.getElementById('eu-role').value,
+    team:document.getElementById('eu-team').value,
+    can_edit:document.getElementById('eu-can-edit').checked,
+    can_broadcast:document.getElementById('eu-can-broadcast').checked,
+    is_active:document.getElementById('eu-is-active').checked,
+    notes:document.getElementById('eu-notes').value.trim(),
+  };
+  if(data.role==='admin'){data.can_edit=true;data.can_broadcast=true;}
+  try{
+    await fetch(`${SUPA_URL}/rest/v1/user_profiles?id=eq.${uid}`,{method:'PATCH',headers:H(),body:JSON.stringify(data)});
+    closeModal('modal-edit-user');
+    showToast('User updated successfully ✓');
+    await loadAll();
+  }catch(e){showToast('Error: '+e.message);}
+}
+
+async function revokeUser(){
+  const uid=document.getElementById('eu-id').value;
+  const name=document.getElementById('eu-display-name').textContent;
+  if(!confirm(`Revoke access for ${name}? They will not be able to login.`)) return;
+  try{
+    await fetch(`${SUPA_URL}/rest/v1/user_profiles?id=eq.${uid}`,{method:'PATCH',headers:H(),body:JSON.stringify({is_active:false})});
+    closeModal('modal-edit-user');
+    showToast(`Access revoked for ${name}`);
+    await loadAll();
+  }catch(e){showToast('Error: '+e.message);}
+}
+
+async function quickRevoke(uid,name){
+  if(!confirm(`Revoke access for ${name}?`)) return;
+  try{
+    await fetch(`${SUPA_URL}/rest/v1/user_profiles?id=eq.${uid}`,{method:'PATCH',headers:H(),body:JSON.stringify({is_active:false})});
+    showToast(`Access revoked for ${name}`);
+    await loadAll();
+  }catch(e){showToast('Error: '+e.message);}
+}
+
+async function quickRestore(uid,name){
+  try{
+    await fetch(`${SUPA_URL}/rest/v1/user_profiles?id=eq.${uid}`,{method:'PATCH',headers:H(),body:JSON.stringify({is_active:true})});
+    showToast(`Access restored for ${name} ✓`);
+    await loadAll();
+  }catch(e){showToast('Error: '+e.message);}
+}
+
+// ── NOTIFICATIONS ─────────────────────────────────────────────────────────────
+async function markRead(id){
+  try{
+    await PATCH('notifications',id,{is_read:true});
+    const n=CACHE.notifications.find(x=>x.id===id);
+    if(n) n.is_read=true;
+    renderNotifications();renderDashboard();updateBadges();
+  }catch(e){}
+}
+
+async function sendBroadcast(){
+  const msg=document.getElementById('broadcast-msg').value.trim();
+  const grp=document.getElementById('broadcast-group').value;
+  if(!msg){showToast('Please type a message.');return;}
+  try{
+    const r=await POST('notifications',{message:msg,sent_by:PROFILE.full_name,target_group:grp,is_read:false,category:'info'});
+    CACHE.notifications.unshift(r[0]);
+    document.getElementById('broadcast-msg').value='';
+    renderNotifications();renderDashboard();updateBadges();
     showToast(`Broadcast sent to: ${grp} ✓`);
-  } catch(e) { showToast('Failed to send: '+e.message); }
+  }catch(e){showToast('Failed: '+e.message);}
 }
 
-// ── STATUS UPDATE ─────────────────────────────────────────────────────────────
-const STATUS_FLOW = ['scheduled','awaiting','landed','en-route','checked-in','departed'];
-async function advanceStatus(id, current) {
-  const idx = STATUS_FLOW.indexOf(current);
-  if(idx >= STATUS_FLOW.length-1){ showToast('Already at final status.'); return; }
-  const next = STATUS_FLOW[idx+1];
-  const d    = CACHE.delegates.find(x=>x.id===id);
-  try {
-    await apiPatch('delegates', id, {status:next});
-    if(d) d.status = next;
-    await apiPost('notifications', {message:`${d?.full_name} status updated → ${SC[next]?.l||next}`, sent_by:'Coordinator', target_group:'All Staff', is_read:false, category:'info'});
+// ── STATUS ────────────────────────────────────────────────────────────────────
+const SF=['scheduled','awaiting','landed','en-route','checked-in','departed'];
+async function advanceStatus(id,current){
+  const idx=SF.indexOf(current);
+  if(idx>=SF.length-1){showToast('Already at final status.');return;}
+  const next=SF[idx+1];
+  const d=CACHE.delegates.find(x=>x.id===id);
+  try{
+    await PATCH('delegates',id,{status:next});
+    if(d) d.status=next;
+    await POST('notifications',{message:`${d?.full_name} status updated → ${SC[next]?.l||next}`,sent_by:PROFILE.full_name||'Coordinator',target_group:'All Staff',is_read:false,category:'info'});
     await loadAll();
     showToast(`${d?.full_name} → ${SC[next]?.l} ✓`);
-  } catch(e) { showToast('Update failed: '+e.message); }
+  }catch(e){showToast('Update failed: '+e.message);}
 }
 
-// ── VIEW DELEGATE ─────────────────────────────────────────────────────────────
-function viewDelegate(id) {
-  const d = CACHE.delegates.find(x=>x.id===id);
+// ── VIEW / ADD DELEGATE ───────────────────────────────────────────────────────
+function viewDelegate(id){
+  const d=CACHE.delegates.find(x=>x.id===id);
   if(!d) return;
-  const i = CACHE.delegates.indexOf(d);
-  document.getElementById('view-content').innerHTML = `
-    <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
-      <div class="avatar av-${i%8}" style="width:52px;height:52px;font-size:16px">${d.initials||'??'}</div>
-      <div><div style="font-size:18px;font-weight:700">${d.full_name}</div>
-      <div style="font-size:13px;color:var(--text-m)">${d.role} · ${d.country}</div></div>
+  const i=CACHE.delegates.indexOf(d);
+  document.getElementById('view-content').innerHTML=`
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+      <div class="avatar av-${i%8}" style="width:50px;height:50px;font-size:15px">${d.initials||'??'}</div>
+      <div><div style="font-size:17px;font-weight:700">${d.full_name}</div>
+      <div style="font-size:12px;color:var(--text-m)">${d.role} · ${d.country}</div></div>
       <div style="margin-left:auto">${pill(d.status)}</div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div style="background:var(--bg);border-radius:var(--r-md);padding:12px">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:8px">✈️ Arrival</div>
-        <div style="font-size:13px;margin-bottom:4px"><span style="color:var(--text-m)">Flight:</span> <strong>${d.arrival_flight||'—'}</strong></div>
-        <div style="font-size:13px;margin-bottom:4px"><span style="color:var(--text-m)">Terminal:</span> <strong>${d.arrival_terminal||'—'}</strong></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="background:var(--bg);border-radius:var(--r-md);padding:11px">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:7px">✈️ Arrival</div>
+        <div style="font-size:13px;margin-bottom:3px"><span style="color:var(--text-m)">Flight:</span> <strong>${d.arrival_flight||'—'}</strong></div>
+        <div style="font-size:13px;margin-bottom:3px"><span style="color:var(--text-m)">Terminal:</span> <strong>${d.arrival_terminal||'—'}</strong></div>
         <div style="font-size:13px"><span style="color:var(--text-m)">Time:</span> <strong>${d.arrival_time||'—'}</strong></div>
       </div>
-      <div style="background:var(--bg);border-radius:var(--r-md);padding:12px">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:8px">🛫 Departure</div>
-        <div style="font-size:13px;margin-bottom:4px"><span style="color:var(--text-m)">Flight:</span> <strong>${d.departure_flight||'—'}</strong></div>
-        <div style="font-size:13px;margin-bottom:4px"><span style="color:var(--text-m)">Airport:</span> <strong>${d.departure_airport||'—'}</strong></div>
+      <div style="background:var(--bg);border-radius:var(--r-md);padding:11px">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:7px">🛫 Departure</div>
+        <div style="font-size:13px;margin-bottom:3px"><span style="color:var(--text-m)">Flight:</span> <strong>${d.departure_flight||'—'}</strong></div>
+        <div style="font-size:13px;margin-bottom:3px"><span style="color:var(--text-m)">Airport:</span> <strong>${d.departure_airport||'—'}</strong></div>
         <div style="font-size:13px"><span style="color:var(--text-m)">Time:</span> <strong>${d.departure_time||'—'}</strong></div>
       </div>
-      <div style="background:var(--bg);border-radius:var(--r-md);padding:12px">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:8px">🏨 Delhi</div>
+      <div style="background:var(--bg);border-radius:var(--r-md);padding:11px">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:7px">🏨 Delhi</div>
         <div style="font-size:13px;font-weight:700">${d.hotel_delhi||'—'}</div>
         <div style="font-size:13px;color:var(--text-m)">Room ${d.room_delhi||'TBC'}</div>
       </div>
-      <div style="background:var(--bg);border-radius:var(--r-md);padding:12px">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:8px">🏨 Lucknow</div>
+      <div style="background:var(--bg);border-radius:var(--r-md);padding:11px">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:7px">🏨 Lucknow</div>
         <div style="font-size:13px;font-weight:700">${d.hotel_lucknow||'—'}</div>
         <div style="font-size:13px;color:var(--text-m)">Room ${d.room_lucknow||'TBC'}</div>
       </div>
-      <div style="background:var(--bg);border-radius:var(--r-md);padding:12px;grid-column:span 2">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:8px">📋 Additional</div>
-        <div style="font-size:13px;margin-bottom:4px"><span style="color:var(--text-m)">Receiver:</span> <strong>${d.receiver||'—'}</strong> &nbsp;|&nbsp; <span style="color:var(--text-m)">Escort:</span> <strong>${d.dep_escort||'—'}</strong></div>
-        <div style="font-size:13px;margin-bottom:4px"><span style="color:var(--text-m)">Dietary:</span> <strong>${d.diet||'None'}</strong></div>
+      <div style="background:var(--bg);border-radius:var(--r-md);padding:11px;grid-column:span 2">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-m);margin-bottom:7px">📋 Additional</div>
+        <div style="font-size:13px;margin-bottom:3px"><span style="color:var(--text-m)">Receiver:</span> <strong>${d.receiver||'—'}</strong> &nbsp;|&nbsp; <span style="color:var(--text-m)">Escort:</span> <strong>${d.dep_escort||'—'}</strong></div>
+        <div style="font-size:13px;margin-bottom:3px"><span style="color:var(--text-m)">Dietary:</span> <strong>${d.diet||'None'}</strong></div>
         <div style="font-size:13px"><span style="color:var(--text-m)">Special:</span> <strong>${d.special_needs||'None'}</strong></div>
       </div>
     </div>`;
-  document.getElementById('modal-view').classList.add('open');
+  openModal('modal-view');
 }
 
-// ── ADD DELEGATE ──────────────────────────────────────────────────────────────
-function openModal()  { if(USER_PROFILE?.role==='admin') document.getElementById('modal-add').classList.add('open'); }
-function closeModal() { document.getElementById('modal-add').classList.remove('open'); }
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
 
-async function saveDelegate() {
-  const name = document.getElementById('new-name').value.trim();
-  if(!name){ showToast('Please enter delegate name.'); return; }
-  const data = {
-    full_name:name, country:document.getElementById('new-country').value.trim()||'—',
+async function saveDelegate(){
+  if(PROFILE?.role!=='admin'){showToast('Only admin can add delegates.');return;}
+  const name=document.getElementById('new-name').value.trim();
+  if(!name){showToast('Please enter delegate name.');return;}
+  const data={
+    full_name:name,country:document.getElementById('new-country').value.trim()||'—',
     role:document.getElementById('new-role').value.trim()||'Delegate',
     initials:name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase(),
     arrival_flight:document.getElementById('new-flight').value.trim()||null,
@@ -1027,30 +1307,29 @@ async function saveDelegate() {
     diet:document.getElementById('new-diet').value,
     receiver:document.getElementById('new-receiver').value.trim()||null,
     special_needs:document.getElementById('new-special').value.trim()||null,
-    status:'scheduled', current_city:'Arriving',
+    status:'scheduled',current_city:'Arriving',
   };
-  try {
-    const result = await apiPost('delegates', data);
-    CACHE.delegates.push(result[0]);
-    closeModal(); renderAll();
-    showToast(`${name} added to database ✓`);
+  try{
+    const r=await POST('delegates',data);
+    CACHE.delegates.push(r[0]);
+    closeModal('modal-add');renderAll();
+    showToast(`${name} added ✓`);
     document.getElementById('new-name').value='';
-  } catch(e) { showToast('Failed to save: '+e.message); }
+  }catch(e){showToast('Failed: '+e.message);}
 }
 
-// ── TOAST ─────────────────────────────────────────────────────────────────────
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 3000);
-}
-
-// ── SEARCH WIRING ─────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('arrivals-search').addEventListener('input',  e=>renderArrivals(e.target.value));
-  document.getElementById('dep-search').addEventListener('input',       ()=>filterDepartures());
-  document.getElementById('delegates-search').addEventListener('input', e=>renderDelegates(e.target.value));
+// Pre-fill delegate dropdown for delegate user creation
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('modal-create-user').addEventListener('click',e=>{
+    if(e.target===document.getElementById('modal-create-user')) closeModal('modal-create-user');
+  });
 });
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3200);
+}
 </script>
 </body>
 </html>
