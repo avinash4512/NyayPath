@@ -1145,38 +1145,57 @@ async function quickCreateUser(){
 }
 
 function toggleRoleFields(){
-  const role=document.getElementById('cu-role').value;
-  document.getElementById('cu-team-row').style.display=role==='coordinator'?'flex':'none';
-  document.getElementById('cu-perms-row').style.display=role==='coordinator'?'block':'none';
-  document.getElementById('cu-delegate-row').style.display=role==='delegate'?'block':'none';
+  const roleEl=document.getElementById('cu-role');
+  if(!roleEl) return;
+  const role=roleEl.value;
+  const teamRow=document.getElementById('cu-team-row');
+  const permsRow=document.getElementById('cu-perms-row');
+  const delegateRow=document.getElementById('cu-delegate-row');
+  if(teamRow) teamRow.style.display=role==='coordinator'?'block':'none';
+  if(permsRow) permsRow.style.display=role==='coordinator'?'block':'none';
+  if(delegateRow) delegateRow.style.display=role==='delegate'?'block':'none';
 }
 
 async function createUser(){
-  const name=document.getElementById('cu-name').value.trim();
-  const email=document.getElementById('cu-email').value.trim();
-  const role=document.getElementById('cu-role').value;
+  const nameEl  = document.getElementById('cu-name');
+  const emailEl = document.getElementById('cu-email');
+  const roleEl  = document.getElementById('cu-role');
+  const notesEl = document.getElementById('cu-notes');
+  const teamEl  = document.getElementById('cu-team');
+  const editEl  = document.getElementById('cu-can-edit');
+  const bcastEl = document.getElementById('cu-can-broadcast');
+  const delEl   = document.getElementById('cu-delegate-id');
+
+  if(!nameEl||!emailEl||!roleEl){showToast('Form not ready. Please try again.');return;}
+  const name  = nameEl.value.trim();
+  const email = emailEl.value.trim();
+  const role  = roleEl.value;
   if(!name){showToast('Please enter full name.');return;}
   if(!email||!email.includes('@')){showToast('Please enter a valid email.');return;}
+
   const btn=document.querySelector('#modal-create-user .btn-primary');
-  if(btn){btn.disabled=true;btn.textContent='Sending…';}
+  if(btn){btn.disabled=true;btn.textContent='Creating account…';}
   try{
     const user=await inviteUser(email,{full_name:name,role:role});
-    if(!user||!user.id) throw new Error('Invite sent but no user ID returned');
-    const upd={id:user.id,full_name:name,email,role,is_active:true,sections:'all',
-      created_by:SESSION?.user?.id,notes:(document.getElementById('cu-notes').value||'').trim()};
+    if(!user||!user.id) throw new Error('Account created but no ID returned — try again');
+    const upd={
+      id:user.id, full_name:name, email, role,
+      is_active:true, sections:'all',
+      created_by:SESSION?.user?.id||null,
+      notes:(notesEl?notesEl.value:'').trim()
+    };
     if(role==='coordinator'){
-      upd.team=document.getElementById('cu-team').value;
-      upd.can_edit=document.getElementById('cu-can-edit').checked;
-      upd.can_broadcast=document.getElementById('cu-can-broadcast').checked;
+      upd.team    = teamEl ? teamEl.value : 'General Coordinator';
+      upd.can_edit      = editEl  ? editEl.checked  : false;
+      upd.can_broadcast = bcastEl ? bcastEl.checked : false;
     }
     if(role==='admin'){upd.can_edit=true;upd.can_broadcast=true;}
-    if(role==='delegate'){
-      const did=document.getElementById('cu-delegate-id').value;
-      if(did) upd.delegate_id=parseInt(did);
+    if(role==='delegate' && delEl && delEl.value){
+      upd.delegate_id=parseInt(delEl.value);
     }
     await POST('user_profiles',upd);
     closeModal('modal-create-user');
-    showToast('Invite sent to '+email+' ✓');
+    showToast('✓ Account created for '+name+' — password reset email sent');
     await loadAll();
   }catch(e){
     console.error('createUser error:',e);
