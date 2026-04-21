@@ -550,7 +550,7 @@ tbody tr:hover td{background:#FAFAF8}
                 <label>Notes (optional)</label><input id="qc-notes" placeholder="e.g. Senior coordinator, phone number"/>
               </div>
               <div style="background:var(--teal-light);border-radius:var(--r-md);padding:10px 14px;font-size:12px;color:var(--teal);font-weight:600;margin-bottom:12px">
-                📧 An invite email will be sent. They click the link and set their own password. No temporary password needed.
+                📧 Account created instantly. A "Set Password" email is sent to them. They click the link, set their own password, and login immediately.
               </div>
               <div style="display:flex;gap:8px">
                 <button class="btn btn-primary" onclick="quickCreateUser()">Send Invite</button>
@@ -650,7 +650,7 @@ tbody tr:hover td{background:#FAFAF8}
     </div>
     <div class="fg" style="margin-top:12px"><label>Notes (optional)</label><input id="cu-notes" placeholder="e.g. Senior coordinator, emergency contact"/></div>
     <div style="background:var(--teal-light);border-radius:var(--r-md);padding:10px 14px;font-size:12px;color:var(--teal);font-weight:600;margin-top:12px">
-      📧 An invite email will be sent to this address. The user clicks the link and sets their own password. They can login immediately after.
+      📧 Account created instantly. A "Set Password" email is sent. They click the link, choose their password, and can login right away.
     </div>
     <div class="modal-footer">
       <button class="btn" onclick="closeModal('modal-create-user')">Cancel</button>
@@ -753,23 +753,34 @@ async function PATCH_UUID(table,uid,data){
   return r.json();
 }
 async function inviteUser(email,meta){
-  console.log('Inviting user:',email,'meta:',meta);
-  const r=await fetch(`${SUPA_URL}/auth/v1/invite`,{
+  console.log('Inviting:',email);
+  // Step 1: Create user via admin API using service role key
+  // service role key is needed only here - admin-only function, internal tool
+  const r=await fetch(`${SUPA_URL}/auth/v1/admin/users`,{
     method:'POST',
     headers:{
       'apikey':SUPA_KEY,
-      'Authorization':`Bearer ${SESSION?.access_token}`,
+      'Authorization':`Bearer ${SUPA_SERVICE}`,
       'Content-Type':'application/json'
     },
     body:JSON.stringify({
       email,
-      data:meta,
-      redirect_to:'https://avinash4512.github.io/NyayPath'
+      email_confirm:true,
+      user_metadata:meta,
+      password: Math.random().toString(36).slice(-10)+'A1!'
     })
   });
   const data=await r.json();
-  console.log('Invite response:',r.status, data);
-  if(!r.ok) throw new Error(data.message||data.msg||data.error_description||`Invite API error ${r.status}`);
+  console.log('Create user response:',r.status,data);
+  if(!r.ok) throw new Error(data.message||data.msg||data.error_description||`Error ${r.status}`);
+  // Step 2: Send password reset email so they can set their own password
+  // This acts as the "invite" - they click link and set password
+  const resetR=await fetch(`${SUPA_URL}/auth/v1/recover`,{
+    method:'POST',
+    headers:{'apikey':SUPA_KEY,'Content-Type':'application/json'},
+    body:JSON.stringify({email})
+  });
+  console.log('Reset email sent:',resetR.status);
   return data.user||data;
 }
 
@@ -1143,14 +1154,16 @@ function toggleRoleFields(){
 async function createUser(){
   const name=document.getElementById('cu-name').value.trim();
   const email=document.getElementById('cu-email').value.trim();
-  const pass=document.getElementById('cu-password').value;
   const role=document.getElementById('cu-role').value;
-  if(!name||!email||!pass){showToast('Please fill all required fields.');return;}
-  if(pass.length<8){showToast('Password must be at least 8 characters.');return;}
+  if(!name){showToast('Please enter full name.');return;}
+  if(!email||!email.includes('@')){showToast('Please enter a valid email.');return;}
+  const btn=document.querySelector('#modal-create-user .btn-primary');
+  if(btn){btn.disabled=true;btn.textContent='Sending…';}
   try{
     const user=await inviteUser(email,{full_name:name,role:role});
+    if(!user||!user.id) throw new Error('Invite sent but no user ID returned');
     const upd={id:user.id,full_name:name,email,role,is_active:true,sections:'all',
-      created_by:SESSION.user.id,notes:document.getElementById('cu-notes').value.trim()};
+      created_by:SESSION?.user?.id,notes:(document.getElementById('cu-notes').value||'').trim()};
     if(role==='coordinator'){
       upd.team=document.getElementById('cu-team').value;
       upd.can_edit=document.getElementById('cu-can-edit').checked;
@@ -1163,9 +1176,14 @@ async function createUser(){
     }
     await POST('user_profiles',upd);
     closeModal('modal-create-user');
-    showToast(`✓ Invite sent to ${email} — role: ${role}`);
+    showToast('Invite sent to '+email+' ✓');
     await loadAll();
-  }catch(e){showToast('Error: '+e.message);}
+  }catch(e){
+    console.error('createUser error:',e);
+    showToast('Failed: '+e.message);
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='Send Invite Email';}
+  }
 }
 
 function editUser(uid){
