@@ -725,6 +725,13 @@ async function GET(table,q=''){
   if(!r.ok) throw new Error(await r.text());
   return r.json();
 }
+async function RPC(fn,params={}){
+  const r=await fetch(`${SUPA_URL}/rest/v1/rpc/${fn}`,{
+    method:'POST',headers:H(),body:JSON.stringify(params)
+  });
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
+}
 async function POST(table,data){
   const r=await fetch(`${SUPA_URL}/rest/v1/${table}`,{method:'POST',headers:H(),body:JSON.stringify(data)});
   if(!r.ok) throw new Error(await r.text());
@@ -735,14 +742,21 @@ async function PATCH(table,id,data){
   if(!r.ok) throw new Error(await r.text());
   return r.json();
 }
-async function authSignUp(email,password,meta){
-  const r=await fetch(`${SUPA_URL}/auth/v1/admin/users`,{
-    method:'POST',
-    headers:{...H(),'Authorization':`Bearer ${SESSION?.access_token}`},
-    body:JSON.stringify({email,password,email_confirm:true,user_metadata:meta})
-  });
-  if(!r.ok) throw new Error((await r.json()).message||'Signup failed');
+async function PATCH_UUID(table,uid,data){
+  const r=await fetch(`${SUPA_URL}/rest/v1/${table}?id=eq.${uid}`,{method:'PATCH',headers:H(),body:JSON.stringify(data)});
+  if(!r.ok) throw new Error(await r.text());
   return r.json();
+}
+async function authSignUp(email,password,meta){
+  // Use regular signup endpoint (works without service role key)
+  const r=await fetch(`${SUPA_URL}/auth/v1/signup`,{
+    method:'POST',
+    headers:{'apikey':SUPA_KEY,'Content-Type':'application/json'},
+    body:JSON.stringify({email,password,options:{data:meta}})
+  });
+  const data=await r.json();
+  if(!r.ok) throw new Error(data.message||data.error_description||'Signup failed');
+  return data;
 }
 
 // ── LOGIN ─────────────────────────────────────────────────────────────────────
@@ -874,7 +888,7 @@ async function loadAll(){
       GET('programme','select=*&order=day_number,session_time'),
       GET('notifications','select=*&order=created_at.desc&limit=20'),
     ];
-    if(PROFILE?.role==='admin') promises.push(GET('user_profiles','select=*&order=created_at'));
+    if(PROFILE?.role==='admin') promises.push(RPC('get_all_user_profiles'));
     const results=await Promise.all(promises);
     CACHE={delegates:results[0],hotels:results[1],transport:results[2],programme:results[3],notifications:results[4],users:results[5]||[]};
     const dbEl=document.getElementById('db-status');
