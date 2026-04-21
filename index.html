@@ -753,14 +753,23 @@ async function PATCH_UUID(table,uid,data){
   return r.json();
 }
 async function inviteUser(email,meta){
-  // Invite API — works with anon key, no secret key needed, works from any device
+  console.log('Inviting user:',email,'meta:',meta);
   const r=await fetch(`${SUPA_URL}/auth/v1/invite`,{
     method:'POST',
-    headers:{'apikey':SUPA_KEY,'Authorization':`Bearer ${SESSION?.access_token}`,'Content-Type':'application/json'},
-    body:JSON.stringify({email,options:{data:meta,redirect_to:'https://avinash4512.github.io/NyayPath'}})
+    headers:{
+      'apikey':SUPA_KEY,
+      'Authorization':`Bearer ${SESSION?.access_token}`,
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify({
+      email,
+      data:meta,
+      redirect_to:'https://avinash4512.github.io/NyayPath'
+    })
   });
   const data=await r.json();
-  if(!r.ok) throw new Error(data.message||data.msg||data.error_description||'Invite failed');
+  console.log('Invite response:',r.status, data);
+  if(!r.ok) throw new Error(data.message||data.msg||data.error_description||`Invite API error ${r.status}`);
   return data.user||data;
 }
 
@@ -1093,26 +1102,35 @@ async function quickCreateUser(){
   const name=document.getElementById('qc-name').value.trim();
   const email=document.getElementById('qc-email').value.trim();
   const notes=document.getElementById('qc-notes').value.trim();
-  if(!name||!email){showToast('Please fill name and email.');return;}
+  if(!SELECTED_TEAM){showToast('Please select a team card first.');return;}
+  if(!name){showToast('Please enter the staff full name.');return;}
+  if(!email||!email.includes('@')){showToast('Please enter a valid email address.');return;}
+  const btn=document.querySelector('#quick-create-form .btn-primary');
+  if(btn){btn.disabled=true;btn.textContent='Sending invite…';}
   const isTopMgmt=SELECTED_TEAM==='Top Management';
   try{
     const user=await inviteUser(email,{full_name:name,role:'coordinator'});
-    // Store pending profile — will be fully set when user accepts invite
+    if(!user||!user.id) throw new Error('No user returned from invite API');
     await POST('user_profiles',{
       id:user.id,
       full_name:name,email,role:'coordinator',team:SELECTED_TEAM,
       can_edit:isTopMgmt||['Airport Team','Delhi Hotel Team','Lucknow Hotel Team','Transport Team'].includes(SELECTED_TEAM),
       can_broadcast:isTopMgmt,
-      is_active:true,notes,created_by:SESSION.user.id,
+      is_active:true,notes:notes||'',created_by:SESSION.user.id,
       sections:'all'
     });
-    showToast(`✓ Invite sent to ${email} — Team: ${SELECTED_TEAM}`);
+    showToast(`✓ Invite sent to ${email} — ${SELECTED_TEAM}`);
     cancelQuickCreate();
     document.getElementById('qc-name').value='';
     document.getElementById('qc-email').value='';
     document.getElementById('qc-notes').value='';
     await loadAll();
-  }catch(e){showToast('Error: '+e.message);}
+  }catch(e){
+    showToast('Failed: '+e.message);
+    console.error('quickCreateUser error:',e);
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='Send Invite';}
+  }
 }
 
 function toggleRoleFields(){
