@@ -723,8 +723,19 @@ let CACHE   = {delegates:[],hotels:[],transport:[],programme:[],notifications:[]
 let SELECTED_TEAM = null;
 
 // ── API ───────────────────────────────────────────────────────────────────────
-const H = () => ({'apikey':SUPA_KEY,'Authorization':`Bearer ${SESSION?.access_token||SUPA_KEY}`,'Content-Type':'application/json','Prefer':'return=representation'});
+const H = () => {
+  const headers = {
+    'apikey': SUPA_KEY,
+    'Content-Type': 'application/json',
+    'Prefer': 'return=representation'
+  };
 
+  if (SESSION?.access_token) {
+    headers['Authorization'] = `Bearer ${SESSION.access_token}`;
+  }
+
+  return headers;
+};
 async function GET(table,q=''){
   const r=await fetch(`${SUPA_URL}/rest/v1/${table}?${q}`,{headers:H()});
   if(!r.ok) throw new Error(await r.text());
