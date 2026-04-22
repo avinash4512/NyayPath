@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>NyayPath — Redirecting...</title>
+<script>
+// This file catches all 404s including Supabase auth redirects
+// GitHub Pages serves this file when URL is not found
+// We grab the token from URL and send to NyayPath app
+(function(){
+  var h = window.location.hash;
+  var s = window.location.search;
+  var base = 'https://avinash4512.github.io/NyayPath/';
+  if(h && h.includes('access_token')){
+    window.location.replace(base + h);
+  } else if(s && s.includes('access_token')){
+    window.location.replace(base + '?' + s.substring(1) + h);
+  } else {
+    window.location.replace(base);
+  }
+})();
+</script>
+</head>
+<body style="font-family:sans-serif;text-align:center;padding:80px 20px;color:#888">
+  <div style="font-size:24px;font-weight:700;color:#0C447C;margin-bottom:8px">NyayPath</div>
+  <div>Redirecting you to the conference portal...</div>
+</body>
+</html>
