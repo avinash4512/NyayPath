@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>NyayPath v8 — Chief Justices' Conference 2025</title>
+<title>NyayPath v8.1 — Chief Justices' Conference 2025</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -256,6 +256,33 @@ tbody tr:hover td{background:#FAFAF8}
   </div>
 </div>
 
+
+<!-- PASSWORD RESET SCREEN -->
+<div id="reset-screen" class="login-screen" style="display:none">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-name">Nyay<span>Path</span></div>
+      <div class="login-logo-sub">न्यायपथ · City Montessori School, Lucknow</div>
+      <div class="login-logo-conf">Set Your Password</div>
+    </div>
+    <div class="login-title">Welcome to NyayPath!</div>
+    <div class="login-sub">Please set your password to activate your account and login.</div>
+    <div class="login-error" id="reset-error"></div>
+    <div class="lf">
+      <label>New Password</label>
+      <input type="password" id="reset-password" placeholder="Minimum 8 characters" autocomplete="new-password"/>
+    </div>
+    <div class="lf">
+      <label>Confirm Password</label>
+      <input type="password" id="reset-confirm" placeholder="Type password again" autocomplete="new-password"/>
+    </div>
+    <button class="login-btn" id="reset-btn" onclick="doSetPassword()">Set Password & Login</button>
+    <div style="text-align:center;margin-top:16px;font-size:12px;color:var(--text-m)">
+      Your account has been created by the NyayPath admin team
+    </div>
+  </div>
+</div>
+
 <!-- DELEGATE PERSONAL VIEW -->
 <div id="delegate-screen" style="display:none">
   <div class="delegate-view">
@@ -335,7 +362,7 @@ tbody tr:hover td{background:#FAFAF8}
       <div class="sb-org">City Montessori School</div>
       <div class="sb-name">Nyay<span>Path</span></div>
       <div class="sb-sub">न्यायपथ · Conference Manager</div>
-      <div class="sb-tag">Nov 12–15, 2025 · v8</div>
+      <div class="sb-tag">Nov 12–15, 2025 · v8.1</div>
     </div>
     <div class="sb-user">
       <div class="sb-user-av av-0" id="sb-av">?</div>
@@ -813,6 +840,88 @@ async function doLogin(){
   }
 }
 
+
+// ── PASSWORD RESET HANDLER ────────────────────────────────────────────────────
+function checkRecoveryToken(){
+  const hash = window.location.hash;
+  if(!hash) return false;
+  const params = new URLSearchParams(hash.substring(1));
+  const type   = params.get('type');
+  const token  = params.get('access_token');
+  const refresh= params.get('refresh_token');
+  if((type==='recovery' || type==='invite') && token){
+    // Store tokens for use after password set
+    window._recoveryToken  = token;
+    window._refreshToken   = refresh;
+    // Show reset screen
+    document.getElementById('login-screen').style.display  = 'none';
+    document.getElementById('reset-screen').style.display  = 'flex';
+    // Clean URL
+    history.replaceState(null,'',window.location.pathname);
+    return true;
+  }
+  return false;
+}
+
+async function doSetPassword(){
+  const pass    = document.getElementById('reset-password').value;
+  const confirm = document.getElementById('reset-confirm').value;
+  const errEl   = document.getElementById('reset-error');
+  const btn     = document.getElementById('reset-btn');
+
+  errEl.style.display='none';
+  if(pass.length < 8){
+    errEl.textContent='Password must be at least 8 characters.';
+    errEl.style.display='block'; return;
+  }
+  if(pass !== confirm){
+    errEl.textContent='Passwords do not match. Please try again.';
+    errEl.style.display='block'; return;
+  }
+
+  btn.disabled=true; btn.textContent='Setting password…';
+  try{
+    // First set the session using recovery token
+    const sessionR = await fetch(`${SUPA_URL}/auth/v1/token?grant_type=refresh_token`,{
+      method:'POST',
+      headers:{'apikey':SUPA_KEY,'Content-Type':'application/json'},
+      body:JSON.stringify({refresh_token: window._refreshToken})
+    });
+    const sessionData = await sessionR.json();
+    if(!sessionR.ok) throw new Error(sessionData.error_description||'Session error');
+    SESSION = sessionData;
+
+    // Now update the password
+    const r = await fetch(`${SUPA_URL}/auth/v1/user`,{
+      method:'PUT',
+      headers:{
+        'apikey':SUPA_KEY,
+        'Authorization':`Bearer ${SESSION.access_token}`,
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({password: pass})
+    });
+    const data = await r.json();
+    if(!r.ok) throw new Error(data.message||'Failed to set password');
+
+    // Get profile and login
+    const profiles = await GET('user_profiles',`id=eq.${SESSION.user.id}&select=*`);
+    PROFILE = profiles[0];
+    if(!PROFILE) throw new Error('Profile not found. Contact admin.');
+
+    showToast('Password set successfully! Welcome to NyayPath ✓');
+    document.getElementById('reset-screen').style.display='none';
+
+    if(PROFILE.role==='delegate') await loadDelegateView();
+    else await loadAdminApp();
+
+  }catch(e){
+    errEl.textContent = e.message||'Failed to set password. Please try again.';
+    errEl.style.display='block';
+    btn.disabled=false; btn.textContent='Set Password & Login';
+  }
+}
+
 function doLogout(){
   SESSION=null; PROFILE=null;
   CACHE={delegates:[],hotels:[],transport:[],programme:[],notifications:[],users:[]};
@@ -825,6 +934,7 @@ function doLogout(){
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
+  checkRecoveryToken();
   ['login-password','login-email'].forEach(id=>
     document.getElementById(id).addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();}));
   document.getElementById('arrivals-search').addEventListener('input',e=>renderArrivals(e.target.value));
@@ -1390,6 +1500,7 @@ async function saveDelegate(){
 
 // Pre-fill delegate dropdown for delegate user creation
 document.addEventListener('DOMContentLoaded',()=>{
+  checkRecoveryToken();
   document.getElementById('modal-create-user').addEventListener('click',e=>{
     if(e.target===document.getElementById('modal-create-user')) closeModal('modal-create-user');
   });
