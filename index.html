@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>NyayPath — Chief Justices' Conference 2025</title>
+<title>NyayPath v8 — Chief Justices' Conference 2025</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -335,7 +335,7 @@ tbody tr:hover td{background:#FAFAF8}
       <div class="sb-org">City Montessori School</div>
       <div class="sb-name">Nyay<span>Path</span></div>
       <div class="sb-sub">न्यायपथ · Conference Manager</div>
-      <div class="sb-tag">Nov 12–15, 2025</div>
+      <div class="sb-tag">Nov 12–15, 2025 · v8</div>
     </div>
     <div class="sb-user">
       <div class="sb-user-av av-0" id="sb-av">?</div>
@@ -715,7 +715,7 @@ tbody tr:hover td{background:#FAFAF8}
 // ── CONFIG ────────────────────────────────────────────────────────────────────
 const SUPA_URL = 'https://hsvhlhoflxngzkdwehoz.supabase.co';
 const SUPA_KEY     = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhzdmhsaG9mbHhuZ3prZHdlaG96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1ODg1MTYsImV4cCI6MjA5MjE2NDUxNn0.Azg34yYTdXxadfCOQ2ZNQgQhx8WzchlGCT3Evc7Um4U';
-const SUPA_SERVICE = 'sb_secret_60nU3SBwkVHjPOtz0-zI7A_xlKeULOF';
+const SUPA_SERVICE = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhzdmhsaG9mbHhuZ3prZHdlaG96Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NjU4ODUxNiwiZXhwIjoyMDkyMTY0NTE2fQ._Balr89tdl5msXMf-xzxGkjKL__OvPEmJeuf3NNSs60';
 
 let SESSION = null;
 let PROFILE = null;
@@ -723,19 +723,8 @@ let CACHE   = {delegates:[],hotels:[],transport:[],programme:[],notifications:[]
 let SELECTED_TEAM = null;
 
 // ── API ───────────────────────────────────────────────────────────────────────
-const H = () => {
-  const headers = {
-    'apikey': SUPA_KEY,
-    'Content-Type': 'application/json',
-    'Prefer': 'return=representation'
-  };
+const H = () => ({'apikey':SUPA_KEY,'Authorization':`Bearer ${SESSION?.access_token||SUPA_KEY}`,'Content-Type':'application/json','Prefer':'return=representation'});
 
-  if (SESSION?.access_token) {
-    headers['Authorization'] = `Bearer ${SESSION.access_token}`;
-  }
-
-  return headers;
-};
 async function GET(table,q=''){
   const r=await fetch(`${SUPA_URL}/rest/v1/${table}?${q}`,{headers:H()});
   if(!r.ok) throw new Error(await r.text());
