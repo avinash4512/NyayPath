@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>NyayPath v8.4 — Chief Justices' Conference 2025</title>
+<title>NyayPath v8.5 — Chief Justices' Conference 2025</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -387,7 +387,7 @@ tbody tr:hover td{background:#FAFAF8}
       <div class="sb-org">City Montessori School</div>
       <div class="sb-name">Nyay<span>Path</span></div>
       <div class="sb-sub">न्यायपथ · Conference Manager</div>
-      <div class="sb-tag">Nov 12–15, 2025 · v8.4</div>
+      <div class="sb-tag">Nov 12–15, 2025 · v8.5</div>
     </div>
     <div class="sb-user">
       <div class="sb-user-av av-0" id="sb-av">?</div>
@@ -870,6 +870,13 @@ async function doLogin(){
 let _countdownInterval = null;
 let _resetEmail        = null;
 
+function b64urlDecode(str){
+  // Fix base64url encoding to standard base64
+  str = str.replace(/-/g,'+').replace(/_/g,'/');
+  while(str.length % 4) str += '=';
+  try{ return JSON.parse(atob(str)); }catch(e){ return null; }
+}
+
 function checkRecoveryToken(){
   const hash = window.location.hash;
   if(!hash) return false;
@@ -880,19 +887,26 @@ function checkRecoveryToken(){
   if((type==='recovery' || type==='invite') && token){
     window._recoveryToken = token;
     window._refreshToken  = refresh;
-    // Decode email from token payload
+    // Decode JWT payload safely using base64url decode
     try{
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      _resetEmail   = payload.email || null;
-      if(_resetEmail){
-        document.getElementById('resend-email-display').textContent = 'Email: '+_resetEmail;
+      const parts   = token.split('.');
+      const payload = b64urlDecode(parts[1]);
+      if(payload){
+        _resetEmail       = payload.email || null;
+        window._resetUid  = payload.sub   || null;
+        console.log('Token decoded OK — email:',_resetEmail,'uid:',window._resetUid);
       }
-    }catch(e){}
-    // Show reset screen
+    }catch(e){
+      console.log('Token decode failed:',e.message);
+    }
+    if(_resetEmail){
+      const el = document.getElementById('resend-email-display');
+      if(el) el.textContent = 'Email: '+_resetEmail;
+    }
     document.getElementById('login-screen').style.display  = 'none';
     document.getElementById('reset-screen').style.display  = 'flex';
     history.replaceState(null,'',window.location.pathname);
-    startCountdown(600); // 10 minutes = 600 seconds
+    startCountdown(600);
     return true;
   }
   return false;
@@ -981,14 +995,9 @@ async function doSetPassword(){
   }
   btn.disabled=true; btn.textContent='Setting password…';
   try{
-    // Extract user info from recovery token
-    let userId = null;
-    try{
-      const payload = JSON.parse(atob(window._recoveryToken.split('.')[1]));
-      _resetEmail = _resetEmail || payload.email;
-      userId      = payload.sub;
-      console.log('Token decoded - email:', _resetEmail, 'uid:', userId);
-    }catch(e2){ console.log('Token decode error:', e2); }
+    // Use pre-decoded values from checkRecoveryToken
+    const userId = window._resetUid || null;
+    console.log('Using email:', _resetEmail, 'uid:', userId);
 
     if(!_resetEmail) throw new Error('Email not found. Please click Re-send to get a new link.');
     if(!userId)      throw new Error('User ID not found. Please click Re-send to get a new link.');
