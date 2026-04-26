@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>NyayPath v8.5 — Chief Justices' Conference 2025</title>
+<title>NyayPath v8.6 — Chief Justices' Conference 2025</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -387,7 +387,7 @@ tbody tr:hover td{background:#FAFAF8}
       <div class="sb-org">City Montessori School</div>
       <div class="sb-name">Nyay<span>Path</span></div>
       <div class="sb-sub">न्यायपथ · Conference Manager</div>
-      <div class="sb-tag">Nov 12–15, 2025 · v8.5</div>
+      <div class="sb-tag">Nov 12–15, 2025 · v8.6</div>
     </div>
     <div class="sb-user">
       <div class="sb-user-av av-0" id="sb-av">?</div>
@@ -878,34 +878,54 @@ function b64urlDecode(str){
 }
 
 function checkRecoveryToken(){
-  const hash = window.location.hash;
-  if(!hash) return false;
-  const params = new URLSearchParams(hash.substring(1));
-  const type   = params.get('type');
-  const token  = params.get('access_token');
-  const refresh= params.get('refresh_token');
-  if((type==='recovery' || type==='invite') && token){
+  // Parse both hash and search params to catch all URL formats
+  const rawHash   = window.location.hash   || '';
+  const rawSearch = window.location.search || '';
+
+  // Try hash first (#access_token=...), then search (?access_token=...)
+  let paramStr = '';
+  if(rawHash.includes('access_token')){
+    paramStr = rawHash.startsWith('#') ? rawHash.slice(1) : rawHash;
+  } else if(rawSearch.includes('access_token')){
+    paramStr = rawSearch.startsWith('?') ? rawSearch.slice(1) : rawSearch;
+  }
+
+  if(!paramStr) return false;
+
+  const params  = new URLSearchParams(paramStr);
+  const type    = params.get('type');
+  const token   = params.get('access_token');
+  const refresh = params.get('refresh_token');
+
+  console.log('URL type:', type, '| token present:', !!token, '| raw:', paramStr.substring(0,80));
+
+  if((type==='recovery' || type==='invite' || type==='signup') && token){
     window._recoveryToken = token;
-    window._refreshToken  = refresh;
-    // Decode JWT payload safely using base64url decode
+    window._refreshToken  = refresh || '';
+
+    // Decode JWT — fix base64url padding
     try{
-      const parts   = token.split('.');
-      const payload = b64urlDecode(parts[1]);
-      if(payload){
-        _resetEmail       = payload.email || null;
-        window._resetUid  = payload.sub   || null;
-        console.log('Token decoded OK — email:',_resetEmail,'uid:',window._resetUid);
-      }
+      const part    = token.split('.')[1];
+      const fixed   = part.replace(/-/g,'+').replace(/_/g,'/').padEnd(Math.ceil(part.length/4)*4,'=');
+      const payload = JSON.parse(atob(fixed));
+      _resetEmail      = payload.email || payload.user_metadata?.email || null;
+      window._resetUid = payload.sub   || null;
+      console.log('Decoded — email:', _resetEmail, '| uid:', window._resetUid);
     }catch(e){
-      console.log('Token decode failed:',e.message);
+      console.log('JWT decode error:', e.message);
+      // Try to get email from user_metadata in URL if token fails
+      _resetEmail      = params.get('email') || null;
+      window._resetUid = null;
     }
+
     if(_resetEmail){
       const el = document.getElementById('resend-email-display');
       if(el) el.textContent = 'Email: '+_resetEmail;
     }
-    document.getElementById('login-screen').style.display  = 'none';
-    document.getElementById('reset-screen').style.display  = 'flex';
-    history.replaceState(null,'',window.location.pathname);
+
+    history.replaceState(null, '', window.location.pathname);
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('reset-screen').style.display = 'flex';
     startCountdown(600);
     return true;
   }
