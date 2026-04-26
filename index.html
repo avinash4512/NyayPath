@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>NyayPath v8.1 — Chief Justices' Conference 2025</title>
+<title>NyayPath v8.2 — Chief Justices' Conference 2025</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -267,18 +267,43 @@ tbody tr:hover td{background:#FAFAF8}
     </div>
     <div class="login-title">Welcome to NyayPath!</div>
     <div class="login-sub">Please set your password to activate your account and login.</div>
-    <div class="login-error" id="reset-error"></div>
-    <div class="lf">
-      <label>New Password</label>
-      <input type="password" id="reset-password" placeholder="Minimum 8 characters" autocomplete="new-password"/>
+
+    <!-- Countdown Timer -->
+    <div id="reset-timer-box" style="background:var(--primary-light);border-radius:var(--r-md);padding:10px 14px;margin-bottom:16px;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px">
+      <div style="font-size:13px;color:var(--primary);font-weight:600">⏱ Link expires in:</div>
+      <div id="reset-countdown" style="font-size:20px;font-weight:700;color:var(--primary);font-family:monospace">10:00</div>
     </div>
-    <div class="lf">
-      <label>Confirm Password</label>
-      <input type="password" id="reset-confirm" placeholder="Type password again" autocomplete="new-password"/>
+
+    <!-- Expired message -->
+    <div id="reset-expired-box" style="display:none;background:var(--red-light);border-radius:var(--r-md);padding:14px;margin-bottom:16px;text-align:center">
+      <div style="font-size:14px;font-weight:700;color:var(--red);margin-bottom:8px">⚠️ Link has expired</div>
+      <div style="font-size:12px;color:var(--red);margin-bottom:12px">Please request a new password reset link</div>
+      <button class="login-btn" id="resend-btn" onclick="resendPasswordEmail()" style="background:var(--red);margin-top:0">
+        🔄 Re-send Password Setup Email
+      </button>
+      <div id="resend-email-display" style="font-size:11px;color:var(--red);margin-top:8px;font-weight:600"></div>
     </div>
-    <button class="login-btn" id="reset-btn" onclick="doSetPassword()">Set Password & Login</button>
-    <div style="text-align:center;margin-top:16px;font-size:12px;color:var(--text-m)">
-      Your account has been created by the NyayPath admin team
+
+    <div id="reset-form-area">
+      <div class="login-error" id="reset-error"></div>
+      <div class="lf">
+        <label>New Password</label>
+        <input type="password" id="reset-password" placeholder="Minimum 8 characters" autocomplete="new-password"/>
+      </div>
+      <div class="lf">
+        <label>Confirm Password</label>
+        <input type="password" id="reset-confirm" placeholder="Type password again" autocomplete="new-password"/>
+      </div>
+      <button class="login-btn" id="reset-btn" onclick="doSetPassword()">Set Password & Login to NyayPath</button>
+      <div style="text-align:center;margin-top:12px">
+        <button onclick="resendPasswordEmail()" style="background:none;border:none;color:var(--primary-mid);font-size:12px;cursor:pointer;text-decoration:underline">
+          🔄 Re-send setup email
+        </button>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:16px;font-size:11px;color:var(--text-m)">
+      Account created by NyayPath Admin · City Montessori School
     </div>
   </div>
 </div>
@@ -362,7 +387,7 @@ tbody tr:hover td{background:#FAFAF8}
       <div class="sb-org">City Montessori School</div>
       <div class="sb-name">Nyay<span>Path</span></div>
       <div class="sb-sub">न्यायपथ · Conference Manager</div>
-      <div class="sb-tag">Nov 12–15, 2025 · v8.1</div>
+      <div class="sb-tag">Nov 12–15, 2025 · v8.2</div>
     </div>
     <div class="sb-user">
       <div class="sb-user-av av-0" id="sb-av">?</div>
@@ -842,6 +867,9 @@ async function doLogin(){
 
 
 // ── PASSWORD RESET HANDLER ────────────────────────────────────────────────────
+let _countdownInterval = null;
+let _resetEmail        = null;
+
 function checkRecoveryToken(){
   const hash = window.location.hash;
   if(!hash) return false;
@@ -850,24 +878,97 @@ function checkRecoveryToken(){
   const token  = params.get('access_token');
   const refresh= params.get('refresh_token');
   if((type==='recovery' || type==='invite') && token){
-    // Store tokens for use after password set
-    window._recoveryToken  = token;
-    window._refreshToken   = refresh;
+    window._recoveryToken = token;
+    window._refreshToken  = refresh;
+    // Decode email from token payload
+    try{
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      _resetEmail   = payload.email || null;
+      if(_resetEmail){
+        document.getElementById('resend-email-display').textContent = 'Email: '+_resetEmail;
+      }
+    }catch(e){}
     // Show reset screen
     document.getElementById('login-screen').style.display  = 'none';
     document.getElementById('reset-screen').style.display  = 'flex';
-    // Clean URL
     history.replaceState(null,'',window.location.pathname);
+    startCountdown(600); // 10 minutes = 600 seconds
     return true;
   }
   return false;
 }
 
+function startCountdown(seconds){
+  let remaining = seconds;
+  const el = document.getElementById('reset-countdown');
+  const timerBox = document.getElementById('reset-timer-box');
+  const expiredBox = document.getElementById('reset-expired-box');
+  const formArea = document.getElementById('reset-form-area');
+
+  if(_countdownInterval) clearInterval(_countdownInterval);
+
+  _countdownInterval = setInterval(()=>{
+    remaining--;
+    const m = Math.floor(remaining/60);
+    const s = remaining % 60;
+    if(el) el.textContent = m+':'+(s<10?'0':'')+s;
+
+    // Change color to red when under 2 minutes
+    if(remaining <= 120 && el){
+      el.style.color = 'var(--red)';
+      if(timerBox) timerBox.style.background = 'var(--red-light)';
+      el.closest && el.closest('div') && (el.closest('[style]').style.background='var(--red-light)');
+    }
+
+    // Timer expired
+    if(remaining <= 0){
+      clearInterval(_countdownInterval);
+      if(formArea)   formArea.style.display    = 'none';
+      if(timerBox)   timerBox.style.display    = 'none';
+      if(expiredBox) expiredBox.style.display  = 'block';
+    }
+  }, 1000);
+}
+
+async function resendPasswordEmail(){
+  const btn = document.getElementById('resend-btn');
+  if(!_resetEmail){ showToast('Email not found. Please contact admin.'); return; }
+  if(btn){ btn.disabled=true; btn.textContent='Sending…'; }
+  try{
+    const r = await fetch(`${SUPA_URL}/auth/v1/recover`,{
+      method:'POST',
+      headers:{'apikey':SUPA_KEY,'Content-Type':'application/json'},
+      body:JSON.stringify({email:_resetEmail})
+    });
+    if(r.ok){
+      showToast('New setup email sent to '+_resetEmail+' ✓ Check your inbox.');
+      // Show form again with fresh timer
+      const expiredBox = document.getElementById('reset-expired-box');
+      const formArea   = document.getElementById('reset-form-area');
+      const timerBox   = document.getElementById('reset-timer-box');
+      const el         = document.getElementById('reset-countdown');
+      if(expiredBox) expiredBox.style.display = 'none';
+      if(formArea)   formArea.style.display   = 'block';
+      if(timerBox){  timerBox.style.display   = 'flex'; timerBox.style.background='var(--primary-light)'; }
+      if(el)         el.style.color = 'var(--primary)';
+      startCountdown(600);
+    } else {
+      showToast('Failed to send email. Please contact admin.');
+    }
+  }catch(e){
+    showToast('Error: '+e.message);
+  }finally{
+    if(btn){ btn.disabled=false; btn.textContent='🔄 Re-send Password Setup Email'; }
+  }
+}
+
 async function doSetPassword(){
-  const pass    = document.getElementById('reset-password').value;
-  const confirm = document.getElementById('reset-confirm').value;
-  const errEl   = document.getElementById('reset-error');
-  const btn     = document.getElementById('reset-btn');
+  const passEl    = document.getElementById('reset-password');
+  const confirmEl = document.getElementById('reset-confirm');
+  const errEl     = document.getElementById('reset-error');
+  const btn       = document.getElementById('reset-btn');
+  const pass      = passEl ? passEl.value : '';
+  const confirm   = confirmEl ? confirmEl.value : '';
 
   errEl.style.display='none';
   if(pass.length < 8){
@@ -878,47 +979,63 @@ async function doSetPassword(){
     errEl.textContent='Passwords do not match. Please try again.';
     errEl.style.display='block'; return;
   }
-
   btn.disabled=true; btn.textContent='Setting password…';
   try{
-    // First set the session using recovery token
-    const sessionR = await fetch(`${SUPA_URL}/auth/v1/token?grant_type=refresh_token`,{
-      method:'POST',
-      headers:{'apikey':SUPA_KEY,'Content-Type':'application/json'},
-      body:JSON.stringify({refresh_token: window._refreshToken})
-    });
-    const sessionData = await sessionR.json();
-    if(!sessionR.ok) throw new Error(sessionData.error_description||'Session error');
-    SESSION = sessionData;
+    // Use access_token directly to set session (most reliable method)
+    SESSION = {
+      access_token:  window._recoveryToken,
+      refresh_token: window._refreshToken,
+      user: null
+    };
 
-    // Now update the password
+    // Get user info from token
+    try{
+      const payload = JSON.parse(atob(window._recoveryToken.split('.')[1]));
+      SESSION.user  = {id: payload.sub, email: payload.email};
+    }catch(e){}
+
+    // Update password using the recovery access token directly
     const r = await fetch(`${SUPA_URL}/auth/v1/user`,{
       method:'PUT',
       headers:{
-        'apikey':SUPA_KEY,
-        'Authorization':`Bearer ${SESSION.access_token}`,
-        'Content-Type':'application/json'
+        'apikey':     SUPA_KEY,
+        'Authorization': `Bearer ${window._recoveryToken}`,
+        'Content-Type':  'application/json'
       },
-      body:JSON.stringify({password: pass})
+      body: JSON.stringify({password: pass})
     });
     const data = await r.json();
-    if(!r.ok) throw new Error(data.message||'Failed to set password');
+    if(!r.ok) throw new Error(data.message || data.error_description || 'Failed to set password');
 
-    // Get profile and login
+    // Now get fresh session with new password
+    const loginR = await fetch(`${SUPA_URL}/auth/v1/token?grant_type=password`,{
+      method:'POST',
+      headers:{'apikey':SUPA_KEY,'Content-Type':'application/json'},
+      body: JSON.stringify({email: _resetEmail, password: pass})
+    });
+    const loginData = await loginR.json();
+    if(!loginR.ok) throw new Error(loginData.error_description||'Login after password set failed');
+    SESSION = loginData;
+
+    // Get profile
     const profiles = await GET('user_profiles',`id=eq.${SESSION.user.id}&select=*`);
     PROFILE = profiles[0];
-    if(!PROFILE) throw new Error('Profile not found. Contact admin.');
+    if(!PROFILE) throw new Error('Profile not found. Please contact admin.');
+    if(!PROFILE.is_active) throw new Error('Your account is not active. Contact admin.');
 
-    showToast('Password set successfully! Welcome to NyayPath ✓');
+    clearInterval(_countdownInterval);
+    showToast('Password set! Welcome to NyayPath ✓');
     document.getElementById('reset-screen').style.display='none';
 
     if(PROFILE.role==='delegate') await loadDelegateView();
     else await loadAdminApp();
 
   }catch(e){
-    errEl.textContent = e.message||'Failed to set password. Please try again.';
+    console.error('doSetPassword error:',e);
+    errEl.textContent = e.message || 'Failed to set password. Try re-sending the email.';
     errEl.style.display='block';
-    btn.disabled=false; btn.textContent='Set Password & Login';
+    btn.disabled=false;
+    btn.textContent='Set Password & Login to NyayPath';
   }
 }
 
