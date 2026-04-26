@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>NyayPath v8.3 — Chief Justices' Conference 2025</title>
+<title>NyayPath v8.4 — Chief Justices' Conference 2025</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -387,7 +387,7 @@ tbody tr:hover td{background:#FAFAF8}
       <div class="sb-org">City Montessori School</div>
       <div class="sb-name">Nyay<span>Path</span></div>
       <div class="sb-sub">न्यायपथ · Conference Manager</div>
-      <div class="sb-tag">Nov 12–15, 2025 · v8.3</div>
+      <div class="sb-tag">Nov 12–15, 2025 · v8.4</div>
     </div>
     <div class="sb-user">
       <div class="sb-user-av av-0" id="sb-av">?</div>
@@ -981,65 +981,50 @@ async function doSetPassword(){
   }
   btn.disabled=true; btn.textContent='Setting password…';
   try{
-    // Step 1: Exchange recovery token for a valid session
-    // This is the correct Supabase flow for password recovery
-    const sessionR = await fetch(`${SUPA_URL}/auth/v1/token?grant_type=refresh_token`,{
-      method:'POST',
-      headers:{'apikey':SUPA_KEY,'Content-Type':'application/json'},
-      body:JSON.stringify({refresh_token: window._refreshToken})
-    });
-    const sessionData = await sessionR.json();
-    console.log('Session exchange:', sessionR.status, sessionData);
+    // Extract user info from recovery token
+    let userId = null;
+    try{
+      const payload = JSON.parse(atob(window._recoveryToken.split('.')[1]));
+      _resetEmail = _resetEmail || payload.email;
+      userId      = payload.sub;
+      console.log('Token decoded - email:', _resetEmail, 'uid:', userId);
+    }catch(e2){ console.log('Token decode error:', e2); }
 
-    let activeToken = window._recoveryToken; // fallback
+    if(!_resetEmail) throw new Error('Email not found. Please click Re-send to get a new link.');
+    if(!userId)      throw new Error('User ID not found. Please click Re-send to get a new link.');
 
-    if(sessionR.ok && sessionData.access_token){
-      SESSION = sessionData;
-      activeToken = sessionData.access_token;
-      // Extract email if not already set
-      if(!_resetEmail && sessionData.user){
-        _resetEmail = sessionData.user.email;
-      }
-    } else {
-      // refresh failed - try using recovery token directly as session
-      console.log('Refresh failed, trying recovery token directly');
-      try{
-        const payload = JSON.parse(atob(window._recoveryToken.split('.')[1]));
-        _resetEmail = _resetEmail || payload.email;
-        SESSION = {access_token: window._recoveryToken, user: {id: payload.sub, email: payload.email}};
-      }catch(e2){}
-    }
-
-    // Step 2: Update the password using active token
-    const r = await fetch(`${SUPA_URL}/auth/v1/user`,{
+    // Step 1: Use service role to update password directly via Admin API
+    // This bypasses the need for an active session entirely
+    console.log('Updating password via Admin API...');
+    const r = await fetch(`${SUPA_URL}/auth/v1/admin/users/${userId}`,{
       method:'PUT',
       headers:{
-        'apikey':SUPA_KEY,
-        'Authorization':`Bearer ${activeToken}`,
-        'Content-Type':'application/json'
+        'apikey':        SUPA_SERVICE,
+        'Authorization': `Bearer ${SUPA_SERVICE}`,
+        'Content-Type':  'application/json'
       },
-      body:JSON.stringify({password:pass})
+      body:JSON.stringify({password: pass})
     });
     const data = await r.json();
-    console.log('Password update:', r.status, data);
-    if(!r.ok) throw new Error(data.message||data.error_description||`Password update failed (${r.status})`);
+    console.log('Admin password update:', r.status, data);
+    if(!r.ok) throw new Error(data.message||data.error_description||`Failed (${r.status})`);
 
-    // Step 3: Login fresh with new password
-    if(!_resetEmail) throw new Error('Email not found. Please re-send the setup email.');
+    // Step 2: Login with new password
+    console.log('Logging in with new password...');
     const loginR = await fetch(`${SUPA_URL}/auth/v1/token?grant_type=password`,{
       method:'POST',
       headers:{'apikey':SUPA_KEY,'Content-Type':'application/json'},
       body:JSON.stringify({email:_resetEmail, password:pass})
     });
     const loginData = await loginR.json();
-    console.log('Login:', loginR.status, loginData);
-    if(!loginR.ok) throw new Error(loginData.error_description||'Auto-login failed — please login manually');
+    console.log('Login result:', loginR.status, loginData);
+    if(!loginR.ok) throw new Error(loginData.error_description||'Login failed after password set');
     SESSION = loginData;
 
-    // Step 4: Load profile and enter app
+    // Step 3: Load profile and enter app
     const profiles = await GET('user_profiles',`id=eq.${SESSION.user.id}&select=*`);
     PROFILE = profiles[0];
-    if(!PROFILE) throw new Error('Profile not found. Please contact admin.');
+    if(!PROFILE) throw new Error('Profile not found. Contact admin.');
     if(!PROFILE.is_active) throw new Error('Account not active. Contact admin.');
 
     clearInterval(_countdownInterval);
@@ -1051,7 +1036,7 @@ async function doSetPassword(){
 
   }catch(e){
     console.error('doSetPassword error:',e);
-    errEl.textContent = e.message||'Failed. Please use Re-send button to get a new link.';
+    errEl.textContent = e.message||'Failed. Please click Re-send to get a new link.';
     errEl.style.display='block';
     btn.disabled=false;
     btn.textContent='Set Password & Login to NyayPath';
